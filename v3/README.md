@@ -1,13 +1,14 @@
 # GSM touch keychain, v3: one custom board with the nRF9151 (LTE-M)
 
-v3 puts everything on **one 25 × 30 mm board** built around the **Nordic nRF9151**. That
+v3 puts everything on **one 25 × 49 mm board** built around the **Nordic nRF9151**, including a
+**heart of 10 RGB LEDs** and **programming over USB-C**. That
 single chip holds the processor and the LTE-M/NB-IoT modem. There's no XIAO and no SIM800L,
 and it's not affected by the 2G shutdown. You assemble it yourself.
 
 | | v2 (modules) | **v3 (this)** |
 |---|---|---|
 | Network | 2G (SIM800L), ends for 1NCE ~end of 2027 | **LTE-M / NB-IoT** (4G), no 2G shutdown problem |
-| Electronics | XIAO + SIM800L stacked, ~31 × 27 × 10 mm | **one 25 × 30 × ~4.5 mm board** (USB-C is the tallest part) |
+| Electronics | XIAO + SIM800L stacked, ~31 × 27 × 10 mm | **one 25 × 49 × ~4.5 mm board** with the RGB heart on it (USB-C is the tallest part) |
 | Modem idle | ~1 mA (2G) | **µA level** with LTE-M power saving (PSM 2.7 µA, eDRX ~18 µA per Nordic) |
 | Assembly | wires + through-hole | SMD: solder paste + stencil + hot plate (details below) |
 
@@ -36,7 +37,7 @@ and it's not affected by the 2G shutdown. You assemble it yourself.
 - **3.0 V for the I/O pins** (U3, XC6206, 1 µA). It follows the battery up and down, which is the power-up order the nRF9151 requires.
 - **Charger** (U2, TP4054) on USB-C:
   - **213 mA** (R3 = 4.7 k), which suits a 200–500 mAh cell. Use 3.3 k for 300 mA if the cell is at least 300 mAh.
-  - The charge-status pin goes to a GPIO, so the firmware can show "charging".
+  - "USB plugged in" goes to P0.31 (VBUS/2); with the battery voltage the firmware knows when it's charging.
 - **Battery voltage** is measured by the modem itself (`AT%XVBAT`), so there are no divider resistors.
 - **Nano-SIM** (J3, hinged holder on the bottom), with the ESD protection the SIM interface requires (U4).
   - U4 sits directly above the SIM contacts, as ESD protection should; its 100 nF (C13) is on the bottom next to the holder.
@@ -45,14 +46,22 @@ and it's not affected by the 2G shutdown. You assemble it yourself.
   - A 50 Ω trace runs straight from the antenna pin to a **U.FL** socket.
   - It goes through a 0 Ω resistor and two unfitted pads (C14/C15) for later tuning.
   - Ground stitching vias around the socket; the 2nd layer is solid ground.
-- **Motor + heart:** AO3400A + flyback diode, the same as v1/v2. The pads take the same motor and heart perfboard.
+- **Motor:** AO3400A + flyback diode, the same as v1/v2, wired to the MOT+/− pads.
+- **RGB heart (on the board):**
+  - 10 × WS2812B-2020 addressable RGB LEDs on a heart curve at the end of the board, each with its own 100 nF.
+  - A load switch (U6, TPS22917) cuts their power when they're dark: these LEDs draw ~1 mA each even when off, which would cost more than the whole keychain in standby.
+  - A buffer (U7, SN74LV1T34) lifts the 3.0 V data to the LED supply. The LEDs are fed by a copper plane on layer 3 under the heart.
+  - Any colour per LED and fades; full colour above ~3.6 V battery.
+- **USB-C with data (CP2102N, U5):**
+  - Firmware updates and the log go over USB-C. The SWD pads are needed only once, to install the bootloader.
+  - The PC can reset the board through DTR/RTS (Q2, as on ESP32 boards). Idle, an open port and an unplugged cable never reset it.
+  - The chip runs only from USB, so it costs no battery.
 - **Side button** (SW1) on the right edge, pressed through the case's flexing tab.
 - **Pads on the bottom:**
-  - BAT+/−, MOT+/−, HEART+/−;
-  - **SWD** (IO, CK, RST, VT, GND) for programming;
-  - **TX/RX** for the log (3.0 V, 115200).
+  - BAT+/−, MOT+/−;
+  - **SWD** (CK, IO, RST, VT, GND), for the one-time bootloader flash.
 
-Pins used: P0.05 motor/heart PWM, P0.27 button, P0.26 charge status, P0.24 UART TX, P0.25 UART RX
+Pins used: P0.05 motor PWM, P0.06 LED data, P0.19 LED power, P0.30 button, P0.31 USB plugged in, P0.24 UART TX, P0.25 UART RX (to the USB-serial chip)
 (set these in the Zephyr devicetree; the nRF9151 can put the UART on any pin).
 
 ## Ordering
@@ -73,11 +82,11 @@ Pins used: P0.05 motor/heart PWM, P0.27 button, P0.26 charge status, P0.24 UART 
 |---|---|
 | PCB 4-layer ENIG × 5 + stencil + shipping to CZ | ~€35–60 |
 | 3 × nRF9151 | ~€60–90 |
-| Other parts for 3 boards (USB-C, SIM holder, U.FL, ICs, passives) | ~€15–25 |
+| Other parts for 3 boards (USB-C, SIM holder, U.FL, CP2102N, 30 RGB LEDs, ICs, passives) | ~€30–45 |
 | 2 × LTE FPC antenna with U.FL | ~€5–20 |
 | 2 × LiPo, 2 × motor, heart parts | ~€10–15 |
 | 2 × 1NCE SIM | ~€24 |
-| **Total** | **≈ €150–230 (≈ 3 700–5 700 Kč)** |
+| **Total** | **≈ €165–250 (≈ 4 100–6 200 Kč)** |
 
 This is more than v2. You pay for the nRF9151 and a 4-layer ENIG board, and get LTE-M, much
 lower standby current and a smaller keychain.
@@ -109,15 +118,21 @@ You need:
    - You can't see under the nRF9151, so test it electrically (step 6).
 5. **Bottom side, with an iron:**
    - The **SIM holder**: its contacts are on the outer edge, and the 4 shield tabs are at its sides.
-   - Then the wires to the battery, motor and heart.
+   - C13 (100 nF, 0603) next to the holder.
+   - Then the wires to the battery and the motor.
 6. **First power-up, before connecting a battery:**
    - Put **3.8 V** on BAT+/− from a supply limited to ~100 mA. Idle current should be a few mA or less, with nothing getting warm.
    - **VT** should read **3.0 V**.
    - Then plug in USB-C: about 213 mA should flow into a battery.
-7. **Program it:**
-   - Connect a debug probe to **IO/CK/RST/VT/GND**: a J-Link, the debug-out of an nRF9151 DK, or a cheap CMSIS-DAP probe with pyOCD.
-   - Check the chip responds, flash the nRF Connect SDK `at_client` sample, and send AT commands over TX/RX: `AT+CFUN=1`, then `AT+CEREG?`.
-   - Registration status 1 or 5 means LTE-M works with the 1NCE SIM.
+7. **First flash, once, over SWD:**
+   - Connect a debug probe to **CK/IO/RST/VT/GND**: a J-Link, the debug-out of an nRF9151 DK, or a borrowed / €5 Pico probe with pyOCD.
+   - Flash the **MCUboot** bootloader together with the first app.
+   - MCUboot is set to wait ~0.5 s after every reset for an update over the USB serial port.
+8. **From then on, over USB-C only:**
+   - The board shows up as a USB serial port (CP2102N). Log: any serial terminal at 115200.
+   - Update: `mcumgr --conntype serial --connstring "dev=<port>,baud=115200" image upload app.bin`, then `reset`.
+   - The PC resets the board by setting DTR high and RTS low. A small script in the firmware folder will do this.
+   - LTE-M test: the `at_client` sample over USB, `AT+CFUN=1`, then `AT+CEREG?`. Registration status 1 or 5 means LTE-M works with the 1NCE SIM.
 
 ## Design review (2026-11-25)
 
@@ -134,7 +149,7 @@ Found and fixed:
 | Several caps had their signal pad on the far side (C5, C6, C9, C10, C12) | Rotated; DEC0 cap 1.6 mm and VDD_GPIO 100 nF 1.9 mm from their pins |
 | The two unfitted antenna pads would have got solder paste | Own footprint without stencil openings |
 | Alternative charger part: the MCP73831 drives its status pin to 5 V, which would damage the nRF9151's 3.0 V pin | BOM now names the MCP73832 (open-drain status) |
-| The left side of the SiP was too crowded to route cleanly | Board 2 mm wider (25 × 30 mm). UART moved to P0.24/P0.25 and the debug pads put in pin order |
+| The left side of the SiP was too crowded to route cleanly | Board 2 mm wider. UART moved to P0.24/P0.25 and the debug pads put in pin order |
 
 Checked and OK:
 - every part's pinout against its footprint;
@@ -143,6 +158,17 @@ Checked and OK:
 - the RF path (no other copper near it, ground under and around it);
 - the SIM holder's keep-out areas;
 - 1.0 mm 4-layer stack-up, 0.3/0.6 mm vias, minimum track 0.11 mm (JLC 4-layer allows 0.09).
+
+### Added after the review: USB programming and the RGB heart (2026-11-26)
+
+- **USB corner:** laid out by pin order.
+  - The CP2102N sits between the antenna socket and the button.
+  - The reset transistor sits at its DTR/RTS pins; its caps and dividers sit at their pins.
+- **Fixed routing:** the USB data pair is a fixed pair on layer 3, joined under the connector body so both plug orientations work.
+- **Heart:** the LED chain runs on the bottom layer under the heart, and the LED supply is a plane on layer 3.
+- **Hand-routed nets:** the SIM lines, reset, enable, the battery feed to the regulator and the LED data were drawn as fixed tracks, so the result doesn't depend on autorouter luck.
+- **Charge status (CHRG):** dropped; the firmware uses *USB plugged in* plus the battery voltage instead.
+- **Result:** ERC, DRC and schematic↔PCB parity are clean. The board is 25 × 49 mm and has 73 parts.
 
 ## Status and open points
 
@@ -158,4 +184,4 @@ Checked and OK:
 - **First build:**
   - This is a new design and hasn't been made yet. Order the spare SiP.
   - Hand-soldering an LGA chip is the hardest step, so expect one board to need rework.
-- **Case:** not yet adapted to v3. Once you've picked the battery, the case can be redrawn around the 25 × 30 mm board. It will be thinner than v2.
+- **Case:** not yet adapted to v3. Once you've picked the battery, the case can be redrawn around the 25 × 49 mm board: thinner than v2, with the heart under a translucent lid or light holes.

@@ -24,7 +24,16 @@ INFO = {
     "1N4148W": ("Switching diode, SOD-123 (motor flyback)", "Diodes 1N4148W-7-F"),
     "TPD4E05U06DQA": ("4-channel ESD array for the SIM lines, USON-10 2.5 x 1 mm",
                       "TI TPD4E05U06DQAR"),
-    "USB-C 6P": ("USB-C receptacle, power only, 6 pin, top mount", "GCT USB4125-GF-A"),
+    "USB-C 16P": ("USB-C receptacle, USB 2.0, 16 pin, top mount", "GCT USB4105-GF-A"),
+    "CP2102N-A02-GQFN24": ("USB-UART bridge, QFN-24 4 x 4 (firmware updates + log over USB-C)",
+                           "Silicon Labs CP2102N-A02-GQFN24R"),
+    "DTC114E": ("Digital NPN 10k/10k, SOT-23 (USB auto-reset)", "Rohm DTC114EKAT146 or Nexperia PDTC114ET"),
+    "WS2812B-2020": ("Addressable RGB LED 2.0 x 2.0 mm (heart)", "Worldsemi WS2812B-2020 or XL-2020RGBC-WS2812B"),
+    "TPS22917DBV": ("Load switch 1-5.5 V, SOT-23-6 (LED power off when idle)", "TI TPS22917DBVR"),
+    "SN74LV1T34DBV": ("Single buffer / level shifter, SOT-23-5 (LED data 3.0 V -> VLED)", "TI SN74LV1T34DBVR"),
+    "22.1k": ("Resistor 22.1 k 1% 0402 (VBUS sense divider)", "UNI-ROYAL 0402WGF2212TCE"),
+    "47.5k": ("Resistor 47.5 k 1% 0402 (VBUS sense divider)", "UNI-ROYAL 0402WGF4752TCE"),
+    "330R": ("Resistor 330 R 1% 0402 (LED data line)", "UNI-ROYAL 0402WGF3300TCE"),
     "nano-SIM hinged": ("Nano-SIM holder, hinged, 6 contacts (bottom side)", "GCT SIM8060-6-0-14-00"),
     "U.FL": ("U.FL coaxial receptacle for the LTE antenna", "Hirose U.FL-R-SMT-1(10)"),
     "Side tact": ("Side-push tactile switch 3.5 x 2.9 mm", "Alps SKRTLAE010"),
@@ -48,7 +57,6 @@ OFFBOARD = [
     ("J2", 2, "LTE flexible FPC antenna with U.FL cable, 698-2200 MHz (B3/B8/B20), as large as the case allows"),
     ("J3", 2, "1NCE IoT SIM, nano size (1.8 V capable)"),
     ("MOT+/-", 2, "0820 coin vibration motor, 3 V"),
-    ("HEART+/-", 2, "Heart perfboard: 10 x 3 mm LED + 470 R each (see /enclosure/heart_perfboard.py)"),
 ]
 
 

@@ -1,24 +1,36 @@
 Value,Designators,Qty/board,Footprint,Side,Fit,Description,Suggested MPN
 4.7uF,"C1, C2, C9, C11",4,C_0603_1608Metric,top,,MLCC 4.7 uF 10 V X5R 0603,Samsung CL10A475KP8NNNC
-10uF,"C3, C5",2,C_0603_1608Metric,top,,MLCC 10 uF 10 V X5R 0603,Samsung CL10A106KP8NNNC
+10uF,"C3, C5, C20",3,C_0603_1608Metric,top,,MLCC 10 uF 10 V X5R 0603,Samsung CL10A106KP8NNNC
 1uF,"C4, C6, C7, C8",4,C_0603_1608Metric,top,,MLCC 1 uF 16 V X5R 0603,Samsung CL10A105KO8NNNC
 100nF,"C10, C12, C13",3,C_0603_1608Metric,bottom/top,,MLCC 100 nF 16 V X7R 0603,Samsung CL10B104KO8NNNC
 DNP,"C14, C15",2,C_0402_NoPaste,top,DNP,"Antenna tuning pad, NOT fitted (0402)",-
+1uF,"C16, C17, C19",3,C_0402_1005Metric,top,,MLCC 1 uF 16 V X5R 0603,Samsung CL10A105KO8NNNC
+100nF,"C18, C21, C22, C23, C24, C25, C26, C27, C28, C29, C30, C31",12,C_0402_1005Metric,top,,MLCC 100 nF 16 V X7R 0603,Samsung CL10B104KO8NNNC
 1N4148W,D1,1,D_SOD-123,top,,"Switching diode, SOD-123 (motor flyback)",Diodes 1N4148W-7-F
+WS2812B-2020,"D3, D4, D5, D6, D7, D8, D9, D10, D11, D12",10,LED_WS2812B-2020_PLCC4_2.0x2.0mm,top,,Addressable RGB LED 2.0 x 2.0 mm (heart),Worldsemi WS2812B-2020 or XL-2020RGBC-WS2812B
 22R@100MHz 6A,FB1,1,L_0805_2012Metric,top,,"Ferrite bead 22 ohm @ 100 MHz, 6 A, 0805 (nRF9151 VDD)",Murata BLM21PG220SN1D
-USB-C 6P,J1,1,USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal,top,,"USB-C receptacle, power only, 6 pin, top mount",GCT USB4125-GF-A
+USB-C 16P,J1,1,USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal,top,,"USB-C receptacle, USB 2.0, 16 pin, top mount",GCT USB4105-GF-A
 U.FL,J2,1,U.FL_Hirose_U.FL-R-SMT-1_Vertical,top,,U.FL coaxial receptacle for the LTE antenna,Hirose U.FL-R-SMT-1(10)
 nano-SIM hinged,J3,1,nanoSIM_GCT_SIM8060-6-0-14-00,bottom,,"Nano-SIM holder, hinged, 6 contacts (bottom side)",GCT SIM8060-6-0-14-00
 AO3400A,Q1,1,SOT-23,top,,"N-MOSFET 30 V 5.7 A, SOT-23 (motor + heart driver)",AOS AO3400A
-5.1k,"R1, R2",2,R_0603_1608Metric,top,,Resistor 5.1 k 1% 0603 (USB-C CC),UNI-ROYAL 0603WAF5101T5E
-4.7k,R3,1,R_0603_1608Metric,top,,Resistor 4.7 k 1% 0603 (charge current 213 mA; 3.3 k = 300 mA),UNI-ROYAL 0603WAF4701T5E
+DTC114E,Q2,1,SOT-23,top,,"Digital NPN 10k/10k, SOT-23 (USB auto-reset)",Rohm DTC114EKAT146 or Nexperia PDTC114ET
+5.1k,"R1, R2",2,R_0402_1005Metric,top,,Resistor 5.1 k 1% 0603 (USB-C CC),UNI-ROYAL 0603WAF5101T5E
+4.7k,"R3, R12, R13",3,R_0402_1005Metric,top,,Resistor 4.7 k 1% 0603 (charge current 213 mA; 3.3 k = 300 mA),UNI-ROYAL 0603WAF4701T5E
 10k,R4,1,R_0603_1608Metric,top,,Resistor 10 k 1% 0603 (ENABLE pull-up),UNI-ROYAL 0603WAF1002T5E
 1k,R5,1,R_0603_1608Metric,top,,Resistor 1 k 1% 0603 (reset series),UNI-ROYAL 0603WAF1001T5E
 0R,R6,1,R_0402_1005Metric,top,,Resistor 0 ohm 0402 (antenna series),UNI-ROYAL 0402WGF0000TCE
 100R,R7,1,R_0603_1608Metric,top,,Resistor 100 R 1% 0603 (gate),UNI-ROYAL 0603WAF1000T5E
 100k,R8,1,R_0603_1608Metric,top,,Resistor 100 k 1% 0603 (gate pull-down),UNI-ROYAL 0603WAF1003T5E
+22.1k,R9,1,R_0402_1005Metric,top,,Resistor 22.1 k 1% 0402 (VBUS sense divider),UNI-ROYAL 0402WGF2212TCE
+47.5k,R10,1,R_0402_1005Metric,top,,Resistor 47.5 k 1% 0402 (VBUS sense divider),UNI-ROYAL 0402WGF4752TCE
+10k,R11,1,R_0402_1005Metric,top,,Resistor 10 k 1% 0603 (ENABLE pull-up),UNI-ROYAL 0603WAF1002T5E
+100k,"R15, R16, R17",3,R_0402_1005Metric,top,,Resistor 100 k 1% 0603 (gate pull-down),UNI-ROYAL 0603WAF1003T5E
+330R,R18,1,R_0402_1005Metric,top,,Resistor 330 R 1% 0402 (LED data line),UNI-ROYAL 0402WGF3300TCE
 Side tact,SW1,1,SW_Push_1P1T-MP_NO_Horizontal_Alps_SKRTLAE010,top,,Side-push tactile switch 3.5 x 2.9 mm,Alps SKRTLAE010
 nRF9151-LACA,U1,1,Nordic_nRF9151-LAxx_LGA-80-33EP_12.1x11.1mm_P0.5mm,top,,"Nordic nRF9151 SiP: Cortex-M33 + LTE-M/NB-IoT modem + GNSS, LGA-80 12.1 x 11.1 mm",Nordic nRF9151-LACA (cut tape: nRF9151-LACA-R7)
 TP4054,U2,1,SOT-23-5,top,,"Li-ion/LiPo linear charger 4.2 V, SOT-23-5 (MCP73831 pinout), I = 1000 V / R3","TP4054 (Nanjing Top Power) or MCP73832T-2ACI/OT (open-drain STAT; NOT the MCP73831, its STAT drives 5 V into the nRF9151)"
 XC6206P302MR,U3,1,SOT-23-3,top,,"LDO 3.0 V 200 mA, Iq 1 uA, SOT-23 (VDD_GPIO)",Torex XC6206P302MR
 TPD4E05U06DQA,U4,1,USON-10_2.5x1.0mm_P0.5mm,top,,"4-channel ESD array for the SIM lines, USON-10 2.5 x 1 mm",TI TPD4E05U06DQAR
+CP2102N-A02-GQFN24,U5,1,QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm,top,,"USB-UART bridge, QFN-24 4 x 4 (firmware updates + log over USB-C)",Silicon Labs CP2102N-A02-GQFN24R
+TPS22917DBV,U6,1,SOT-23-6,top,,"Load switch 1-5.5 V, SOT-23-6 (LED power off when idle)",TI TPS22917DBVR
+SN74LV1T34DBV,U7,1,SOT-23-5,top,,"Single buffer / level shifter, SOT-23-5 (LED data 3.0 V -> VLED)",TI SN74LV1T34DBVR

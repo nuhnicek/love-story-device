@@ -86,7 +86,7 @@ def free(x, y, src_pad, seg_from):
         if (px - x) ** 2 + (py - y) ** 2 < mm(VIA_D + CLR) ** 2:
             return False
     for o in OBS:
-        same = o.GetNetCode() == GND.GetNetCode() and o.GetNetCode() != 0
+        same = o.GetNetCode() == src_pad.GetNetCode() and o.GetNetCode() != 0
         if isinstance(o, pn.PAD):
             if o.GetDrillSize().x > 0:                       # any hole: keep 0.25 mm
                 hp = o.GetPosition()
@@ -112,11 +112,15 @@ def free(x, y, src_pad, seg_from):
 
 
 
+VLED = board.FindNet("/VLED")
+HEART_Y = mm(99.9)                    # heart area: everything above this line
 missing = []
 for fp in board.GetFootprints():
     for p in fp.Pads():
-        if p.GetNetCode() != GND.GetNetCode() or p.GetDrillSize().x > 0:
+        is_vled = VLED is not None and p.GetNetCode() == VLED.GetNetCode() and p.GetPosition().y < HEART_Y
+        if (p.GetNetCode() != GND.GetNetCode() and not is_vled) or p.GetDrillSize().x > 0:
             continue
+        NET = VLED if is_vled else GND
         if fp.GetReference() == "J3" and p.GetNumber() == "SH":
             pass
         pc = p.GetPosition()
@@ -140,13 +144,13 @@ for fp in board.GetFootprints():
                 if free(x, y, p, pc):
                     v = pn.PCB_VIA(board)
                     v.SetPosition(pn.VECTOR2I(int(x), int(y)))
-                    v.SetWidth(mm(VIA_D)); v.SetDrill(mm(VIA_DRILL)); v.SetNet(GND)
+                    v.SetWidth(mm(VIA_D)); v.SetDrill(mm(VIA_DRILL)); v.SetNet(NET)
                     v.SetLocked(True)
                     board.Add(v)
                     t = pn.PCB_TRACK(board)
                     t.SetStart(pc); t.SetEnd(pn.VECTOR2I(int(x), int(y)))
                     t.SetWidth(mm(0.25)); t.SetLayer(p.GetLayer() if p.IsOnLayer(pn.F_Cu) else pn.B_Cu)
-                    t.SetNet(GND); t.SetLocked(True)
+                    t.SetNet(NET); t.SetLocked(True)
                     board.Add(t)
                     placed.append((x, y))
                     OBS.append(t)
@@ -196,6 +200,9 @@ uc = board.FindFootprintByReference("U1").GetPosition()
 ux, uy = pn.ToMM(uc.x), pn.ToMM(uc.y)
 rule_area((pn.F_Cu, pn.In1_Cu, pn.In2_Cu, pn.B_Cu), ux - 5.2, uy - 4.7, ux + 5.2, uy + 4.7, True, False)
 rule_area((pn.F_Cu,), ux - 5.2, uy - 4.7, ux + 5.2, uy + 4.7, False, True)
+# the heart area's inner layer 3 is reserved for the VLED plane
+e = board.GetBoardEdgesBoundingBox()
+rule_area((pn.In2_Cu,), pn.ToMM(e.GetLeft()), pn.ToMM(e.GetTop()), pn.ToMM(e.GetRight()), 99.9, False, True)
 pn.SaveBoard(PCB, board)
 
 tmp = tempfile.mkdtemp(prefix="v3_route_")
@@ -203,7 +210,8 @@ dsn, ses = os.path.join(tmp, "board.dsn"), os.path.join(tmp, "board.ses")
 if not pn.ExportSpecctraDSN(board, dsn):
     sys.exit("DSN export failed")
 
-PASSES = ("40",) if "--quick" in sys.argv else ("60", "100", "150", "200", "300")
+PASSES = ("40",) if "--quick" in sys.argv else ("100", "200", "300")
+prev = None
 for attempt, passes in enumerate(PASSES, 1):
     out = subprocess.run(["java", "-jar", jar, "--gui.enabled=false",
                           "--usage_and_diagnostic_data.disable_analytics=true",
@@ -212,8 +220,9 @@ for attempt, passes in enumerate(PASSES, 1):
     m = re.findall(r"Auto-routing stage completed.*?\((\d+) unrouted", out.stdout + out.stderr)
     unrouted = int(m[-1]) if m else -1
     print("freerouting attempt %d (%s passes): %s unrouted" % (attempt, passes, unrouted))
-    if unrouted == 0:
+    if unrouted == 0 or unrouted == prev:      # done, or more passes don't help
         break
+    prev = unrouted
 else:
     # What Freerouting still lists is normally GND, closed by the pours added
     # below; the DRC (make_all.sh) decides whether the board is complete.
@@ -247,13 +256,25 @@ def via_layers(v):
 
 GNDC = board.FindNet("GND").GetNetCode()
 for v in [t for t in board.GetTracks() if t.GetClass() == "PCB_VIA"]:
-    if v.GetNetCode() != GNDC and len(via_layers(v)) < 2:
+    if not v.IsLocked() and v.GetNetCode() != GNDC and len(via_layers(v)) < 2:   # fixed vias may feed a plane
         board.Remove(v)
 
 for z in list(board.Zones()):
     board.Remove(z)
 zone(board, pn.In1_Cu, "GND")
 zone(board, pn.In2_Cu, "GND")
+if board.FindNet("/VLED"):            # VLED plane on L3 under the heart, above the GND pour
+    zv = pn.ZONE(board)
+    zv.SetLayer(pn.In2_Cu); zv.SetNet(board.FindNet("/VLED"))
+    zv.SetLocalClearance(mm(0.2)); zv.SetMinThickness(mm(0.15))
+    zv.SetPadConnection(pn.ZONE_CONNECTION_FULL); zv.SetAssignedPriority(1)
+    zv.SetIslandRemovalMode(pn.ISLAND_REMOVAL_MODE_ALWAYS)
+    eb = board.GetBoardEdgesBoundingBox()
+    ol = zv.Outline(); ol.NewOutline()
+    for x, y in ((eb.GetLeft(), eb.GetTop()), (eb.GetRight(), eb.GetTop()),
+                 (eb.GetRight(), mm(99.8)), (eb.GetLeft(), mm(99.8))):
+        ol.Append(x, y)
+    board.Add(zv)
 zone(board, pn.F_Cu, "GND", clearance=0.25)
 zone(board, pn.B_Cu, "GND", clearance=0.25)
 pn.ZONE_FILLER(board).Fill(board.Zones())

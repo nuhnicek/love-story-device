@@ -57,21 +57,24 @@ def pad(ref, val, x, y, n, size=1.0, rot=0):
 
 
 # ============================================================ A: USB-C + charger
-box(15.24, 20.32, 142.24, 96.52, "A. USB-C + LiPo charger (TP4054)")
-place("Connector:USB_C_Receptacle_PowerOnly_6P", "J1", "USB-C 6P", 33.02, 55.88, 0,
-      "Connector_USB:USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal",
-      {"A9": "VBUS", "B9": "VBUS", "A5": "CC1", "B5": "CC2", "A12": "GND", "B12": "GND", "SH": "GND"})
-res("R1", "5.1k", 63.5, 68.58, "CC1", "GND")
-res("R2", "5.1k", 71.12, 68.58, "CC2", "GND")
+box(15.24, 20.32, 142.24, 96.52, "A. USB-C (power + data) + LiPo charger (TP4054)")
+place("Connector:USB_C_Receptacle_USB2.0_16P", "J1", "USB-C 16P", 33.02, 53.34, 0,
+      "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal",
+      {"A4": "VBUS", "A9": "VBUS", "B4": "VBUS", "B9": "VBUS", "A1": "GND", "A12": "GND",
+       "B1": "GND", "B12": "GND", "A5": "CC1", "B5": "CC2", "A6": "USB_DP", "B6": "USB_DP",
+       "A7": "USB_DM", "B7": "USB_DM", "SH": "GND"}, nc=("A8", "B8"),
+      field_at={"Reference": (0, -27.94), "Value": (0, -25.4)})
+res("R1", "5.1k", 63.5, 68.58, "CC1", "GND", fp=FP_R04)
+res("R2", "5.1k", 71.12, 68.58, "CC2", "GND", fp=FP_R04)
 cap("C1", "4.7uF", 81.28, 60.96, "VBUS", "GND")
 place("keychain:TP4054", "U2", "TP4054", 109.22, 58.42, 0, "Package_TO_SOT_SMD:SOT-23-5",
-      {"1": "CHRG", "2": "GND", "3": "VBAT", "4": "VBUS", "5": "PROG"},
+      {"2": "GND", "3": "VBAT", "4": "VBUS", "5": "PROG"}, nc=("1",),
       field_at={"Reference": (-10.16, -8.89), "Value": (-12.7, 10.16)})
-res("R3", "4.7k", 93.98, 73.66, "PROG", "GND")
+res("R3", "4.7k", 93.98, 73.66, "PROG", "GND", fp=FP_R04)
 cap("C2", "4.7uF", 134.62, 63.5, "VBAT", "GND")
 place("power:PWR_FLAG", "#FLG01", "PWR_FLAG", 127.0, 30.48, 180, "", {"1": "VBUS"})
 text("I_chg = 1000 V / R3: 4.7k = 213 mA (200-500 mAh cells), 3.3k = 300 mA (>= 300 mAh)", 20.32, 88.9)
-text("CHRG (open drain, low while charging) -> P0.26. Alternative part: MCP73832 (open drain), NOT MCP73831", 20.32, 91.44)
+text("CHRG not used: firmware sees USB_DET + battery voltage. Alternative part: MCP73832 (not MCP73831)", 20.32, 91.44)
 
 # ============================================================ B: battery, VDD, VDD_GPIO
 box(15.24, 101.6, 142.24, 180.34, "B. Battery, nRF9151 supply, 3.0 V GPIO rail")
@@ -101,7 +104,8 @@ U1_NETS = {"14": "VDD_NRF", "10": "ENABLE", "24": "DEC0", "65": "+3V0",
            "3": "SWDCLK", "4": "SWDIO", "9": "nRESET",
            "16": "SIM_RST", "17": "SIM_IO", "18": "SIM_CLK", "19": "SIM_1V8",
            "35": "LTE_ANT0",
-           "62": "DRV", "45": "BTN", "44": "CHRG", "11": "UART_TX", "12": "UART_RX"}
+           "62": "DRV", "49": "BTN", "11": "UART_TX", "12": "UART_RX",
+           "50": "USB_DET", "63": "LED_DATA3V", "80": "LED_EN"}
 U1_GND = ["1", "7", "13", "15", "20", "25", "30", "34", "36", "38", "39", "40", "41", "43",
           "46", "51", "55", "60", "66", "71", "76"] + [str(n) for n in range(105, 114)]
 for g in U1_GND:
@@ -118,7 +122,7 @@ cap("C11", "4.7uF", 251.46, 50.8, "+3V0", "GND")
 res("R5", "1k", 162.56, 220.98, "nRESET_PAD", "nRESET")
 cap("C12", "100nF", 175.26, 220.98, "nRESET", "GND")
 text("ENABLE pulled up: always on. nRESET: no external pull-up (internal 13k)", 149.86, 246.38)
-text("P0.05 DRV (PWM), P0.27 BTN, P0.26 CHRG, P0.24 UART TX / P0.25 UART RX", 149.86, 248.92)
+text("P0.05 motor, P0.30 BTN, P0.31 USB_DET, P0.24/25 UART, P0.06 LED data, P0.19 LED_EN", 149.86, 248.92)
 
 # ============================================================ D: SIM
 box(15.24, 185.42, 142.24, 251.46, "D. Nano-SIM (1.8 V class C) + UICC ESD")
@@ -146,7 +150,7 @@ text("Antenna: flexible LTE FPC with U.FL (700-2200 MHz, B3/B8/B20)", 274.32, 68
 text("RF trace: 0.35 mm on L1 over L2 GND (JLC04101H-7628), short", 274.32, 71.12)
 
 # ============================================================ F: motor, heart, button
-box(271.78, 81.28, 403.86, 157.48, "F. Vibration motor + heart LEDs, side button")
+box(271.78, 81.28, 403.86, 157.48, "F. Vibration motor, side button")
 res("R7", "100R", 284.48, 111.76, "DRV", "GATE", rot=90)
 res("R8", "100k", 297.18, 124.46, "GATE", "GND")
 place("Transistor_FET:AO3400A", "Q1", "AO3400A", 317.5, 116.84, 0, "Package_TO_SOT_SMD:SOT-23",
@@ -155,28 +159,84 @@ place("Device:D", "D1", "1N4148W", 345.44, 101.6, 0, "Diode_SMD:D_SOD-123",
       {"1": "VBAT", "2": "MOT_N"})
 pad("TP3", "MOT+", 365.76, 104.14, "VBAT", rot=180)
 pad("TP4", "MOT-", 375.92, 119.38, "MOT_N")
-pad("TP5", "HEART+", 383.54, 104.14, "VBAT", rot=180)
-pad("TP6", "HEART-", 393.7, 119.38, "MOT_N")
 place("Switch:SW_Push", "SW1", "Side tact", 330.2, 142.24, 0,
       "Button_Switch_SMD:SW_Push_1P1T-MP_NO_Horizontal_Alps_SKRTLAE010", {"1": "BTN", "2": "GND"})
-text("Motor and heart perfboard (10 LEDs + resistors, v1) share Q1; D1 = flyback", 274.32, 152.4)
+text("Q1 drives the 0820 coin motor (wired to MOT+/-); D1 = flyback", 274.32, 152.4)
 text("BTN: internal pull-up, GPIO sense wakes the nRF9151", 274.32, 154.94)
 
 # ============================================================ G: debug pads
-box(271.78, 162.56, 403.86, 238.76, "G. SWD programming + UART log pads (bottom side)")
+box(271.78, 162.56, 403.86, 238.76, "G. SWD pads (bottom side): first bootloader flash only")
 for i, (ref, val, n) in enumerate([("TP7", "SWDIO", "SWDIO"), ("TP8", "SWDCLK", "SWDCLK"),
                                    ("TP9", "RST", "nRESET_PAD"), ("TP10", "VT", "+3V0"),
-                                   ("TP11", "GND", "GND"), ("TP12", "TX", "UART_TX"),
-                                   ("TP13", "RX", "UART_RX")]):
+                                   ("TP11", "GND", "GND")]):
     pad(ref, val, 284.48 + i * 15.24, 195.58, n, 0.9, rot=180 if n != "GND" else 0)
 text("Program with any SWD probe: J-Link, nRF91 DK, or a Pico debugprobe + pyOCD", 274.32, 220.98)
 text("VT = 3.0 V target reference (do NOT power the board from the probe)", 274.32, 223.52)
-text("TX/RX: 3.0 V UART log, 115200 8N1", 274.32, 226.06)
+text("After that: firmware + log over USB-C (block H)", 274.32, 226.06)
+
+# ============================================================ H: USB-serial + auto reset
+box(408.94, 20.32, 581.66, 205.74, "H. USB-serial (CP2102N): flashing + log over USB-C")
+U5_NC = ("1", "10", "11", "12", "13", "14", "15", "16", "17", "18", "22", "24")
+place("Interface_USB:CP2102N-Axx-xQFN24", "U5", "CP2102N-A02-GQFN24", 482.6, 104.14, 0,
+      "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm",
+      {"3": "USB_DP", "4": "USB_DM", "5": "V3U", "6": "V3U", "7": "VBUS", "8": "USB_VSNS",
+       "9": "CP_RST", "2": "GND", "25": "GND", "19": "CP_RTS", "20": "CP_RXD", "21": "CP_TXD",
+       "23": "CP_DTR"}, nc=U5_NC, field_at={"Reference": (17.78, -33.02), "Value": (17.78, -30.48)})
+cap("C16", "1uF", 424.18, 45.72, "VBUS", "GND", fp=FP_C04)
+cap("C17", "1uF", 436.88, 45.72, "V3U", "GND", fp=FP_C04)
+cap("C18", "100nF", 449.58, 45.72, "V3U", "GND", fp=FP_C04)
+place("power:PWR_FLAG", "#FLG04", "PWR_FLAG", 462.28, 38.1, 180, "", {"1": "V3U"})
+res("R9", "22.1k", 424.18, 81.28, "VBUS", "USB_VSNS", fp=FP_R04)
+res("R10", "47.5k", 424.18, 116.84, "USB_VSNS", "GND", fp=FP_R04)
+res("R11", "10k", 436.88, 81.28, "V3U", "CP_RST", fp=FP_R04)
+res("R12", "4.7k", 528.32, 60.96, "UART_TX", "CP_RXD", fp=FP_R04)
+res("R13", "4.7k", 541.02, 60.96, "CP_TXD", "UART_RX", fp=FP_R04)
+place("Transistor_BJT:DTC114E", "Q2", "DTC114E", 548.64, 142.24, 0, "Package_TO_SOT_SMD:SOT-23",
+      {"1": "CP_DTR", "2": "CP_RTS", "3": "nRESET"})
+res("R15", "100k", 449.58, 154.94, "VBUS", "USB_DET", fp=FP_R04)
+res("R16", "100k", 462.28, 172.72, "USB_DET", "GND", fp=FP_R04)
+for i, t in enumerate([
+        "CP2102N runs only from USB (VREGIN = VBUS), its I/O at its own 3.3 V (VIO = VDD).",
+        "R12/R13: 4.7k series to the nRF9151 UART. The firmware turns the UART off",
+        "  when USB_DET is low, so nothing leaks into the unpowered CP2102N on battery.",
+        "Q2 (digital NPN, 10k/10k inside) auto-reset: nRESET is pulled low only when DTR is high",
+        "  and RTS is low. Idle (both high), port open (both low) and USB unplugged: no reset.",
+        "Flash: MCUboot (installed once over SWD) waits ~0.5 s after reset for mcumgr",
+        "  over this UART, so the PC can reset the board and upload new firmware.",
+        "USB_DET (P0.31): VBUS/2, high while USB-C is plugged in"]):
+    text(t, 411.48, 185.42 + i * 2.54)
+
+# ============================================================ I: RGB heart
+box(15.24, 259.08, 403.86, 386.08, "I. Heart: 10 addressable RGB LEDs (WS2812B-2020), switched off when idle")
+place("Power_Management:TPS22917DBV", "U6", "TPS22917DBV", 43.18, 289.56, 0, "Package_TO_SOT_SMD:SOT-23-6",
+      {"1": "VBAT", "2": "GND", "3": "LED_EN", "6": "VLED"}, nc=("4", "5"),
+      field_at={"Reference": (0, -10.16), "Value": (0, 10.16)})
+cap("C19", "1uF", 22.86, 292.1, "VBAT", "GND", fp=FP_C04)
+res("R17", "100k", 25.4, 312.42, "LED_EN", "GND", fp=FP_R04)
+cap("C20", "10uF", 68.58, 292.1, "VLED", "GND")
+place("Logic_LevelTranslator:SN74LV1T34DBV", "U7", "SN74LV1T34DBV", 104.14, 292.1, 0, "Package_TO_SOT_SMD:SOT-23-5",
+      {"2": "LED_DATA3V", "3": "GND", "4": "LED_DIN", "5": "VLED"}, nc=("1",),
+      field_at={"Reference": (0, -10.16), "Value": (0, 10.16)})
+cap("C21", "100nF", 124.46, 292.1, "VLED", "GND", fp=FP_C04)
+res("R18", "330R", 139.7, 287.02, "LED_DIN", "LED_D0", fp=FP_R04, rot=90)
+for i in range(10):
+    x = 40.64 + i * 34.29
+    place("LED:WS2812B-2020", "D%d" % (3 + i), "WS2812B-2020", x, 340.36, 0,
+          "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm",
+          {"4": "VLED", "2": "GND", "3": "LED_D%d" % i, "1": ("LED_D%d" % (i + 1)) if i < 9 else None},
+          nc=() if i < 9 else ("1",), field_at={"Reference": (-5.08, -10.16), "Value": (0, 10.16)})
+    cap("C%d" % (22 + i), "100nF", x + 15.24, 340.36, "VLED", "GND", fp=FP_C04)
+for i, t in enumerate([
+        "U6 (load switch) powers the LEDs only while they light: WS2812-type LEDs draw ~1 mA each even when dark.",
+        "U7 lifts the 3.0 V data from P0.06 to the LED supply level (WS2812 needs 0.7 x VDD). R18 damps the line.",
+        "LEDs run from the battery: full colour above ~3.6 V; the firmware dims / skips the heart below that.",
+        "P0.19 = LED_EN (R17 keeps it off during reset), P0.06 = data. Zephyr: ws2812 driver over SPI or I2S."]):
+    text(t, 20.32, 365.76 + i * 2.54)
 
 S.write("GSM touch keychain v3 - nRF9151 LTE-M board",
         ["nRF9151 SiP + TP4054 charger + nano-SIM + U.FL, 4-layer 1.0 mm, hand assembly (stencil + hot plate)",
          "Generated by v3/hardware/scripts/gen_schematic.py - edit the script, not this file"],
-        os.path.join(HW, "sch_uuids.json"), paper="A3")
+        os.path.join(HW, "sch_uuids.json"), paper="A2")
 schlib.write_lib_tables(HW, PROJECT + ".kicad_sym", "keychain.pretty")
 pro = os.path.join(HW, PROJECT + ".kicad_pro")
 if not os.path.exists(pro):
