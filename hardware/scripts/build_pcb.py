@@ -211,18 +211,15 @@ R("R3", "100k", 108.7, 113.2, "SIM_RXD", "GND", rot=90, lcsc="C25741")
 # --- reset pull-up (keeps PB5 as RESET for ISP)
 R("R6", "10k", 111.0, 103.9, "RESET", "VBAT", rot=0, lcsc="C25744")
 
-# --- motor driver: PB4 -> 100R -> 2N7002 gate, 100k pull-down
-place("Package_TO_SOT_SMD", "SOT-23", "Q1", "2N7002", 120.2, 107.2, 0,
-      pads={"1": "GATE", "2": "GND", "3": "MOT_N"}, lcsc="C8545")
+# --- motor + heart driver: PB4 -> 100R -> AO3400A gate, 100k pull-down
+place("Package_TO_SOT_SMD", "SOT-23", "Q1", "AO3400A", 120.2, 107.2, 0,
+      pads={"1": "GATE", "2": "GND", "3": "MOT_N"})
 R("R4", "100R", 120.3, 104.6, "DRV", "GATE", rot=0, lcsc="C25076")
 R("R5", "100k", 120.2, 109.8, "GATE", "GND", rot=0, lcsc="C25741")
 place("Diode_SMD", "D_SOD-523", "D1", "1N4148WT", 120.2, 111.4, 0,
       pads={"1": "VBAT", "2": "MOT_N"})   # K=VBAT, A=MOT_N
 
-# --- status LED in parallel with the motor (same PWM)
-place("LED_SMD", "LED_0805_2012Metric", "D2", "LED red 0805", 106.0, 101.2, 180,
-      pads={"1": "MOT_N", "2": "LED_A"})    # 1=K, 2=A
-R("R7", "220R", 108.9, 101.2, "LED_A", "VBAT", rot=0, lcsc="C25091")
+# --- the LED heart is a separate board (hardware/heart), wired to HT1/HT2 below
 
 # --- side-push button on the top edge, actuator points out of the board
 place("Button_Switch_SMD", "SW_Push_1P1T-MP_NO_Horizontal_Alps_SKRTLAE010",
@@ -244,189 +241,76 @@ R("R10", "4.7k", 120.2, 118.4, "PROG", "GND", rot=90, lcsc="C25900")  # ~213 mA
 C("C3", "4.7uF", 118.6, 118.4, "VBUS", "GND", rot=90)
 C("C4", "4.7uF", 121.6, 118.4, "VBAT", "GND", rot=90)
 
-# --- wire pads: battery, motor, ISP (compact custom SMD pads on bottom)
+# --- wire pads: battery, motor, heart board, ISP (compact SMD pads, bottom)
+import pcblib
 def wirepad(ref, val, x, y, size, n):
-    fp = pn.FOOTPRINT(board)
-    fp.SetFPID(pn.LIB_ID("keychain", "WirePad_%.1fmm" % size))
-    fp.SetReference(ref); fp.SetValue(val)
-    fp.SetAttributes(pn.FP_SMD | pn.FP_EXCLUDE_FROM_BOM | pn.FP_EXCLUDE_FROM_POS_FILES)
-    fp.SetPosition(V(x, y))
-    board.Add(fp)
-    p = pn.PAD(fp)
-    p.SetNumber("1"); p.SetAttribute(pn.PAD_ATTRIB_SMD)
-    p.SetShape(pn.PAD_SHAPE_ROUNDRECT); p.SetRoundRectRadiusRatio(0.2)
-    p.SetSize(V(size, size)); p.SetLayerSet(p.SMDMask())
-    p.SetPosition(V(x, y)); fp.Add(p)
-    p.SetNet(net(n))
-    cy = pn.PCB_SHAPE(fp); cy.SetShape(pn.SHAPE_T_RECT)
-    h = size / 2 + 0.15
-    cy.SetStart(V(x - h, y - h)); cy.SetEnd(V(x + h, y + h))
-    cy.SetLayer(pn.F_CrtYd); cy.SetWidth(mm(0.05)); fp.Add(cy)
-    fp.Flip(V(x, y), pn.FLIP_DIRECTION_LEFT_RIGHT)
-    fp.Reference().SetTextSize(V(0.5, 0.5)); fp.Reference().SetTextThickness(mm(0.08))
-    fp.Reference().SetPosition(V(x, y))
-    return fp
+    return pcblib.wirepad(board, net, ref, val, x, y, size, n)
 
 wirepad("BT1", "BAT+", 111.2, 112.2, 1.5, "VBAT")
 wirepad("BT2", "BAT-", 113.2, 112.2, 1.5, "GND")
 wirepad("MT1", "MOT+", 121.3, 102.6, 1.0, "VBAT")
 wirepad("MT2", "MOT-", 121.3, 101.1, 1.0, "MOT_N")
-isp = [("TP1", "RST", "RESET"), ("TP2", "MOSI", "MCU_RX"),
-       ("TP3", "MISO", "MCU_TX"), ("TP4", "SCK", "BTN"),
-       ("TP5", "VCC", "VBAT"), ("TP6", "GND", "GND")]
-ISP_XY = [(104.0, 117.4), (105.4, 117.4), (104.0, 118.8), (105.4, 118.8),
-          (104.0, 120.2), (105.4, 120.2)]
-for (ref, val, n), (x, y) in zip(isp, ISP_XY):
+wirepad("HT1", "HEART+", 105.6, 101.2, 1.0, "VBAT")
+wirepad("HT2", "HEART-", 107.4, 101.2, 1.0, "MOT_N")
+# ISP pads in two staggered columns so every pad gets a readable label
+ISP = [("TP1", "RST", "RESET", 103.7, 117.0), ("TP2", "MOSI", "MCU_RX", 106.6, 118.0),
+       ("TP3", "MISO", "MCU_TX", 103.7, 119.0), ("TP4", "SCK", "BTN", 106.6, 120.0),
+       ("TP5", "VCC", "VBAT", 103.7, 121.0), ("TP6", "GND", "GND", 106.6, 122.0)]
+for ref, val, n, x, y in ISP:
     wirepad(ref, val, x, y, 0.9, n)
 
 # GND pours are added by autoroute.py AFTER routing, so the router wires GND
 # explicitly instead of assuming a plane.
 
 # ---------------------------------------------------------------- text
-# The board is too dense for readable silkscreen references: hide silk refs and
-# values; references stay on the Fab layer (assembly drawing PDF).
-for fp in board.GetFootprints():
-    fp.Value().SetVisible(False)
-    ref = fp.Reference()
-    if fp.GetReference() == "M1":
-        ref.SetLayer(pn.F_Fab)
-    else:
-        ref.SetLayer(pn.B_Fab)
-        ref.SetMirrored(True)
-    ref.SetTextSize(V(0.5, 0.5)); ref.SetTextThickness(mm(0.08))
-    for item in fp.GraphicalItems():
-        if isinstance(item, pn.PCB_TEXT) and item.GetText() == "${REFERENCE}":
-            item.SetVisible(False)          # keep exactly one ref per part
+# References go to the Fab layer (assembly PDF); the silkscreen gets short
+# functional labels so you can see what every pad / hole is.
+pcblib.refs_to_fab(board, top_refs=("M1",))
 
-def silk(text, x, y, size=0.8, layer=pn.B_SilkS):
-    t = pn.PCB_TEXT(board)
-    t.SetText(text); t.SetPosition(V(x, y)); t.SetLayer(layer)
-    t.SetTextSize(V(size, size)); t.SetTextThickness(mm(size * 0.15))
-    t.SetMirrored(layer == pn.B_SilkS)
-    board.Add(t)
+def silk(text, x, y, size=0.8, layer=pn.B_SilkS, justify=None):
+    return pcblib.silk(board, text, x, y, size, layer, justify=justify)
 
-silk("TOUCH-GSM v1", BX + BW / 2, BY + 11.0, 0.7, pn.F_SilkS)
-# battery polarity next to the solder pads (no reverse-polarity protection!)
+# bottom side (mirrored text, reads correctly when the board is flipped)
+silk("BAT", 112.2, 110.75, 0.8)
 silk("+", 111.2, 113.65, 0.9)
 silk("-", 113.2, 113.65, 0.9)
+silk("MOT", 123.7, 101.85, 0.8)
+silk("HEART", 106.5, 103.55, 0.8)
+silk("+", 105.6, 102.45, 0.8)
+silk("-", 107.4, 102.45, 0.8)
+silk("ISP", 105.2, 116.0, 0.8)
+for ref, val, n, x, y in ISP:
+    # bottom text is mirrored: "right" justify on B.SilkS grows to the right on screen
+    if x < 105:
+        silk(val, x + 0.65, y, 0.8, justify="right")
+    else:
+        silk(val, x - 0.65, y, 0.8, justify="left")
 
-# ---------------------------------------------------------------- schematic sync
-# The schematic is the source of truth. Export its netlist, cross-check every
-# pad against the net this script assigned (fail on any disagreement), then
-# adopt the schematic net names (e.g. "/MCU_RX") and symbol fields.
-import subprocess, tempfile
-sys.path.insert(0, HERE)
-import sexpr
-nl_path = os.path.join(tempfile.mkdtemp(), "kc.net")
-subprocess.run(["kicad-cli", "sch", "export", "netlist", "--format", "kicadsexpr",
-                "-o", nl_path, os.path.join(HW, "keychain-carrier.kicad_sch")],
-               check=True, capture_output=True)
-nl = sexpr.parse(open(nl_path).read())
-NETMAP = {}
-for n in sexpr.find(sexpr.first(nl, "nets"), "net"):
-    name = sexpr.first(n, "name")[1]
-    for node in sexpr.find(n, "node"):
-        NETMAP[(sexpr.first(node, "ref")[1], sexpr.first(node, "pin")[1])] = name
-COMPS = {sexpr.first(c, "ref")[1]: c for c in sexpr.find(sexpr.first(nl, "components"), "comp")}
+# top side: SIM800L pin names next to the module holes, plus title
+silk("TOUCH-GSM v1", BX + BW / 2, BY + 12.5, 0.8, pn.F_SilkS)
+silk("SIM800L SIDE", BX + BW / 2, BY + 14.0, 0.8, pn.F_SilkS)
+for i, nm in enumerate(["NET", "VCC", "RST", "RXD", "TXD", "GND"]):
+    silk(nm, X0 + 1.2, Y0 + i * PITCH, 0.8, pn.F_SilkS, justify="left")
+for i, nm in enumerate(["RING", "DTR", "MIC+", "MIC-", "SPK+", "SPK-"]):
+    silk(nm, X0 + ROW_DX - 1.2, Y0 + RIGHT_ROW_DY + i * PITCH, 0.8, pn.F_SilkS, justify="right")
 
-def norm(n):
-    if not n or n.startswith("unconnected-"):
-        return ""
-    return n.lstrip("/")
-
-errors = []
-for fp in board.GetFootprints():
-    ref = fp.GetReference()
-    if ref not in COMPS:
-        errors.append("%s missing from schematic" % ref)
-        continue
-    for p in fp.Pads():
-        if not p.GetNumber():
-            continue                      # NPTH / mechanical
-        sch = NETMAP.get((ref, p.GetNumber()), "")
-        if norm(sch) != norm(p.GetNetname()) and not (p.GetNetname() == "STAT" and not norm(sch)):
-            errors.append("%s.%s: pcb=%s sch=%s" % (ref, p.GetNumber(), p.GetNetname(), sch))
-        p.SetNet(net(sch) if sch else pn.NETINFO_LIST.OrphanedItem())
-    comp = COMPS[ref]
-    fp.SetValue(sexpr.first(comp, "value")[1])
-    sch_fields = {sexpr.first(f, "name")[1] for f in sexpr.find(sexpr.first(comp, "fields") or [], "field")}
-    for fld in list(fp.GetFields()):
-        if not fld.IsMandatory() and fld.GetName() not in sch_fields:
-            fp.Remove(fld)                    # e.g. KiLib_Generator from the library
-    for f in sexpr.find(sexpr.first(comp, "fields") or [], "field"):
-        name = sexpr.first(f, "name")[1]
-        val = f[2] if len(f) > 2 else ""
-        if name == "Footprint" or name.startswith("ki_"):
-            continue
-        fp.SetField(name, val)
-        fld = fp.GetField(name)
-        if name not in ("Reference",):
-            fld.SetVisible(False)
-if errors:
-    sys.exit("schematic/PCB mismatch:\n  " + "\n  ".join(errors))
-for name in list(NETS):
-    if name not in NETMAP.values():
-        board.Remove(NETS.pop(name))      # drop the script's pre-sync net names
-
-# ---------------------------------------------------------------- schematic link
-# Link each footprint to its schematic symbol (UUIDs from gen_schematic.py) so
-# KiCad's schematic-parity check and "Update PCB from Schematic" work.
-import json
-link = json.load(open(os.path.join(HW, "sch_uuids.json")))
-for fp in board.GetFootprints():
-    u = link["symbols"].get(fp.GetReference())
-    if not u:
-        sys.exit("footprint %s has no schematic symbol" % fp.GetReference())
-    fp.SetPath(pn.KIID_PATH("/" + u))
-    fp.SetSheetname("/")
-    fp.SetSheetfile("keychain-carrier.kicad_sch")
-
-# ---------------------------------------------------------------- project footprint lib
-# Save the custom footprints (module + wire pads) to keychain.pretty.
-PRETTY = os.path.join(HW, "keychain.pretty")
-os.makedirs(PRETTY, exist_ok=True)
-io = pn.PCB_IO_KICAD_SEXPR()
-done = set()
-for fp in board.GetFootprints():
-    fid = fp.GetFPID()
-    if fid.GetLibNickname() == "keychain" and str(fid.GetLibItemName()) not in done:
-        lf = pn.FOOTPRINT(fp)               # copy, normalised to origin / top side
-        if lf.IsFlipped():
-            lf.Flip(lf.GetPosition(), pn.FLIP_DIRECTION_LEFT_RIGHT)
-        lf.SetOrientationDegrees(0)
-        lf.Move(pn.VECTOR2I(-lf.GetPosition().x, -lf.GetPosition().y))
-        lf.SetPath(pn.KIID_PATH())
-        lf.Reference().SetVisible(True)
-        lf.Reference().SetLayer(pn.F_SilkS); lf.Reference().SetMirrored(False)
-        io.FootprintSave(PRETTY, lf)
-        done.add(str(fid.GetLibItemName()))
-
+# ---------------------------------------------------------------- schematic sync + link
+# The schematic is the source of truth: pad nets and fields come from its
+# netlist (cross-checked against this script), footprints link to symbols.
+net.items = NETS
+pcblib.sync_from_schematic(board, net, os.path.join(HW, "keychain-carrier.kicad_sch"),
+                           allow_dropped=("STAT",))
+pcblib.link_symbols(board, os.path.join(HW, "sch_uuids.json"), "keychain-carrier.kicad_sch")
+pcblib.save_custom_footprints(board, os.path.join(HW, "keychain.pretty"))
 board.BuildConnectivity()
 pn.SaveBoard(OUT, board)
 
 # ---------------------------------------------------------------- project file
-# pcbnew's SaveBoard() does not reliably rewrite an existing .kicad_pro, so the
-# net classes and minimum rules are written into the project JSON explicitly.
-PRO = OUT[:-len(".kicad_pcb")] + ".kicad_pro"
-pro = json.load(open(PRO)) if os.path.exists(PRO) else {"meta": {"filename": os.path.basename(PRO), "version": 3}}
-NETCLASSES = [  # name, track, clearance, via dia, via drill, priority
-    ("Default", 0.2, 0.15, 0.6, 0.3, 2147483647),
-    ("Power", 0.6, 0.2, 0.7, 0.35, 0),
-    ("Motor", 0.3, 0.15, 0.6, 0.3, 1),
-]
-PATTERNS = [("VBAT", "Power"), ("GND", "Power"), ("VBUS", "Power"), ("/MOT_N", "Motor")]
-nsj = pro.setdefault("net_settings", {"meta": {"version": 5}})
-nsj["classes"] = [{"name": n, "track_width": t, "clearance": c, "via_diameter": vd, "via_drill": vr,
-                   "priority": pr, "bus_width": 12, "wire_width": 6, "line_style": 0,
-                   "diff_pair_gap": 0.25, "diff_pair_via_gap": 0.25, "diff_pair_width": 0.2,
-                   "microvia_diameter": 0.3, "microvia_drill": 0.1,
-                   "pcb_color": "rgba(0, 0, 0, 0.000)", "schematic_color": "rgba(0, 0, 0, 0.000)",
-                   "tuning_profile": ""} for n, t, c, vd, vr, pr in NETCLASSES]
-nsj["netclass_patterns"] = [{"netclass": c, "pattern": p} for p, c in PATTERNS]
-nsj.setdefault("netclass_assignments", {})
-rules = pro.setdefault("board", {}).setdefault("design_settings", {}).setdefault("rules", {})
-rules.update({"min_clearance": 0.127, "min_track_width": 0.127, "min_hole_clearance": 0.05,
-              "min_through_hole_diameter": 0.3, "min_via_diameter": 0.5,
-              "min_copper_edge_clearance": 0.25, "min_hole_to_hole": 0.25})
-json.dump(pro, open(PRO, "w"), indent=2)
+pcblib.write_project(
+    OUT[:-len(".kicad_pcb")] + ".kicad_pro",
+    [("Default", 0.2, 0.15, 0.6, 0.3, 2147483647),
+     ("Power", 0.6, 0.2, 0.7, 0.35, 0),
+     ("Motor", 0.3, 0.15, 0.6, 0.3, 1)],
+    [("VBAT", "Power"), ("GND", "Power"), ("VBUS", "Power"), ("/MOT_N", "Motor")],
+    extra_rules={"min_hole_clearance": 0.05})   # real 0.25 mm rule is in the .kicad_dru
 print("saved", OUT, "footprints:", len(board.GetFootprints()))

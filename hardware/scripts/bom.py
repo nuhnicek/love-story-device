@@ -1,27 +1,35 @@
 """
-Generate the parts list from the board:
-  hardware/fab/keychain-carrier-bom-jlcpcb.csv  (Comment,Designator,Footprint,LCSC Part #)
-  hardware/BOM.md                               (full human part list incl. off-board parts)
-LCSC numbers left blank were not verified; search the MPN on lcsc.com.
+Generate parts lists + netlists for both boards (run with KiCad's bundled Python):
+  hardware/fab/keychain-carrier-bom-jlcpcb.csv, hardware/heart/fab/heart-led-bom-jlcpcb.csv
+  hardware/BOM.md          full human part list (carrier + heart + off-board)
+  hardware/netlist.txt, hardware/heart/netlist.txt
+LCSC numbers are filled only where verified; otherwise search the MPN on lcsc.com.
 """
 import collections
 import csv
 import os
+import re
+
 import pcbnew as pn
 
 HW = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-board = pn.LoadBoard(os.path.join(HW, "keychain-carrier.kicad_pcb"))
+BOARDS = [
+    ("Carrier board (25.2 x 23 mm, parts on the bottom side)", "keychain-carrier",
+     os.path.join(HW, "keychain-carrier.kicad_pcb"), os.path.join(HW, "fab"), HW),
+    ("Heart LED board (16.4 x 15.2 mm heart, parts on the front side)", "heart-led",
+     os.path.join(HW, "heart", "heart-led.kicad_pcb"), os.path.join(HW, "heart", "fab"),
+     os.path.join(HW, "heart")),
+]
 
 # value -> (description, suggested MPN)
 INFO = {
     "ATtiny85-20SU": ("MCU, 8 KB flash, SOIC-8 (150 mil)", "Microchip ATTINY85-20SU"),
     "MCP73831T-2ACI/OT": ("Li-Ion/LiPo linear charger 4.20 V, SOT-23-5", "Microchip MCP73831T-2ACI/OT"),
-    "2N7002": ("N-MOSFET 60 V 0.3 A, SOT-23 (motor + LED driver)", "2N7002 (Nexperia/onsemi/CJ)"),
+    "AO3400A": ("N-MOSFET 30 V 5.7 A, ~50 mOhm, SOT-23 (motor + heart driver)", "AOS AO3400A"),
     "1N4148WT": ("Switching diode, SOD-523 (motor flyback)", "1N4148WT"),
-    "LED red 0805": ("LED red 0805", "any 0805 red LED"),
     "Side tact": ("Side-push tactile switch 3.5 x 2.9 mm, SMD", "Alps SKRTLAE010"),
     "USB-C 6P": ("USB-C receptacle, power-only 6-pin, top-mount", "GCT USB4125-GF-A (or TYPE-C 6P clone, same land)"),
-    "470uF 6.3V tant": ("Tantalum 470 uF 6.3 V, EIA-7343-31 (Case D), low ESR", "Kemet T520D477M006ATE015 / AVX TPSD477M006R0045"),
+    "470uF tant": ("Polymer tantalum 470 uF 6.3 V, EIA-7343-31 (Case D), low ESR", "Kemet T520D477M006ATE015"),
     "10uF": ("MLCC 10 uF 10 V X5R 0603", "Samsung CL10A106KP8NNNC"),
     "4.7uF": ("MLCC 4.7 uF 10 V X5R 0402", "Samsung CL05A475KP5NRNC"),
     "100nF": ("MLCC 100 nF 16 V X7R 0402", "Samsung CL05B104KO5NNNC"),
@@ -30,72 +38,78 @@ INFO = {
     "100k": ("Resistor 100 k 1% 0402 (TX divider bottom / gate pull-down)", "UNI-ROYAL 0402WGF1003TCE"),
     "10k": ("Resistor 10 k 1% 0402 (RESET pull-up)", "UNI-ROYAL 0402WGF1002TCE"),
     "100R": ("Resistor 100 R 1% 0402 (gate)", "UNI-ROYAL 0402WGF1000TCE"),
-    "220R": ("Resistor 220 R 1% 0402 (LED)", "UNI-ROYAL 0402WGF2200TCE"),
     "5.1k": ("Resistor 5.1 k 1% 0402 (USB-C CC pull-down)", "UNI-ROYAL 0402WGF5101TCE"),
     "4.7k": ("Resistor 4.7 k 1% 0402 (charge current ~213 mA)", "UNI-ROYAL 0402WGF4701TCE"),
+    "LED pink 0603": ("LED pink 0603 (Vf ~2.9 V), same reel for all 14", "any pink 0603 SMD LED"),
+    "330R x4": ("Resistor array 4 x 330 R, 4 x 0402 convex (0804)", "UNI-ROYAL 4D02WGJ0331TCE"),
 }
 
-groups = collections.OrderedDict()
-for fp in sorted(board.GetFootprints(), key=lambda f: f.GetReference()):
-    if fp.GetAttributes() & pn.FP_EXCLUDE_FROM_BOM or fp.GetReference() == "M1":
-        continue
-    lcsc = fp.GetFieldText("LCSC") if fp.HasField("LCSC") else ""
-    key = (fp.GetValue(), str(fp.GetFPID().GetLibItemName()), lcsc)
-    groups.setdefault(key, []).append(fp.GetReference())
-
-def natkey(r):
-    import re
-    m = re.match(r"([A-Z]+)(\d+)", r)
-    return (m.group(1), int(m.group(2))) if m else (r, 0)
-
-os.makedirs(os.path.join(HW, "fab"), exist_ok=True)
-with open(os.path.join(HW, "fab", "keychain-carrier-bom-jlcpcb.csv"), "w", newline="") as f:
-    w = csv.writer(f)
-    w.writerow(["Comment", "Designator", "Footprint", "LCSC Part #"])
-    for (val, fpn, lcsc), refs in groups.items():
-        w.writerow([val, ",".join(sorted(refs, key=natkey)), fpn, lcsc])
-
 OFFBOARD = [
-    ("M1", 1, "SIM800L red mini GSM module (Hadex M374C), soldered on TOP through its 12 holes", "SIM800L mini"),
+    ("M1", 1, "SIM800L red mini GSM module (Hadex M374C), soldered on carrier TOP through its 12 holes", "SIM800L mini"),
     ("—", 12, "Header pins / 0.6 mm tinned copper wire, cut flush (module-to-carrier)", "2.54 mm male header strip, pins pulled"),
     ("BT1/BT2", 1, "LiPo pouch 3.7 V 250–300 mAh, max ~25 x 20 x 4 mm, WITH protection PCM", "e.g. 402025 / 502025"),
     ("MT1/MT2", 1, "Coin vibration motor 0820 (Ø8 x 2 mm, 3 V), adhesive back", "0820 coin motor"),
+    ("HT1/HT2 ↔ HP1/HP2", 2, "Thin wire carrier → heart board (~20 mm, e.g. 0.1 mm enamelled or 36 AWG)", "—"),
     ("—", 1, "Antenna: SIM800L spring/helical antenna (supplied) or u.FL FPC antenna", "—"),
     ("—", 1, "Micro-SIM card with 2G (T-Mobile CZ / Vodafone CZ / O2 CZ), PIN disabled", "—"),
     ("TP1–TP6", 1, "0.1 mm enamelled wire or pogo clip for ISP (RST/MOSI/MISO/SCK/VCC/GND)", "—"),
 ]
 
-with open(os.path.join(HW, "BOM.md"), "w") as f:
-    f.write("# Parts list — GSM touch keychain carrier (per keychain; build x2)\n\n")
-    f.write("Generated by `hardware/scripts/bom.py` from `keychain-carrier.kicad_pcb`.\n")
-    f.write("All carrier parts are on the **bottom** side. LCSC numbers are filled only where checked;\n")
-    f.write("otherwise search the MPN.\n\n")
-    f.write("## On the carrier PCB\n\n| Ref | Qty | Value | Description | Suggested MPN | Footprint | LCSC |\n")
-    f.write("|---|---|---|---|---|---|---|\n")
+
+def natkey(r):
+    m = re.match(r"([A-Z]+)(\d+)", r)
+    return (m.group(1), int(m.group(2))) if m else (r, 0)
+
+
+md = ["# Parts list — GSM touch keychain (per keychain; build x2)\n",
+      "Generated by `hardware/scripts/bom.py` from the KiCad boards. LCSC numbers are filled",
+      "only where checked; otherwise search the MPN.\n"]
+for title, name, pcb, fab, netdir in BOARDS:
+    board = pn.LoadBoard(pcb)
+    groups = collections.OrderedDict()
+    for fp in sorted(board.GetFootprints(), key=lambda f: natkey(f.GetReference())):
+        if fp.GetAttributes() & pn.FP_EXCLUDE_FROM_BOM or fp.GetReference() == "M1":
+            continue
+        lcsc = fp.GetFieldText("LCSC") if fp.HasField("LCSC") else ""
+        key = (fp.GetValue(), str(fp.GetFPID().GetLibItemName()), lcsc)
+        groups.setdefault(key, []).append(fp.GetReference())
+    os.makedirs(fab, exist_ok=True)
+    with open(os.path.join(fab, name + "-bom-jlcpcb.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["Comment", "Designator", "Footprint", "LCSC Part #"])
+        for (val, fpn, lcsc), refs in groups.items():
+            w.writerow([val, ",".join(sorted(refs, key=natkey)), fpn, lcsc])
+    md += ["## %s\n" % title,
+           "| Ref | Qty | Value | Description | Suggested MPN | Footprint | LCSC |",
+           "|---|---|---|---|---|---|---|"]
     total = 0
     for (val, fpn, lcsc), refs in groups.items():
         desc, mpn = INFO.get(val, ("", ""))
         total += len(refs)
-        f.write("| %s | %d | %s | %s | %s | %s | %s |\n" % (
+        md.append("| %s | %d | %s | %s | %s | %s | %s |" % (
             ", ".join(sorted(refs, key=natkey)), len(refs), val, desc, mpn, fpn, lcsc))
-    f.write("\n%d placed parts, %d unique lines.\n\n" % (total, len(groups)))
-    f.write("## Off-board / mechanical\n\n| Ref | Qty | Item | Example |\n|---|---|---|---|\n")
-    for r, q, d, e in OFFBOARD:
-        f.write("| %s | %d | %s | %s |\n" % (r, q, d, e))
-    f.write("\n## PCB\n\n2-layer FR-4, **0.8 mm**, 1 oz, 25.2 x 23.0 mm, min track/space 0.15/0.15 mm, "
-            "min via 0.3/0.6 mm, HASL or ENIG. Gerbers: `hardware/fab/keychain-carrier-gerbers.zip`.\n")
-print("BOM written:", len(groups), "lines")
+    md.append("\n%d placed parts, %d unique lines.\n" % (total, len(groups)))
 
-# ---- netlist dump straight from the board copper (single source of truth)
-nets = collections.defaultdict(list)
-for fp in board.GetFootprints():
-    for p in fp.Pads():
-        if p.GetNetname() and not p.GetNetname().startswith("unconnected-"):
-            pin = p.GetNumber() or "?"
-            fn = p.GetPinFunction()
-            nets[p.GetNetname().lstrip("/")].append("%s.%s%s" % (fp.GetReference(), pin, "(%s)" % fn if fn else ""))
-with open(os.path.join(HW, "netlist.txt"), "w") as f:
-    f.write("# Netlist extracted from keychain-carrier.kicad_pcb by scripts/bom.py\n")
-    for n in sorted(nets):
-        f.write("%-8s %s\n" % (n, "  ".join(sorted(set(nets[n]), key=natkey))))
-print("netlist written:", len(nets), "nets")
+    nets = collections.defaultdict(list)
+    for fp in board.GetFootprints():
+        for p in fp.Pads():
+            if p.GetNetname() and not p.GetNetname().startswith("unconnected-"):
+                fn = p.GetPinFunction()
+                nets[p.GetNetname().lstrip("/")].append(
+                    "%s.%s%s" % (fp.GetReference(), p.GetNumber() or "?", "(%s)" % fn if fn else ""))
+    with open(os.path.join(netdir, "netlist.txt"), "w") as f:
+        f.write("# Netlist extracted from %s by scripts/bom.py\n" % os.path.basename(pcb))
+        for n in sorted(nets, key=natkey):
+            f.write("%-8s %s\n" % (n, "  ".join(sorted(set(nets[n]), key=natkey))))
+    print("%s: %d BOM lines, %d nets" % (name, len(groups), len(nets)))
+
+md += ["## Off-board / mechanical\n", "| Ref | Qty | Item | Example |", "|---|---|---|---|"]
+for r, q, d, e in OFFBOARD:
+    md.append("| %s | %d | %s | %s |" % (r, q, d, e))
+md += ["\n## PCBs\n",
+       "- **Carrier**: 2-layer FR-4, 0.8 mm, 1 oz, 25.2 x 23.0 mm, min track/space 0.127/0.127 mm, "
+       "via 0.3/0.6 mm. Gerbers: `fab/keychain-carrier-gerbers.zip`.",
+       "- **Heart**: 2-layer FR-4, 0.8 mm, 1 oz, 16.4 x 15.2 mm heart outline, same rules. "
+       "Gerbers: `heart/fab/heart-led-gerbers.zip`.", ""]
+with open(os.path.join(HW, "BOM.md"), "w") as f:
+    f.write("\n".join(md))

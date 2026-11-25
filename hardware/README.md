@@ -1,9 +1,18 @@
-# Carrier PCB — GSM touch keychain
+# Hardware — GSM touch keychain
 
-A 2-layer, **0.8 mm** board with the **same 25.2 × 23.0 mm outline as the red SIM800L
-mini module**. The module sits on top and is soldered straight through its own 12 holes.
-All electronics are on the **bottom** side, facing the LiPo cell. The separate TP4056
-board is gone: USB-C and an MCP73831 charger are on the carrier.
+Two boards per keychain:
+
+1. **Carrier** (this folder): a 2-layer, **0.8 mm** board with the **same 25.2 × 23.0 mm
+   outline as the red SIM800L mini module**. The module sits on top and is soldered
+   straight through its own 12 holes. All electronics are on the **bottom** side, facing
+   the LiPo cell. The separate TP4056 board is gone: USB-C and an MCP73831 charger are on
+   the carrier.
+2. **Heart LED board** (`heart/`): a **heart-shaped 16.4 × 15.2 mm** board with **14 pink
+   LEDs** in a heart outline. It sits behind a window in the enclosure and is wired to the
+   carrier with 2 thin wires. See [Heart LED board](#heart-led-board).
+
+Cost: see [COST.md](COST.md) (≈ 2 100–3 800 Kč for the assembled pair incl. modules and
+batteries).
 
 ![bottom](fab/render-bottom.png)
 
@@ -13,7 +22,9 @@ board is gone: USB-C and an MCP73831 charger are on the carrier.
 | `keychain-carrier.kicad_pcb` / `.kicad_pro` / `.kicad_dru` | KiCad 10 board, project, custom DRC rule |
 | `keychain.kicad_sym`, `keychain.pretty/`, `sym-lib-table`, `fp-lib-table` | Project library: SIM800L symbol + footprint, VBAT power symbol, wire pads |
 | `netlist.txt` | Netlist extracted from the board copper |
-| `BOM.md` | Full parts list (carrier + off-board) |
+| `BOM.md` | Full parts list (carrier + heart + off-board) |
+| `COST.md` | Manufacturing and running-cost estimate |
+| `heart/` | Heart LED board: own `.kicad_sch` / `.kicad_pcb`, `netlist.txt`, `fab/` (gerbers, top-side BOM/POS, renders, schematic PDF) |
 | `fab/keychain-carrier-gerbers.zip` | Gerbers + Excellon drill, ready to upload |
 | `fab/keychain-carrier-bom-jlcpcb.csv`, `fab/keychain-carrier-pos-bottom.csv` | JLCPCB assembly files (bottom side) |
 | `fab/assembly-bottom.pdf` | Assembly drawing with designators (bottom, mirrored) |
@@ -21,8 +32,8 @@ board is gone: USB-C and an MCP73831 charger are on the carrier.
 | `scripts/` | Generator: `make_all.sh <freerouting.jar>` rebuilds everything |
 
 Checks (all run by `make_all.sh`):
-- **ERC**: 0 violations
-- **DRC**: 0 errors, 0 unconnected (two cosmetic silk/text notes)
+- **ERC**: 0 violations (both boards)
+- **DRC**: 0 errors, 0 unconnected (both boards; only cosmetic silk notes remain)
 - **Schematic ↔ PCB parity**: 0 issues. Every footprint is linked to its symbol, and the
   pad nets and fields come from the schematic netlist.
 
@@ -34,16 +45,18 @@ Checks (all run by `make_all.sh`):
 |---|---|---|---|
 | 1 | PB5 / RESET | RESET | 10 k pull-up to VBAT, ISP pad TP1 |
 | 2 | PB3 | RING | SIM800L RING (pin 12), wake-up via PCINT3 |
-| 3 | PB4 | DRV | 100 Ω → 2N7002 gate (100 k pull-down). Motor **and** LED |
+| 3 | PB4 | DRV | 100 Ω → AO3400A gate (100 k pull-down). Motor **and** heart LEDs |
 | 4 | GND | GND | |
 | 5 | PB0 / MOSI | MCU_RX | 1 k ← SIM800L TXD (SoftwareSerial RX). ISP TP2 |
 | 6 | PB1 / MISO | MCU_TX | 47 k / 100 k divider → SIM800L RXD (≈2.86 V at 4.2 V). ISP TP3 |
 | 7 | PB2 / SCK | BTN | Side button to GND (internal pull-up), PCINT2. ISP TP4 |
 | 8 | VCC | VBAT | 100 nF |
 
-Five I/O pins can't cover TX, RX, RING, button, motor, LED and DTR separately. So:
-- **LED and motor share PB4.** The LED + 220 Ω sit in parallel with the motor on the
-  MOSFET drain, so the LED blinks exactly with the vibration.
+Five I/O pins can't cover TX, RX, RING, button, motor, LEDs and DTR separately. So:
+- **Heart LEDs and motor share PB4.** The heart board hangs in parallel with the motor on
+  the MOSFET drain (pads HT1/HT2), so the heart glows exactly with the vibration. Q1 is an
+  **AO3400A** (~50 mΩ) instead of the 2N7002 (2–5 Ω). With motor + 14 LEDs (~150 mA) a
+  2N7002 would drop 0.3–0.7 V and visibly dim the pink LEDs. Same SOT-23 footprint and pinout.
 - **DTR is not used.** Use `AT+CSCLK=2` (the module sleeps on its own when the UART is
   idle and wakes on the first incoming character). Send a dummy `AT` and wait ~100 ms
   before real commands.
@@ -71,10 +84,40 @@ Five I/O pins can't cover TX, RX, RING, button, motor, LED and DTR separately. S
   12 RING ──────────────────────────────────────────────────────── 2 PB3
    1 NET, 3 RST, 7–11 (SPK/MIC/DTR): not connected                 3 PB4 ── R4 100R ──┐
                                                                     4 GND             │
-  VBAT ─┬─ MT1 (motor +)    VBAT ─ R7 220R ─ D2 LED ─┐                    R5 100k ─┤ G
-        │   [0820 motor]                             │                       GND   Q1 2N7002
-        D1 (K)─┘ MT2 (motor −) ──────────────────────┴──────────────────────── D   S ── GND
+  VBAT ─┬─ MT1 (motor +)    VBAT ─ HT1 ═ heart board ═ HT2 ─┐             R5 100k ─┤ G
+        │   [0820 motor]                                     │                GND   Q1 AO3400A
+        D1 (K)─┘ MT2 (motor −) ──────────────────────────────┴───────────────── D   S ── GND
 ```
+
+## Silkscreen labels
+
+Every connection point is labelled (0.8 mm text, about the smallest that prints legibly):
+
+- **Bottom:** `BAT` `+`/`-` (battery), `MOT` (motor pads, polarity doesn't matter for a
+  coin motor), `HEART` `+`/`-` (heart board wires), and `ISP` with `RST`, `MOSI`, `MISO`,
+  `SCK`, `VCC`, `GND` next to each programming pad.
+- **Top:** the name of every SIM800L hole (`NET VCC RST RXD TXD GND` / `RING DTR MIC± SPK±`)
+  so the module can't go on the wrong way round, plus `TOUCH-GSM v1 / SIM800L SIDE`.
+
+Part references (R1, U1…) are only on the assembly drawing (`fab/assembly-bottom.pdf`);
+there's no room for them on the copper side.
+
+## Heart LED board
+
+![heart](heart/fab/render-top.png)
+
+- **14 pink 0603 LEDs** spaced evenly around a heart, each pointing radially (that's what
+  fits the tight curves of the lobes).
+- **One 330 Ω per LED**, as four 4 × 0402 resistor arrays in the middle (2 spare). Pink LEDs
+  need ~2.9 V and vary a lot, so a shared resistor would make some much brighter. Current:
+  ~1.5 mA/LED at 3.4 V up to ~4 mA at 4.2 V (≤ 55 mA total). The heart dims noticeably as the
+  battery runs down, which doubles as a "charge me" hint.
+- **All parts are on the front**, so JLCPCB's cheap single-sided assembly works. The back
+  has only the two wire pads `+` (HP1 → carrier HT1) and `-` (HP2 → carrier HT2), and it is
+  flat for gluing.
+- Its own schematic `heart/heart-led.kicad_sch` and the same checks (ERC/DRC/parity = 0).
+- The outline is generated from the LED ring (`WIDTH` in `scripts/build_heart.py`), and the
+  resistor arrays are packed into the centre by a small search.
 
 ## Battery connection
 
@@ -101,6 +144,9 @@ socket (~2.9 mm tall) could replace the pads if you want a pluggable battery.
    flush on the bottom.
 4. Wire the battery to BT1/BT2 and the motor to MT1/MT2 (≈20 mm leads, the motor sticks
    to the enclosure wall).
+5. Wire the heart board: its `+` pad to carrier `HEART +` (HT1) and its `-` pad to
+   `HEART -` (HT2), with two thin wires (~20 mm). Glue the heart's flat back behind the
+   enclosure window, LEDs facing out.
 
 ## Things to check before ordering
 
@@ -125,7 +171,8 @@ socket (~2.9 mm tall) could replace the pads if you want a pluggable battery.
 | Carrier PCB | 0.8 |
 | Tallest bottom part (USB-C 3.2 / tantalum 3.1) | 3.2 |
 | LiPo | 4.0 |
-| **Total inside** | **~12.5** |
+| Heart board (0.8 mm PCB + 0.6 mm LEDs) behind the window | ~1.5 |
+| **Total inside** | **~14** |
 
 The 11 mm target can't be reached with a Case-D tantalum, a top-mount USB-C and a 4 mm
 cell all stacked. To get close: use a 3 mm cell (e.g. 302025, ~150 mAh) and pocket the
@@ -133,10 +180,12 @@ battery around the USB-C/tantalum.
 
 ## Design flow / editing
 
-`scripts/gen_schematic.py` → `keychain-carrier.kicad_sch` (source of truth)
-→ `scripts/build_pcb.py` places footprints, then **imports nets and fields from the
-schematic netlist** (and fails if they disagree with its own pin map)
-→ `scripts/autoroute.py` (Freerouting) → GND pours → DRC + parity + ERC → fab outputs.
+Per board: `gen_schematic.py` / `gen_heart.py` → `.kicad_sch` (source of truth)
+→ `build_pcb.py` / `build_heart.py` place footprints, then **import nets and fields from
+the schematic netlist** (and fail if they disagree with their own pin map)
+→ `autoroute.py` (Freerouting, retried with varied pass budgets; fails if anything stays
+unrouted) → GND pours (carrier) → DRC + parity + ERC → fab outputs.
+Shared code: `schlib.py` (schematic writer), `pcblib.py` (pcbnew helpers), `sexpr.py`.
 
 To change the circuit, edit the scripts and rerun `make_all.sh`. Regenerating
 overwrites the `.kicad_sch` / `.kicad_pcb`, so if you'd rather edit by hand in KiCad

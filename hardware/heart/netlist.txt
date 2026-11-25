@@ -1,0 +1,17 @@
+# Netlist extracted from heart-led.kicad_pcb by scripts/bom.py
+A1       D1.2  RN1.8
+A2       D2.2  RN1.7
+A3       D3.2  RN1.6
+A4       D4.2  RN1.5
+A5       D5.2  RN2.8
+A6       D6.2  RN2.7
+A7       D7.2  RN2.6
+A8       D8.2  RN2.5
+A9       D9.2  RN3.8
+A10      D10.2  RN3.7
+A11      D11.2  RN3.6
+A12      D12.2  RN3.5
+A13      D13.2  RN4.8
+A14      D14.2  RN4.7
+LED+     HP1.1  RN1.4  RN1.3  RN1.1  RN1.2  RN2.1  RN2.2  RN2.4  RN2.3  RN3.2  RN3.3  RN3.1  RN3.4  RN4.2  RN4.1
+LED-     D1.1  D2.1  D3.1  D4.1  D5.1  D6.1  D7.1  D8.1  D9.1  D10.1  D11.1  D12.1  D13.1  D14.1  HP2.1

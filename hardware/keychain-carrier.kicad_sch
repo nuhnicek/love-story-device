@@ -2721,7 +2721,7 @@
 				)
 			)
 		)
-		(symbol "Transistor_FET:2N7002"
+		(symbol "Transistor_FET:AO3400A"
 			(on_board yes)
 			(in_bom yes)
 			(exclude_from_sim no)
@@ -2740,7 +2740,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "2N7002"
+			(property "Value" "AO3400A"
 				(at 5.08 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2764,7 +2764,7 @@
 					(justify left)
 				)
 			)
-			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
+			(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf"
 				(at 5.08 -3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2776,7 +2776,7 @@
 					(justify left)
 				)
 			)
-			(property "Description" "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23"
+			(property "Description" "30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2787,7 +2787,7 @@
 					)
 				)
 			)
-			(property "ki_keywords" "N-Channel Switching MOSFET"
+			(property "ki_keywords" "N-Channel MOSFET"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2810,7 +2810,7 @@
 				)
 			)
 			(embedded_fonts no)
-			(symbol "2N7002_0_1"
+			(symbol "AO3400A_0_1"
 				(polyline
 					(pts
 						(xy 0.254 1.905)
@@ -2995,7 +2995,7 @@
 					)
 				)
 			)
-			(symbol "2N7002_1_1"
+			(symbol "AO3400A_1_1"
 				(pin input line
 					(at -5.08 0 0)
 					(length 2.54)
@@ -3206,220 +3206,6 @@
 				)
 			)
 			(symbol "D_1_1"
-				(pin passive line
-					(at -3.81 0 0)
-					(length 2.54)
-					(name "K"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 3.81 0 180)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Device:LED"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "D"
-				(at 0 2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "LED"
-				(at 0 -2.54 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Light emitting diode"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Sim.Pins" "1=K 2=A"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "LED diode"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "LED_0_1"
-				(polyline
-					(pts
-						(xy -3.048 -0.762)
-						(xy -4.572 -2.286)
-						(xy -3.81 -2.286)
-						(xy -4.572 -2.286)
-						(xy -4.572 -1.524)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 -0.762)
-						(xy -3.302 -2.286)
-						(xy -2.54 -2.286)
-						(xy -3.302 -2.286)
-						(xy -3.302 -1.524)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 0)
-						(xy 1.27 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.27 -1.27)
-						(xy -1.27 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -1.27)
-						(xy 1.27 1.27)
-						(xy -1.27 0)
-						(xy 1.27 -1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "LED_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -9077,9 +8863,9 @@
 		(fill
 			(type none)
 		)
-		(uuid "009e0ffe-a85f-58be-b814-5d0abead2d0a")
+		(uuid "34135244-6698-5a0d-bf7a-9a3ad81b65ed")
 	)
-	(text "E. Vibration motor + LED driver (shared PB4 PWM)"
+	(text "E. Vibration motor + heart LED driver (shared PB4 PWM)"
 		(exclude_from_sim no)
 		(at 143.51 105.41 0)
 		(effects
@@ -9089,7 +8875,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "56ef742d-3164-5542-9b20-cd412d45551d")
+		(uuid "5faa4f4e-23c2-5fbe-80a7-de2e5f7965ca")
 	)
 	(wire
 		(pts
@@ -9501,7 +9287,7 @@
 		(uuid "59cbb8ce-6ab1-5d8c-9b2e-378ccacc225a")
 	)
 	(symbol
-		(lib_id "Transistor_FET:2N7002")
+		(lib_id "Transistor_FET:AO3400A")
 		(at 190.5 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9518,7 +9304,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2N7002"
+		(property "Value" "AO3400A"
 			(at 195.58 132.08 0)
 			(effects
 				(font
@@ -9538,7 +9324,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF"
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf"
 			(at 195.58 135.89 0)
 			(effects
 				(font
@@ -9548,16 +9334,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0.115A Id, 60V Vds, N-Channel MOSFET, SOT-23"
-			(at 190.5 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C8545"
+		(property "Description" "30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"
 			(at 190.5 132.08 0)
 			(effects
 				(font
@@ -9768,157 +9545,18 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 137.16)
-			(xy 212.09 137.16)
+			(xy 223.52 132.08)
+			(xy 223.52 129.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d3ab2100-2f94-5e33-98ee-853bdc77b7b2")
-	)
-	(label "MOT_N"
-		(at 212.09 137.16 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2e134cc6-5dd2-50f1-8b8f-55b9f0a549ba")
-	)
-	(wire
-		(pts
-			(xy 222.25 137.16)
-			(xy 224.79 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e08b717-9859-548e-bf1d-9b643724a43f")
-	)
-	(label "LED_A"
-		(at 224.79 137.16 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "825a79b9-4fbb-5e46-984c-88d0aee17bef")
-	)
-	(symbol
-		(lib_id "Device:LED")
-		(at 218.44 137.16 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a78f4e08-ca72-5d87-a2dd-60a2a99a42bf")
-		(property "Reference" "D2"
-			(at 218.44 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LED red 0805"
-			(at 218.44 142.24 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
-			(at 218.44 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 218.44 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode"
-			(at 218.44 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 218.44 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "724da9f2-c2ca-545d-bdb1-b0d4530bd61f")
-		)
-		(pin "2"
-			(uuid "09bf08dc-8554-5cd3-82e5-32de40056b16")
-		)
-		(instances
-			(project "keychain-carrier"
-				(path "/29574fee-eb7b-5add-9822-f146771b02f5"
-					(reference "D2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 238.76 140.97)
-			(xy 238.76 143.51)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ad9fbe8-416c-57b8-8d87-fb4a819bd843")
-	)
-	(label "LED_A"
-		(at 238.76 143.51 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "05a1050b-f1c2-5942-8d0c-b3d86c78dbcc")
-	)
-	(wire
-		(pts
-			(xy 238.76 133.35)
-			(xy 238.76 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d4c21e5-8d1d-5e69-98b2-7d12477bcfc8")
+		(uuid "304f8d4d-18bb-504f-a372-3adad9f5b65e")
 	)
 	(symbol
 		(lib_id "keychain:VBAT")
-		(at 238.76 130.81 0)
+		(at 223.52 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9926,7 +9564,7 @@
 		(dnp no)
 		(uuid "0bc6f64c-8a21-5e07-9980-2521a24aa232")
 		(property "Reference" "#PWR38"
-			(at 238.76 134.62 0)
+			(at 223.52 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9935,7 +9573,7 @@
 			)
 		)
 		(property "Value" "VBAT"
-			(at 238.76 127.254 0)
+			(at 223.52 125.984 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9943,7 +9581,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 238.76 130.81 0)
+			(at 223.52 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9952,7 +9590,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 238.76 130.81 0)
+			(at 223.52 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9961,7 +9599,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VBAT\""
-			(at 238.76 130.81 0)
+			(at 223.52 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9982,32 +9620,32 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 238.76 137.16 180)
+		(lib_id "Connector:TestPoint")
+		(at 223.52 132.08 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "620aaae9-bf45-5d5e-b39f-a069bedc6f7d")
-		(property "Reference" "R7"
-			(at 236.728 137.16 90)
+		(uuid "cd3fae9a-251a-5674-844b-c6a5c1593187")
+		(property "Reference" "HT1"
+			(at 223.52 138.938 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "220R"
-			(at 238.76 137.16 90)
+		(property "Value" "HEART+"
+			(at 223.52 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 240.538 137.16 90)
+		(property "Footprint" "keychain:WirePad_1.0mm"
+			(at 218.44 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10016,7 +9654,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 238.76 137.16 0)
+			(at 218.44 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10024,17 +9662,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
-			(at 238.76 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25091"
-			(at 238.76 137.16 0)
+		(property "Description" "test point"
+			(at 223.52 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10043,19 +9672,112 @@
 			)
 		)
 		(pin "1"
-			(uuid "d58c299e-bc00-5040-aa83-40153ac1e564")
-		)
-		(pin "2"
-			(uuid "83d0a6c2-5ca6-5a17-9242-14933901c14f")
+			(uuid "8c3ae3f2-f07b-518c-ba78-057a56278083")
 		)
 		(instances
 			(project "keychain-carrier"
 				(path "/29574fee-eb7b-5add-9822-f146771b02f5"
-					(reference "R7")
+					(reference "HT1")
 					(unit 1)
 				)
 			)
 		)
+	)
+	(wire
+		(pts
+			(xy 233.68 142.24)
+			(xy 233.68 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac822ade-f2c4-55eb-b292-3f95560393ed")
+	)
+	(label "MOT_N"
+		(at 233.68 144.78 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7f86c81b-54d8-5a1d-8d3d-3a95dcf72f07")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 233.68 142.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e38e9116-4b29-5af1-af19-437adc4f12ba")
+		(property "Reference" "HT2"
+			(at 233.68 135.382 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "HEART-"
+			(at 233.68 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_1.0mm"
+			(at 238.76 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 238.76 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 233.68 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fe96854e-c79c-5ed0-ac5d-a0c3f86f904f")
+		)
+		(instances
+			(project "keychain-carrier"
+				(path "/29574fee-eb7b-5add-9822-f146771b02f5"
+					(reference "HT2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "HT1/HT2 -> heart LED board"
+		(exclude_from_sim no)
+		(at 215.9 149.86 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3b577b9f-7f44-52b0-9562-e44b3fe39bce")
 	)
 	(wire
 		(pts
@@ -10459,7 +10181,7 @@
 		)
 		(uuid "819a179b-e0f2-5554-b232-6f3fb92c29ea")
 	)
-	(text "LED + R7 sit in parallel with the motor, so they blink with the vibration."
+	(text "Heart board (hardware/heart, 14 pink LEDs) sits in parallel with the motor."
 		(exclude_from_sim no)
 		(at 144.78 153.67 0)
 		(effects
@@ -10468,7 +10190,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "02c4285c-b02b-5f8f-99b1-0acc4f4b1ab7")
+		(uuid "32fb49f4-3ddf-501d-857a-cf6635ac17ac")
 	)
 	(sheet_instances
 		(path "/"

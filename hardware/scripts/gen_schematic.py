@@ -22,35 +22,15 @@ HW = os.path.dirname(HERE)
 SYMDIR = "/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols/"
 PROJECT = "keychain-carrier"
 SCH = os.path.join(HW, PROJECT + ".kicad_sch")
-NS = uuid.UUID("6b0d1c4e-3f7a-4c55-9a51-2e1f6a7c9b10")
 
 
-def uid(*k):
-    return Q(str(uuid.uuid5(NS, "/".join(map(str, k)))))
-
-
-ROOT = uid("root")
-STUB = 2.54
 POWER = {"GND": "power:GND", "VBAT": "keychain:VBAT", "VBUS": "power:VBUS"}
 
 
-def font(size=1.27, hide=False, justify=None, bold=False):
-    f = ["font", ["size", size, size]]
-    if bold:
-        f.append(["bold", "yes"])
-    e = ["effects", f]
-    if justify:
-        e.append(["justify"] + justify)
-    if hide:
-        e.append(["hide", "yes"])
-    return e
+from schlib import font, prop  # noqa: E402
 
 
 # ------------------------------------------------------------ custom symbols
-def prop(name, value, x=0.0, y=0.0, hide=False):
-    return ["property", Q(name), Q(value), ["at", x, y, 0], font(hide=hide)]
-
-
 def sim800l_symbol():
     left = [("4", "RXD", "input"), ("5", "TXD", "output"), ("12", "RING", "output"),
             ("11", "DTR", "input"), ("3", "RST", "input"), ("1", "NET", "output")]
@@ -94,13 +74,10 @@ def vbat_symbol(stock):
     return s
 
 
-libs = {}
-
+import schlib
 
 def lib(name):
-    if name not in libs:
-        libs[name] = sexpr.load_library(SYMDIR + name + ".kicad_sym")
-    return libs[name]
+    return schlib.stock(name)
 
 
 KEYCHAIN = {"SIM800L_Red_Mini": sim800l_symbol(), "VBAT": vbat_symbol(lib("power"))}
@@ -109,134 +86,8 @@ with open(os.path.join(HW, "keychain.kicad_sym"), "w") as f:
                         ["generator", Q("gen_schematic.py")], ["generator_version", Q("10.0")]]
                        + list(KEYCHAIN.values())) + "\n")
 
-lib_symbols = {}
-
-
-def libsym(lib_id):
-    if lib_id not in lib_symbols:
-        ln, name = lib_id.split(":")
-        if ln == "keychain":
-            s = copy.deepcopy(KEYCHAIN[name])
-            s[1] = Q(lib_id)
-        else:
-            s = sexpr.flatten(lib(ln), name, ln)
-        lib_symbols[lib_id] = s
-    return lib_symbols[lib_id]
-
-
-# ------------------------------------------------------------ geometry
-def xform(px, py, X, Y, rot):
-    """symbol coords (y up) -> sheet coords (y down)."""
-    x, y = px, -py
-    a = math.radians(rot)
-    c, s = round(math.cos(a)), round(math.sin(a))
-    return X + x * c + y * s, Y - x * s + y * c
-
-
-def snap(v):
-    return round(v / 1.27) * 1.27
-
-
-items = []
-uuids = {}
-pwr_count = [0]
-
-
-def wire(a, b):
-    items.append(["wire", ["pts", ["xy", a[0], a[1]], ["xy", b[0], b[1]]],
-                  ["stroke", ["width", 0], ["type", "default"]], ["uuid", uid("w", a, b)]])
-
-
-def label(name, at, direction):
-    ang = {"right": 0, "up": 90, "left": 180, "down": 270}[direction]
-    just = ["left", "bottom"] if direction in ("right", "up") else ["right", "bottom"]
-    items.append(["label", Q(name), ["at", at[0], at[1], ang], font(justify=just),
-                  ["uuid", uid("l", name, at)]])
-
-
-def text(s, x, y, size=1.27, bold=False):
-    items.append(["text", Q(s), ["exclude_from_sim", "no"], ["at", x, y, 0],
-                  font(size, justify=["left", "bottom"], bold=bold), ["uuid", uid("t", s[:40], x, y)]])
-
-
-def box(x1, y1, x2, y2, title):
-    items.append(["rectangle", ["start", x1, y1], ["end", x2, y2],
-                  ["stroke", ["width", 0.2], ["type", "dash"]], ["fill", ["type", "none"]],
-                  ["uuid", uid("r", title)]])
-    text(title, x1 + 1.27, y1 + 3.81, 2.0, True)
-
-
-def place(lib_id, ref, value, x, y, rot=0, footprint="", nets=None, nc=(), on_board=True,
-          in_bom=True, extra=None, field_at=None):
-    nets = nets or {}
-    sym = libsym(lib_id)
-    X, Y = snap(x), snap(y)
-    u = uid("s", ref)
-    if not ref.startswith("#"):
-        uuids[ref] = str(u)
-    inst = ["symbol", ["lib_id", Q(lib_id)], ["at", X, Y, rot], ["unit", 1],
-            ["exclude_from_sim", "no"], ["in_bom", "yes" if in_bom else "no"],
-            ["on_board", "yes" if on_board else "no"], ["dnp", "no"], ["uuid", u]]
-    values = {"Reference": ref, "Value": value, "Footprint": footprint}
-    values.update(extra or {})
-    for p in find(sym, "property"):
-        name = p[1]
-        if name.startswith("ki_"):
-            continue                      # library search metadata, not instance fields
-        at = first(p, "at")
-        px, py = xform(float(at[1]), float(at[2]), X, Y, rot)
-        pang = (float(at[3]) if len(at) > 3 else 0.0) + rot
-        if field_at and name in field_at:
-            px, py = X + field_at[name][0], Y + field_at[name][1]
-            pang = 0
-        eff = copy.deepcopy(first(p, "effects")) or font()
-        hidden = (first(p, "hide") is not None and first(p, "hide")[1] == "yes") or \
-            first(eff, "hide") is not None or ref.startswith("#") and name == "Reference" or \
-            name in ("Footprint", "Datasheet", "Description") or name not in values
-        for h in find(eff, "hide"):
-            eff.remove(h)
-        if hidden:
-            eff.append(["hide", "yes"])
-        val = values.get(name, p[2])
-        inst.append(["property", Q(name), Q(val), ["at", px, py, pang % 180], eff])   # keep text upright
-    for name, val in (extra or {}).items():
-        if not any(pp[1] == name for pp in find(sym, "property")):
-            inst.append(["property", Q(name), Q(val), ["at", X, Y, 0], font(hide=True)])
-    seen = {}
-    for num, pname, px, py, ang, ptype in sexpr.pins(sym):
-        inst.append(["pin", Q(num), ["uuid", uid("p", ref, num)]])
-        ex, ey = xform(px, py, X, Y, rot)
-        ex, ey = round(ex, 2), round(ey, 2)
-        if (ex, ey) in seen:
-            continue
-        seen[(ex, ey)] = num
-        # outward direction = opposite of the pin's body direction
-        oa = math.radians(ang + 180)
-        dx, dy = round(math.cos(oa)), -round(math.sin(oa))
-        a = math.radians(rot)
-        c, s = round(math.cos(a)), round(math.sin(a))
-        dx, dy = dx * c + dy * s, -dx * s + dy * c
-        direction = {(1, 0): "right", (-1, 0): "left", (0, -1): "up", (0, 1): "down"}[(dx, dy)]
-        if num in nc:
-            items.append(["no_connect", ["at", ex, ey], ["uuid", uid("nc", ref, num)]])
-            continue
-        n = nets.get(num)
-        if not n:
-            continue
-        end = (round(ex + dx * STUB, 2), round(ey + dy * STUB, 2))
-        wire((ex, ey), end)
-        if n in POWER:
-            pwr_count[0] += 1
-            if n == "GND":
-                prot = 180 if direction == "up" else 0
-            else:
-                prot = 180 if direction == "down" else 0
-            place(POWER[n], "#PWR%02d" % pwr_count[0], n, end[0], end[1], prot)
-        else:
-            label(n, end, direction)
-    inst.append(["instances", ["project", Q(PROJECT),
-                               ["path", Q("/" + ROOT), ["reference", Q(ref)], ["unit", 1]]]])
-    items.append(inst)
+S = schlib.Sheet(PROJECT, SCH, power=POWER, custom=KEYCHAIN)
+place, text, box = S.place, S.text, S.box
 
 
 R = "Device:R"
@@ -322,42 +173,27 @@ text("R2/R3: 4.2 V -> 2.86 V (2.8 V logic)", 218.44, 93.98)
 text("DTR unused: AT+CSCLK=2 (auto sleep)", 218.44, 33.02)
 
 # ============================================================ BLOCK E: motor + LED
-box(142.24, 101.6, 289.56, 157.48, "E. Vibration motor + LED driver (shared PB4 PWM)")
+box(142.24, 101.6, 289.56, 157.48, "E. Vibration motor + heart LED driver (shared PB4 PWM)")
 res("R4", "100R", 160.02, 129.54, "DRV", "GATE", lcsc="C25076")
 res("R5", "100k", 172.72, 137.16, "GATE", "GND", lcsc="C25741")
-place("Transistor_FET:2N7002", "Q1", "2N7002", 190.5, 132.08, 0, "Package_TO_SOT_SMD:SOT-23",
-      {"1": "GATE", "2": "GND", "3": "MOT_N"}, extra={"LCSC": "C8545"})
+place("Transistor_FET:AO3400A", "Q1", "AO3400A", 190.5, 132.08, 0, "Package_TO_SOT_SMD:SOT-23",
+      {"1": "GATE", "2": "GND", "3": "MOT_N"})   # ~50 mOhm: motor + 14 LEDs, no dimming
 place("Device:D", "D1", "1N4148WT", 218.44, 119.38, 0, "Diode_SMD:D_SOD-523",
       {"1": "VBAT", "2": "MOT_N"})
-place("Device:LED", "D2", "LED red 0805", 218.44, 137.16, 0, "LED_SMD:LED_0805_2012Metric",
-      {"1": "MOT_N", "2": "LED_A"}, field_at={"Value": (0, 5.08)})
-res("R7", "220R", 238.76, 137.16, "LED_A", "VBAT", rot=180, lcsc="C25091")
+tp("HT1", "HEART+", 223.52, 132.08, "VBAT", 1.0, rot=180)
+tp("HT2", "HEART-", 233.68, 142.24, "MOT_N", 1.0)
+text("HT1/HT2 -> heart LED board", 215.9, 149.86)
 place("Motor:Motor_DC", "MOT1", "0820 motor", 254.0, 127.0, 0, "",
       {"1": "VBAT", "2": "MOT_N"}, on_board=False, in_bom=False)
 tp("MT1", "MOT+", 271.78, 119.38, "VBAT", 1.0, rot=180)
 tp("MT2", "MOT-", 281.94, 134.62, "MOT_N", 1.0)
 text("MOT1 is off-board, wired to pads MT1/MT2.  D1 = flyback.", 144.78, 151.13)
-text("LED + R7 sit in parallel with the motor, so they blink with the vibration.", 144.78, 153.67)
+text("Heart board (hardware/heart, 14 pink LEDs) sits in parallel with the motor.", 144.78, 153.67)
 
 # ------------------------------------------------------------ write
-sch = ["kicad_sch", ["version", 20250114], ["generator", Q("eeschema")],
-       ["generator_version", Q("10.0")], ["uuid", ROOT], ["paper", Q("A4")],
-       ["title_block", ["title", Q("GSM touch keychain - carrier board")],
-        ["date", Q("2026-11-25")], ["rev", Q("1")],
-        ["comment", 1, Q("SIM800L red mini + ATtiny85 + MCP73831, 25.2 x 23 mm")],
-        ["comment", 2, Q("Generated by hardware/scripts/gen_schematic.py - edit the script, not this file")]],
-       ["lib_symbols"] + list(lib_symbols.values())]
-sch += items
-sch.append(["sheet_instances", ["path", Q("/"), ["page", Q("1")]]])
-sch.append(["embedded_fonts", "no"])
-with open(SCH, "w") as f:
-    f.write(sexpr.dump(sch) + "\n")
-with open(os.path.join(HW, "sch_uuids.json"), "w") as f:
-    json.dump({"root": str(ROOT), "symbols": uuids}, f, indent=1, sort_keys=True)
-
-for name, uri in (("sym-lib-table", "keychain.kicad_sym"), ("fp-lib-table", "keychain.pretty")):
-    kind = "sym_lib_table" if name.startswith("sym") else "fp_lib_table"
-    with open(os.path.join(HW, name), "w") as f:
-        f.write('(%s\n  (version 7)\n  (lib (name "keychain")(type "KiCad")(uri "${KIPRJMOD}/%s")'
-                '(options "")(descr "Project parts"))\n)\n' % (kind, uri))
-print("schematic:", SCH, "symbols:", len(uuids))
+S.write("GSM touch keychain - carrier board",
+        ["SIM800L red mini + ATtiny85 + MCP73831, 25.2 x 23 mm",
+         "Generated by hardware/scripts/gen_schematic.py - edit the script, not this file"],
+        os.path.join(HW, "sch_uuids.json"))
+schlib.write_lib_tables(HW, "keychain.kicad_sym", "keychain.pretty")
+print("schematic:", SCH, "symbols:", len(S.uuids))
