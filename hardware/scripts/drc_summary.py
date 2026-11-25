@@ -14,3 +14,8 @@ print("unconnected:", len(d.get("unconnected_items", [])))
 for v in d["violations"]:
     if v["type"] not in COSMETIC:
         print(" ", v["severity"], v["type"], "|", " / ".join(i["description"] for i in v["items"]))
+par = d.get("schematic_parity", [])
+if "--schematic-parity" in sys.argv:
+    print("schematic parity issues:", len(par))
+    for v in par:
+        print(" ", v["severity"], v["type"], "|", " / ".join(i["description"] for i in v["items"]))

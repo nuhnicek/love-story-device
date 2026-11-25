@@ -9,7 +9,9 @@ board is gone: USB-C and an MCP73831 charger are on the carrier.
 
 | File | What |
 |---|---|
+| `keychain-carrier.kicad_sch` | **Schematic** (KiCad 10). PDF/SVG: `fab/schematic.pdf`, `fab/schematic.svg` |
 | `keychain-carrier.kicad_pcb` / `.kicad_pro` / `.kicad_dru` | KiCad 10 board, project, custom DRC rule |
+| `keychain.kicad_sym`, `keychain.pretty/`, `sym-lib-table`, `fp-lib-table` | Project library: SIM800L symbol + footprint, VBAT power symbol, wire pads |
 | `netlist.txt` | Netlist extracted from the board copper |
 | `BOM.md` | Full parts list (carrier + off-board) |
 | `fab/keychain-carrier-gerbers.zip` | Gerbers + Excellon drill, ready to upload |
@@ -18,8 +20,13 @@ board is gone: USB-C and an MCP73831 charger are on the carrier.
 | `fab/keychain-carrier.step` | 3D model for the enclosure design |
 | `scripts/` | Generator: `make_all.sh <freerouting.jar>` rebuilds everything |
 
-DRC status: **0 unconnected, 0 electrical errors**. Remaining notes are cosmetic
-(footprints differ from the library copy because of their placement/text edits).
+Checks (all run by `make_all.sh`):
+- **ERC**: 0 violations
+- **DRC**: 0 errors, 0 unconnected (two cosmetic silk/text notes)
+- **Schematic ↔ PCB parity**: 0 issues. Every footprint is linked to its symbol, and the
+  pad nets and fields come from the schematic netlist.
+
+![schematic](fab/schematic.svg)
 
 ## Pin map (ATtiny85, RESET kept for ISP)
 
@@ -44,7 +51,7 @@ Five I/O pins can't cover TX, RX, RING, button, motor, LED and DTR separately. S
   wake the chip: after `mySerial.begin()`, set `PCMSK |= _BV(PCINT2) | _BV(PCINT3);
   GIMSK |= _BV(PCIE);`. SoftwareSerial's ISR ignores changes on pins that aren't its RX.
 
-## Schematic (ASCII)
+## Schematic (ASCII quick view; the real one is `keychain-carrier.kicad_sch`)
 
 ```
  USB-C (power only)                MCP73831 (U2)                LiPo 3.7 V
@@ -114,6 +121,18 @@ Five I/O pins can't cover TX, RX, RING, button, motor, LED and DTR separately. S
 The 11 mm target can't be reached with a Case-D tantalum, a top-mount USB-C and a 4 mm
 cell all stacked. To get close: use a 3 mm cell (e.g. 302025, ~150 mAh) and pocket the
 battery around the USB-C/tantalum.
+
+## Design flow / editing
+
+`scripts/gen_schematic.py` → `keychain-carrier.kicad_sch` (source of truth)
+→ `scripts/build_pcb.py` places footprints, then **imports nets and fields from the
+schematic netlist** (and fails if they disagree with its own pin map)
+→ `scripts/autoroute.py` (Freerouting) → GND pours → DRC + parity + ERC → fab outputs.
+
+To change the circuit, edit the scripts and rerun `make_all.sh`. Regenerating
+overwrites the `.kicad_sch` / `.kicad_pcb`, so if you'd rather edit by hand in KiCad
+from now on, stop running the scripts and use KiCad's *Update PCB from Schematic*. The
+footprint↔symbol links are already in place.
 
 ## Regenerate
 

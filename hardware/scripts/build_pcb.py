@@ -76,7 +76,7 @@ motor_nc.SetClearance(mm(0.15))
 motor_nc.SetViaDiameter(mm(0.6))
 motor_nc.SetViaDrill(mm(0.3))
 ns.SetNetclass("Motor", motor_nc)
-ns.SetNetclassPatternAssignment("MOT_N", "Motor")
+ns.SetNetclassPatternAssignment("/MOT_N", "Motor")
 
 # ---------------------------------------------------------------- nets
 NETS = {}
@@ -120,6 +120,7 @@ def place(lib, name, ref, value, x, y, rot=0, bottom=True, pads=None, lcsc=""):
     fp = pn.FootprintLoad(FPLIB + lib + ".pretty", name)
     if fp is None:
         sys.exit("footprint not found: %s:%s" % (lib, name))
+    fp.SetFPID(pn.LIB_ID(lib, name))
     fp.SetReference(ref)
     fp.SetValue(value)
     fp.SetPosition(V(x, y))
@@ -141,7 +142,7 @@ def sim800l_module():
     fp = pn.FOOTPRINT(board)
     fp.SetFPID(pn.LIB_ID("keychain", "SIM800L_Red_Mini_25.2x23"))
     fp.SetReference("M1")
-    fp.SetValue("SIM800L red mini (M374C)")
+    fp.SetValue("SIM800L (M374C)")
     fp.SetAttributes(pn.FP_EXCLUDE_FROM_POS_FILES)  # hand-soldered module
     board.Add(fp)
     left = ["NET", "VCC", "RST", "RXD", "TXD", "GND"]          # pins 1..6
@@ -226,7 +227,7 @@ R("R7", "220R", 108.9, 101.2, "LED_A", "VBAT", rot=0, lcsc="C25091")
 # --- side-push button on the top edge, actuator points out of the board
 place("Button_Switch_SMD", "SW_Push_1P1T-MP_NO_Horizontal_Alps_SKRTLAE010",
       "SW1", "Side tact", 116.6, BY + 1.8, 0,
-      pads={"1": "BTN", "2": "GND", "MP": "GND"})
+      pads={"1": "BTN", "2": "GND"})   # MP = mechanical, no net
 
 # --- USB-C (power only) + MCP73831 charger
 place("Connector_USB", "USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal",
@@ -305,6 +306,97 @@ def silk(text, x, y, size=0.8, layer=pn.B_SilkS):
     board.Add(t)
 
 silk("TOUCH-GSM v1", BX + BW / 2, BY + 11.0, 0.7, pn.F_SilkS)
+
+# ---------------------------------------------------------------- schematic sync
+# The schematic is the source of truth. Export its netlist, cross-check every
+# pad against the net this script assigned (fail on any disagreement), then
+# adopt the schematic net names (e.g. "/MCU_RX") and symbol fields.
+import subprocess, tempfile
+sys.path.insert(0, HERE)
+import sexpr
+nl_path = os.path.join(tempfile.mkdtemp(), "kc.net")
+subprocess.run(["kicad-cli", "sch", "export", "netlist", "--format", "kicadsexpr",
+                "-o", nl_path, os.path.join(HW, "keychain-carrier.kicad_sch")],
+               check=True, capture_output=True)
+nl = sexpr.parse(open(nl_path).read())
+NETMAP = {}
+for n in sexpr.find(sexpr.first(nl, "nets"), "net"):
+    name = sexpr.first(n, "name")[1]
+    for node in sexpr.find(n, "node"):
+        NETMAP[(sexpr.first(node, "ref")[1], sexpr.first(node, "pin")[1])] = name
+COMPS = {sexpr.first(c, "ref")[1]: c for c in sexpr.find(sexpr.first(nl, "components"), "comp")}
+
+def norm(n):
+    if not n or n.startswith("unconnected-"):
+        return ""
+    return n.lstrip("/")
+
+errors = []
+for fp in board.GetFootprints():
+    ref = fp.GetReference()
+    if ref not in COMPS:
+        errors.append("%s missing from schematic" % ref)
+        continue
+    for p in fp.Pads():
+        if not p.GetNumber():
+            continue                      # NPTH / mechanical
+        sch = NETMAP.get((ref, p.GetNumber()), "")
+        if norm(sch) != norm(p.GetNetname()) and not (p.GetNetname() == "STAT" and not norm(sch)):
+            errors.append("%s.%s: pcb=%s sch=%s" % (ref, p.GetNumber(), p.GetNetname(), sch))
+        p.SetNet(net(sch) if sch else pn.NETINFO_LIST.OrphanedItem())
+    comp = COMPS[ref]
+    fp.SetValue(sexpr.first(comp, "value")[1])
+    sch_fields = {sexpr.first(f, "name")[1] for f in sexpr.find(sexpr.first(comp, "fields") or [], "field")}
+    for fld in list(fp.GetFields()):
+        if not fld.IsMandatory() and fld.GetName() not in sch_fields:
+            fp.Remove(fld)                    # e.g. KiLib_Generator from the library
+    for f in sexpr.find(sexpr.first(comp, "fields") or [], "field"):
+        name = sexpr.first(f, "name")[1]
+        val = f[2] if len(f) > 2 else ""
+        if name == "Footprint" or name.startswith("ki_"):
+            continue
+        fp.SetField(name, val)
+        fld = fp.GetField(name)
+        if name not in ("Reference",):
+            fld.SetVisible(False)
+if errors:
+    sys.exit("schematic/PCB mismatch:\n  " + "\n  ".join(errors))
+for name in list(NETS):
+    if name not in NETMAP.values():
+        board.Remove(NETS.pop(name))      # drop the script's pre-sync net names
+
+# ---------------------------------------------------------------- schematic link
+# Link each footprint to its schematic symbol (UUIDs from gen_schematic.py) so
+# KiCad's schematic-parity check and "Update PCB from Schematic" work.
+import json
+link = json.load(open(os.path.join(HW, "sch_uuids.json")))
+for fp in board.GetFootprints():
+    u = link["symbols"].get(fp.GetReference())
+    if not u:
+        sys.exit("footprint %s has no schematic symbol" % fp.GetReference())
+    fp.SetPath(pn.KIID_PATH("/" + u))
+    fp.SetSheetname("/")
+    fp.SetSheetfile("keychain-carrier.kicad_sch")
+
+# ---------------------------------------------------------------- project footprint lib
+# Save the custom footprints (module + wire pads) to keychain.pretty.
+PRETTY = os.path.join(HW, "keychain.pretty")
+os.makedirs(PRETTY, exist_ok=True)
+io = pn.PCB_IO_KICAD_SEXPR()
+done = set()
+for fp in board.GetFootprints():
+    fid = fp.GetFPID()
+    if fid.GetLibNickname() == "keychain" and str(fid.GetLibItemName()) not in done:
+        lf = pn.FOOTPRINT(fp)               # copy, normalised to origin / top side
+        if lf.IsFlipped():
+            lf.Flip(lf.GetPosition(), pn.FLIP_DIRECTION_LEFT_RIGHT)
+        lf.SetOrientationDegrees(0)
+        lf.Move(pn.VECTOR2I(-lf.GetPosition().x, -lf.GetPosition().y))
+        lf.SetPath(pn.KIID_PATH())
+        lf.Reference().SetVisible(True)
+        lf.Reference().SetLayer(pn.F_SilkS); lf.Reference().SetMirrored(False)
+        io.FootprintSave(PRETTY, lf)
+        done.add(str(fid.GetLibItemName()))
 
 board.BuildConnectivity()
 pn.SaveBoard(OUT, board)

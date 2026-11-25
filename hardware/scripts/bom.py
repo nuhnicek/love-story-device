@@ -90,10 +90,10 @@ print("BOM written:", len(groups), "lines")
 nets = collections.defaultdict(list)
 for fp in board.GetFootprints():
     for p in fp.Pads():
-        if p.GetNetname():
+        if p.GetNetname() and not p.GetNetname().startswith("unconnected-"):
             pin = p.GetNumber() or "?"
             fn = p.GetPinFunction()
-            nets[p.GetNetname()].append("%s.%s%s" % (fp.GetReference(), pin, "(%s)" % fn if fn else ""))
+            nets[p.GetNetname().lstrip("/")].append("%s.%s%s" % (fp.GetReference(), pin, "(%s)" % fn if fn else ""))
 with open(os.path.join(HW, "netlist.txt"), "w") as f:
     f.write("# Netlist extracted from keychain-carrier.kicad_pcb by scripts/bom.py\n")
     for n in sorted(nets):

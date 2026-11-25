@@ -9,7 +9,7 @@ otherwise search the MPN.
 | Ref | Qty | Value | Description | Suggested MPN | Footprint | LCSC |
 |---|---|---|---|---|---|---|
 | C1 | 1 | 100nF | MLCC 100 nF 16 V X7R 0402 | Samsung CL05B104KO5NNNC | C_0402_1005Metric |  |
-| C2 | 1 | 470uF 6.3V tant | Tantalum 470 uF 6.3 V, EIA-7343-31 (Case D), low ESR | Kemet T520D477M006ATE015 / AVX TPSD477M006R0045 | CP_EIA-7343-31_Kemet-D |  |
+| C2 | 1 | 470uF tant |  |  | CP_EIA-7343-31_Kemet-D |  |
 | C3, C4 | 2 | 4.7uF | MLCC 4.7 uF 10 V X5R 0402 | Samsung CL05A475KP5NRNC | C_0402_1005Metric |  |
 | C5 | 1 | 10uF | MLCC 10 uF 10 V X5R 0603 | Samsung CL10A106KP8NNNC | C_0603_1608Metric | C19702 |
 | D1 | 1 | 1N4148WT | Switching diode, SOD-523 (motor flyback) | 1N4148WT | D_SOD-523 |  |
