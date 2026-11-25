@@ -3382,7 +3382,7 @@
 		)
 		(uuid "4f632eab-e384-5d5f-a100-97f906fac8ce")
 	)
-	(text "  case fits up to 23 x 28 x 4 mm, e.g. 402025"
+	(text "  case is made for a 502025 cell"
 		(exclude_from_sim no)
 		(at 20.32 78.74 0)
 		(effects
@@ -3391,9 +3391,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "95039ec4-214d-5f58-af42-634d72c07b11")
+		(uuid "c4a951fb-954e-5241-91ee-0c22db45bd74")
 	)
-	(text "  (4 x 20 x 25 mm, ~150-200 mAh)"
+	(text "  (5 x 20 x 25 mm, ~250 mAh)"
 		(exclude_from_sim no)
 		(at 20.32 81.28 0)
 		(effects
@@ -3402,7 +3402,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "71edc2b5-a45c-5e26-b6b2-c8893c31a2e6")
+		(uuid "23941e55-cf33-506b-810e-4e80770727be")
 	)
 	(text "C1: right at the SIM800L VCC/GND pins;"
 		(exclude_from_sim no)

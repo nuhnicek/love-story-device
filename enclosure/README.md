@@ -11,8 +11,8 @@ Two parts per keychain, both printed **without supports**:
   a heart** that the 3 mm LED domes stick through (1.5 mm proud), plus 4 posts that press
   the heart perfboard down.
 
-Outer size **33.5 × 27.3 × 20.8 mm** plus 1.5 mm LED domes and the keyring loop. Where the
-height goes: battery 4.0, carrier parts + PCB 4.2, SIM800L with its SIM holder 4.7, heart
+Outer size **33.5 × 27.3 × 21.8 mm** plus 1.5 mm LED domes and the keyring loop. Where the
+height goes: battery 5.0 (502025 LiPo, 5 × 20 × 25 mm), carrier parts + PCB 4.2, SIM800L with its SIM holder 4.7, heart
 perfboard with wiring and LEDs 5.5, floor and lid 2.4.
 
 ## Heart perfboard
@@ -38,7 +38,7 @@ stick out less.
 | `out/heart_perfboard.png`, `.txt` | Perfboard build drawing and hole list |
 | `out/case_tray.stl`, `out/case_lid.stl` | One keychain (lid already flipped for printing) |
 | `out/case_plate.stl` | Both keychains: 2 trays + 2 lids laid out on one plate |
-| `out/keychain_case_x2_ender3v2_PLA_0.12mm.gcode` | **Ready to print** on an Ender-3 V2 / Ender-3 Pro: PLA, 0.12 mm layers, about 2 h 26 min, 13 g |
+| `out/keychain_case_x2_ender3v2_PLA_0.12mm.gcode` | **Ready to print** on an Ender-3 V2 / Ender-3 Pro: PLA, 0.12 mm layers, about 2 h 31 min, 14 g |
 | `ender3v2_pla_0.12.ini` | The slicer settings used (Creality's official PrusaSlicer presets, flattened) |
 | `scripts/build.sh` | Regenerates STLs, previews and G-code |
 
