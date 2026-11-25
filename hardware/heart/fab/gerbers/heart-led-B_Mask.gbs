@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,10.0.7*%
-%TF.CreationDate,2026-11-25T08:54:22+01:00*%
+%TF.CreationDate,2026-11-25T09:24:08+01:00*%
 %TF.ProjectId,heart-led,68656172-742d-46c6-9564-2e6b69636164,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Bot*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 10.0.7) date 2026-11-25 08:54:22*
+G04 Created by KiCad (PCBNEW 10.0.7) date 2026-11-25 09:24:08*
 %MOMM*%
 %LPD*%
 G01*
@@ -32,10 +32,10 @@ G04 Aperture macros list end*
 %ADD10RoundRect,0.200000X0.300000X0.300000X-0.300000X0.300000X-0.300000X-0.300000X0.300000X-0.300000X0*%
 G04 APERTURE END LIST*
 D10*
-%TO.C,HP1*%
-X98900000Y-100600000D03*
-%TD*%
 %TO.C,HP2*%
 X101100000Y-100600000D03*
+%TD*%
+%TO.C,HP1*%
+X98900000Y-100600000D03*
 %TD*%
 M02*

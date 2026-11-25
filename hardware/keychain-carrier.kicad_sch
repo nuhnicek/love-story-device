@@ -1046,7 +1046,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Battery_Management:MCP73831-2-OT"
+		(symbol "keychain:TP4054"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1063,7 +1063,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "MCP73831-2-OT"
+			(property "Value" "TP4054"
 				(at 1.27 6.35 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1087,7 +1087,7 @@
 					(justify left)
 				)
 			)
-			(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/20001984g.pdf"
+			(property "Datasheet" "https://www.lcsc.com/search?q=TP4054"
 				(at 0 -18.288 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1098,7 +1098,7 @@
 					)
 				)
 			)
-			(property "Description" "Single cell, Li-Ion/Li-Po charge management controller, 4.20V, Tri-State Status Output, in SOT23-5 package"
+			(property "Description" "Standalone linear Li-ion charger 4.2 V, 500 mA max, I = 1000 V / R_PROG, SOT-23-5"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1131,7 +1131,7 @@
 					)
 				)
 			)
-			(symbol "MCP73831-2-OT_0_1"
+			(symbol "TP4054_0_1"
 				(rectangle
 					(start -7.62 5.08)
 					(end 7.62 -5.08)
@@ -1144,11 +1144,11 @@
 					)
 				)
 			)
-			(symbol "MCP73831-2-OT_1_1"
-				(pin tri_state line
+			(symbol "TP4054_1_1"
+				(pin open_collector line
 					(at 10.16 -2.54 180)
 					(length 2.54)
-					(name "STAT"
+					(name "~{CHRG}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1166,7 +1166,7 @@
 				(pin power_in line
 					(at 0 -7.62 90)
 					(length 2.54)
-					(name "V_{SS}"
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1184,7 +1184,7 @@
 				(pin power_out line
 					(at 10.16 2.54 180)
 					(length 2.54)
-					(name "V_{BAT}"
+					(name "BAT"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1202,7 +1202,7 @@
 				(pin power_in line
 					(at 0 7.62 270)
 					(length 2.54)
-					(name "V_{DD}"
+					(name "VCC"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3465,9 +3465,9 @@
 		(fill
 			(type none)
 		)
-		(uuid "1dfd35d1-775d-5f62-98a8-8da9a5901c90")
+		(uuid "dd2d1fbd-0d6f-556f-b31e-3e4fb44114ac")
 	)
-	(text "A. USB-C input + LiPo charger (MCP73831, ~213 mA)"
+	(text "A. USB-C input + LiPo charger (TP4054, ~213 mA)"
 		(exclude_from_sim no)
 		(at 16.51 26.67 0)
 		(effects
@@ -3477,7 +3477,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "33ffa9c6-e18d-5f4a-9306-8c93597ca44f")
+		(uuid "1e409a3e-1ac8-5cf3-ad31-9893604cd76e")
 	)
 	(wire
 		(pts
@@ -4654,7 +4654,7 @@
 		(uuid "a5de1aeb-043e-5b3d-9e14-04c060266b35")
 	)
 	(symbol
-		(lib_id "Battery_Management:MCP73831-2-OT")
+		(lib_id "keychain:TP4054")
 		(at 106.68 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4671,7 +4671,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "MCP73831T-2ACI/OT"
+		(property "Value" "TP4054"
 			(at 93.98 68.58 0)
 			(effects
 				(font
@@ -4691,7 +4691,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/20001984g.pdf"
+		(property "Datasheet" "https://www.lcsc.com/search?q=TP4054"
 			(at 106.68 76.708 0)
 			(effects
 				(font
@@ -4700,7 +4700,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Single cell, Li-Ion/Li-Po charge management controller, 4.20V, Tri-State Status Output, in SOT23-5 package"
+		(property "Description" "Standalone linear Li-ion charger 4.2 V, 500 mA max, I = 1000 V / R_PROG, SOT-23-5"
 			(at 106.68 58.42 0)
 			(effects
 				(font
@@ -5127,7 +5127,7 @@
 			)
 		)
 	)
-	(text "I_chg = 1000 V / R10 = 213 mA (0.85 C for 250 mAh)"
+	(text "I_chg = 1000 V / R10 = 213 mA (0.85 C for 250 mAh); TP4054 = MCP73831 pinout"
 		(exclude_from_sim no)
 		(at 20.32 91.44 0)
 		(effects
@@ -6523,7 +6523,7 @@
 		)
 		(uuid "5c6bc1e7-0e74-59ca-906b-a42d2c47e036")
 	)
-	(label "RING"
+	(label "RST_DRV"
 		(at 187.96 53.34 0)
 		(effects
 			(font
@@ -6531,7 +6531,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b4eb4b53-2df0-51de-b4b1-3545888a2c04")
+		(uuid "28357cee-4c4e-5cc8-9030-665921cf8753")
 	)
 	(wire
 		(pts
@@ -8113,34 +8113,34 @@
 		)
 		(uuid "0d3c4469-39cc-5003-9599-176c06b30ad3")
 	)
+	(no_connect
+		(at 254 49.53)
+		(uuid "77dd0efc-d407-519e-9ec8-a15ab4114186")
+	)
+	(no_connect
+		(at 254 52.07)
+		(uuid "8f0b2bdf-9c20-5efc-a305-835bdd180753")
+	)
 	(wire
 		(pts
-			(xy 254 49.53)
-			(xy 251.46 49.53)
+			(xy 254 54.61)
+			(xy 251.46 54.61)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3571fcd5-8675-5291-96a3-3759e354318d")
+		(uuid "a552144c-1a2f-5bd2-9f93-3819969e29fd")
 	)
-	(label "RING"
-		(at 251.46 49.53 180)
+	(label "SIM_RST"
+		(at 251.46 54.61 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "1f20e43e-f488-5619-bca9-0d5a9dc4db08")
-	)
-	(no_connect
-		(at 254 52.07)
-		(uuid "8f0b2bdf-9c20-5efc-a305-835bdd180753")
-	)
-	(no_connect
-		(at 254 54.61)
-		(uuid "c44df6be-d929-575a-a1a8-857035c146db")
+		(uuid "cbb6e1c7-8abd-500f-8156-256da323b40a")
 	)
 	(no_connect
 		(at 254 57.15)
@@ -8406,6 +8406,124 @@
 			(project "keychain-carrier"
 				(path "/29574fee-eb7b-5add-9822-f146771b02f5"
 					(reference "M1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 266.7 77.47)
+			(xy 266.7 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29ac2a62-d864-51a3-a8bb-6a4fa0a9619d")
+	)
+	(label "RST_DRV"
+		(at 266.7 74.93 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "556408a2-11f3-5385-b15b-fa0deb83b963")
+	)
+	(wire
+		(pts
+			(xy 266.7 85.09)
+			(xy 266.7 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dc807d14-120c-5cd0-95a5-6a41f4da3903")
+	)
+	(label "SIM_RST"
+		(at 266.7 87.63 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7bfc86ae-14ab-5d4d-ba96-5b54e7cac2ae")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 266.7 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "620aaae9-bf45-5d5e-b39f-a069bedc6f7d")
+		(property "Reference" "R7"
+			(at 268.732 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 266.7 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 264.922 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 266.7 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 266.7 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C11702"
+			(at 266.7 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d58c299e-bc00-5040-aa83-40153ac1e564")
+		)
+		(pin "2"
+			(uuid "83d0a6c2-5ca6-5a17-9242-14933901c14f")
+		)
+		(instances
+			(project "keychain-carrier"
+				(path "/29574fee-eb7b-5add-9822-f146771b02f5"
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -8842,7 +8960,7 @@
 		)
 		(uuid "a8c93f43-6f7f-5149-be03-4572df52852b")
 	)
-	(text "DTR unused: AT+CSCLK=2 (auto sleep)"
+	(text "DTR/RING unused: AT+CSCLK=2 sleep, data buffered by AT+CIPRXGET"
 		(exclude_from_sim no)
 		(at 218.44 33.02 0)
 		(effects
@@ -8851,7 +8969,18 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "bfd0ebd9-e81f-56e6-bd46-13a9f553636e")
+		(uuid "bb487322-73c5-569b-96bf-efca011aa0b2")
+	)
+	(text "PB3 -> R7 -> RST: open-drain hard reset of a hung modem (never drive high)"
+		(exclude_from_sim no)
+		(at 218.44 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4f72761b-483d-5f7f-9519-25557ec3c2db")
 	)
 	(rectangle
 		(start 142.24 101.6)

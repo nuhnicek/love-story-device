@@ -24,7 +24,7 @@ BOARDS = [
 # value -> (description, suggested MPN)
 INFO = {
     "ATtiny85-20SU": ("MCU, 8 KB flash, SOIC-8 (150 mil)", "Microchip ATTINY85-20SU"),
-    "MCP73831T-2ACI/OT": ("Li-Ion/LiPo linear charger 4.20 V, SOT-23-5", "Microchip MCP73831T-2ACI/OT"),
+    "TP4054": ("Li-Ion/LiPo linear charger 4.20 V, SOT-23-5 (MCP73831 pinout)", "TP4054 (NanJing Top Power or equivalent)"),
     "AO3400A": ("N-MOSFET 30 V 5.7 A, ~50 mOhm, SOT-23 (motor + heart driver)", "AOS AO3400A"),
     "1N4148WT": ("Switching diode, SOD-523 (motor flyback)", "1N4148WT"),
     "Side tact": ("Side-push tactile switch 3.5 x 2.9 mm, SMD", "Alps SKRTLAE010"),
@@ -33,7 +33,7 @@ INFO = {
     "10uF": ("MLCC 10 uF 10 V X5R 0603", "Samsung CL10A106KP8NNNC"),
     "4.7uF": ("MLCC 4.7 uF 10 V X5R 0402", "Samsung CL05A475KP5NRNC"),
     "100nF": ("MLCC 100 nF 16 V X7R 0402", "Samsung CL05B104KO5NNNC"),
-    "1k": ("Resistor 1 k 1% 0402 (SIM TXD -> PB0, ISP isolation)", "UNI-ROYAL 0402WGF1001TCE"),
+    "1k": ("Resistor 1 k 1% 0402 (SIM TXD -> PB0 ISP isolation; PB3 -> SIM RST)", "UNI-ROYAL 0402WGF1001TCE"),
     "47k": ("Resistor 47 k 1% 0402 (TX divider top)", "UNI-ROYAL 0402WGF4702TCE"),
     "100k": ("Resistor 100 k 1% 0402 (TX divider bottom / gate pull-down)", "UNI-ROYAL 0402WGF1003TCE"),
     "10k": ("Resistor 10 k 1% 0402 (RESET pull-up)", "UNI-ROYAL 0402WGF1002TCE"),

@@ -1,0 +1,19 @@
+[Unit]
+Description=GSM touch keychain relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=keychain
+WorkingDirectory=/opt/keychain-relay
+ExecStart=/usr/bin/python3 /opt/keychain-relay/relay.py --config config.json --state state.json
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/keychain-relay
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

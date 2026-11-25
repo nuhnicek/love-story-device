@@ -58,7 +58,7 @@ def normal(i):
 
 board = pn.NewBoard(OUT)
 board.SetCopperLayerCount(2)
-NETCLASSES = [("Default", 0.15, 0.15, 0.6, 0.3, 2147483647), ("Power", 0.25, 0.15, 0.6, 0.3, 0)]
+NETCLASSES = [("Default", 0.15, 0.15, 0.6, 0.3, 2147483647), ("Power", 0.2, 0.15, 0.6, 0.3, 0)]
 PATTERNS = [("/LED+", "Power"), ("/LED-", "Power")]
 pcblib.apply_rules(board, NETCLASSES, PATTERNS, thickness=0.8)
 net = pcblib.Nets(board)

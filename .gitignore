@@ -6,3 +6,6 @@ _autosave-*
 ~*.lck
 __pycache__/
 *.jar
+
+# firmware build output
+firmware/**/build/

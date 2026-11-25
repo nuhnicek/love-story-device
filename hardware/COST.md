@@ -1,71 +1,50 @@
-# Cost estimate — one pair of keychains, self-assembled
+# Cost estimate — one pair, self-assembled, 1NCE data SIMs
 
-Estimate from 2026-11-25, assuming ~23 Kč/USD and ~25 Kč/EUR. Prices move, so get the live
+Estimate from 2026-11-25, assuming ~23 Kč/USD and ~25 Kč/EUR. Prices move, so get a live
 JLCPCB quote (upload the two gerber zips) and an LCSC cart from `BOM.md` before ordering.
 
-## One-time cost (you solder and assemble)
+## Where the money goes, and what was cut
 
-| Item | Qty | Approx. |
+| Change | Saving | Quality impact |
 |---|---|---|
-| Carrier PCB, 2-layer 0.8 mm (JLCPCB) | 5 pcs | ~$2–4 |
-| Heart PCB, 2-layer 0.8 mm (JLCPCB) | 5 pcs | ~$2–4 |
-| PCB shipping to CZ (one combined order, incl. VAT via IOSS) | | ~$8–15 |
-| Electronic parts from LCSC for **3 sets** (1 spare; tiny parts come in cut-tape minimums of 10–100) | | ~$15–25 |
-| LCSC shipping to CZ | | ~$8–20 |
-| *Optional:* SMT stencils for both boards (makes 0402s and the 0.5 mm resistor arrays far easier) | 2 | ~$7–15 |
-| **Boards + parts** | | **≈ 800–1 300 Kč** (+ ~250 Kč with stencils) |
+| Charger MCP73831 → **TP4054** (pin-compatible, same 213 mA) | ~$0.45 per board | none: standard standalone Li-ion charger with thermal regulation |
+| Q1 2N7002 → **AO3400A** | ~0 | better: no LED dimming |
+| No SMT assembly, no stencil (hand solder) | ~$40–60 | you need flux, a fine tip, and patience for the 0.5 mm arrays |
+| SIM800L, LiPo, motors from **AliExpress** instead of local shops | ~300–500 Kč | same Chinese modules; buy LiPos only with a built-in protection board |
+| **1NCE SIM**: €12 once for 10 years (500 MB + 250 SMS) | no monthly fees | needs your relay server (included in `/server`) |
 
-Most expensive parts per set: ATtiny85 ≈ $1–1.5, polymer tantalum ≈ $1–2, MCP73831 ≈ $0.5,
-USB-C and side switch ≈ $0.2–0.5 each. The other ~30 parts are cents each.
+Kept on purpose: the **polymer** 470 µF tantalum (≈ $1–1.5), the SIM800L's 2 A burst buffer.
+The cheap MnO₂ type can fail short on a 4.2 V cell. Also kept: per-LED resistors on the heart.
 
-| Off-board, per keychain (Czech retail) | Approx. |
+## One-time cost
+
+| Item | Approx. |
 |---|---|
-| SIM800L red mini module | 150–250 Kč |
-| LiPo 250–300 mAh pouch with protection PCM | 100–150 Kč |
-| 0820 coin vibration motor | 30–60 Kč |
-| Wire, header pins | ~10 Kč |
-| **Per keychain** | **≈ 300–470 Kč → pair ≈ 600–950 Kč** |
+| Carrier PCB × 5 + heart PCB × 5 (JLCPCB, 2-layer, 0.8 mm) | ~$4–8 |
+| PCB shipping to CZ (one combined order, VAT collected at checkout) | ~$8–15 |
+| Electronic parts from LCSC for **3 sets** (1 spare) | ~$12–20 |
+| LCSC shipping to CZ (or choose "ship with JLCPCB order" if offered at checkout) | ~$0–20 |
+| **Boards + electronics** | **≈ 550–1 450 Kč** |
+| SIM800L red mini × 2 (AliExpress ~$3–5 each; Hadex/GM ~150–250 Kč) | ~150–500 Kč |
+| LiPo 250–300 mAh with PCM × 2 (AliExpress ~$2–4) | ~100–300 Kč |
+| 0820 coin motors (AliExpress 5–10 pack) | ~30–60 Kč |
+| 1NCE SIM × 2 (€12 each, 10 years; shipping not included) | ~600 Kč |
+| PLA for 2 cases (~6 g) | ~5 Kč |
+| **Total for the pair** | **≈ 1 450–2 900 Kč**, the low end with AliExpress parts and combined shipping |
 
-**Hardware total for the pair: ≈ 1 400–2 250 Kč**, plus the SIM cards (below) and a few grams
-of filament for the enclosures.
+The fixed costs (shipping, PCB minimum order, 1NCE) are most of the bill. The ATtiny85 is
+the single most expensive chip at ~$1–1.5. Swapping it would save under 100 Kč for the
+pair but would need a different programmer, so it stays.
 
-Tools assumed: fine-tip iron, flux, tweezers, solder wick, a loupe. A hot-air station or hot
-plate helps a lot with the 0.5 mm-pitch resistor arrays and the USB-C.
+## Running cost
 
-## SIM cards: two options
+| | |
+|---|---|
+| SIM | **0 Kč for 10 years** with 1NCE, as long as you stay under 500 MB per SIM (expected ~15–20 MB/year each) |
+| Server | your own server (Python, any small Linux box or VPS you already have) |
 
-| | A. Czech prepaid SIM (current design) | B. M2M data SIM, e.g. 1NCE |
-|---|---|---|
-| Price | ~0–200 Kč per SIM, then top-ups as your operator requires | **~€12 per SIM, one-time, for 10 years** (500 MB + 250 SMS) |
-| Pair, 10 years | depends on tariff (top-ups / SMS fees) | **≈ 600 Kč total** |
-| Voice calls | yes → free missed-call ping | **no** |
-| SMS to the other keychain | yes (~1–2.5 Kč each) | **no**: 1NCE blocks SIM-to-SIM/P2P SMS; SMS only to/from their API |
-| Server needed | **no**, the keychains call/text each other directly | **yes**: both keychains talk through an MQTT broker over GPRS |
-| Hardware change | none | none (SIM800L does 2G GPRS/TCP) |
-| Firmware | missed call + SMS (as planned) | MQTT over GPRS (different firmware) |
-| Battery | best: SIM800L sleeps until a call/SMS arrives | a bit worse: a TCP keep-alive every few minutes keeps the connection open |
+## Check before buying 1NCE
 
-### How option B would work
-- Each keychain opens a GPRS TCP connection to an MQTT broker. Use a free hosted tier (e.g.
-  HiveMQ Cloud), or a Raspberry Pi / small VPS you run. Each keychain subscribes to its
-  partner's topic.
-- **Short press** publishes a "ping"; **long press** publishes the tap timings as a few bytes.
-  The other keychain gets it within about a second, plays it, and goes back to sleep.
-- **Data use** is tiny. A keep-alive every ~5 min is roughly 15–20 MB/year per keychain, and
-  messages are a few hundred bytes each, so 500 MB lasts the 10 years.
-- **Battery**: expect noticeably shorter life than option A because of the keep-alives.
-  This is still to be measured; the keep-alive interval is the main setting to play with.
-
-### Check before buying 1NCE
-- That they sell to you as a private person. As far as I know, 1NCE has been business-only
-  (B2B), so check their shop terms.
-- That their SIM can use **2G in Czechia**. 1NCE lists 2G support, but the SIM800L is 2G-only,
-  and 2G is being switched off across Europe.
-- The SIM size (the SIM800L takes **micro-SIM**).
-
-## Running cost summary
-
-| | A. Czech prepaid | B. 1NCE + free MQTT tier |
-|---|---|---|
-| Per year | top-ups + ~1–2.5 Kč per tap-pattern SMS; missed-call pings free | **0 Kč** (prepaid 10 years) as long as you stay within 500 MB |
-| Extra infrastructure | none | MQTT broker (free tier or your own) |
+- **Private customers:** as far as I know, 1NCE has been business-only. Check their shop terms.
+- **2G in Czechia:** the SIM800L is 2G-only, and 2G is being switched off across Europe.
+- **SIM size:** the SIM800L takes a **micro-SIM**.

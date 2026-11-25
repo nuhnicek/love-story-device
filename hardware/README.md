@@ -5,15 +5,14 @@ Two boards per keychain:
 1. **Carrier** (this folder): a 2-layer, **0.8 mm** board with the **same 25.2 × 23.0 mm
    outline as the red SIM800L mini module**. The module sits on top and is soldered
    straight through its own 12 holes. All electronics are on the **bottom** side, facing
-   the LiPo cell. The separate TP4056 board is gone: USB-C and an MCP73831 charger are on
-   the carrier.
+   the LiPo cell. The separate TP4056 board is gone: USB-C and a TP4054 charger chip are
+   on the carrier.
 2. **Heart LED board** (`heart/`): a **heart-shaped 16.4 × 15.2 mm** board with **14 pink
    LEDs** in a heart outline. It sits behind a window in the enclosure and is wired to the
    carrier with 2 thin wires. See [Heart LED board](#heart-led-board).
 
-Cost: see [COST.md](COST.md). Self-assembled pair ≈ 1 400–2 250 Kč of hardware plus SIMs
-(Czech prepaid, or an M2M data SIM such as 1NCE, ~€12 per SIM for 10 years, which needs
-MQTT firmware and a broker).
+Cost: see [COST.md](COST.md). ≈ 1 450–2 900 Kč for the self-assembled pair incl. 1NCE SIMs
+for 10 years. Firmware: [`../firmware`](../firmware). Relay server: [`../server`](../server).
 
 ![bottom](fab/render-bottom.png)
 
@@ -45,7 +44,7 @@ Checks (all run by `make_all.sh`):
 | ATtiny85 pin | Port | Net | Goes to |
 |---|---|---|---|
 | 1 | PB5 / RESET | RESET | 10 k pull-up to VBAT, ISP pad TP1 |
-| 2 | PB3 | RING | SIM800L RING (pin 12), wake-up via PCINT3 |
+| 2 | PB3 | RST_DRV | 1 kΩ → SIM800L RST (pin 3). Open-drain hard reset of a hung modem; never driven high |
 | 3 | PB4 | DRV | 100 Ω → AO3400A gate (100 k pull-down). Motor **and** heart LEDs |
 | 4 | GND | GND | |
 | 5 | PB0 / MOSI | MCU_RX | 1 k ← SIM800L TXD (SoftwareSerial RX). ISP TP2 |
@@ -58,20 +57,24 @@ Five I/O pins can't cover TX, RX, RING, button, motor, LEDs and DTR separately. 
   the MOSFET drain (pads HT1/HT2), so the heart glows exactly with the vibration. Q1 is an
   **AO3400A** (~50 mΩ) instead of the 2N7002 (2–5 Ω). With motor + 14 LEDs (~150 mA) a
   2N7002 would drop 0.3–0.7 V and visibly dim the pink LEDs. Same SOT-23 footprint and pinout.
-- **DTR is not used.** Use `AT+CSCLK=2` (the module sleeps on its own when the UART is
-  idle and wakes on the first incoming character). Send a dummy `AT` and wait ~100 ms
-  before real commands.
-- **SoftwareSerial owns the only PCINT vector** on the ATtiny85. Button and RING still
-  wake the chip: after `mySerial.begin()`, set `PCMSK |= _BV(PCINT2) | _BV(PCINT3);
-  GIMSK |= _BV(PCIE);`. SoftwareSerial's ISR ignores changes on pins that aren't its RX.
+- **DTR and RING are not used** (1NCE data design). The modem sleeps by itself
+  (`AT+CSCLK=2`). Incoming TCP data is held in the modem (`AT+CIPRXGET=1`), and its URC on
+  the UART line wakes the ATtiny85. That frees PB3 to hard-reset the modem.
+- **SoftwareSerial owns the only PCINT vector** on the ATtiny85. The button shares it
+  (`PCMSK |= _BV(PCINT2)`); SoftwareSerial's ISR ignores changes on pins other than its RX.
+- **Charger: TP4054** (pin-compatible with the MCP73831; 4.7 kΩ on PROG = 213 mA). It's a
+  standalone linear Li-ion charger with thermal regulation, the same circuit class as the
+  TP4056, at about a tenth of the MCP73831's price. A transistor-only charger wouldn't be
+  cheaper and would be much less safe.
+- Firmware: `../firmware`. Relay server: `../server`.
 
 ## Schematic (ASCII quick view; the real one is `keychain-carrier.kicad_sch`)
 
 ```
- USB-C (power only)                MCP73831 (U2)                LiPo 3.7 V
+ USB-C (power only)                TP4054 (U2)                  LiPo 3.7 V
  VBUS ──┬──────────────────────── 4 VDD     VBAT 3 ──┬───────────── BT1 (+)
         C3 4.7u                     5 PROG─R10 4k7─GND │            BT2 (-) ── GND
- CC1 ── R8 5k1 ── GND               1 STAT (n.c.)    C4 4.7u
+ CC1 ── R8 5k1 ── GND               1 CHRG (n.c.)    C4 4.7u
  CC2 ── R9 5k1 ── GND               2 VSS ── GND       │
                                                        │ VBAT
         ┌──────────────────────────────────────────────┼───────────────────┐
@@ -82,8 +85,8 @@ Five I/O pins can't cover TX, RX, RING, button, motor, LEDs and DTR separately. 
    5 TXD ── R1 1k ──────────────────────────────────────────────── 5 PB0 ── TP2
    4 RXD ──┬── R2 47k ──────────────────────────────────────────── 6 PB1 ── TP3
            R3 100k ── GND                                          7 PB2 ── TP4 ── SW1 ── GND
-  12 RING ──────────────────────────────────────────────────────── 2 PB3
-   1 NET, 3 RST, 7–11 (SPK/MIC/DTR): not connected                 3 PB4 ── R4 100R ──┐
+   3 RST ── R7 1k ──────────────────────────────────────────────── 2 PB3 (open drain)
+   1 NET, 7–12 (SPK/MIC/DTR/RING): not connected                   3 PB4 ── R4 100R ──┐
                                                                     4 GND             │
   VBAT ─┬─ MT1 (motor +)    VBAT ─ HT1 ═ heart board ═ HT2 ─┐             R5 100k ─┤ G
         │   [0820 motor]                                     │                GND   Q1 AO3400A

@@ -148,7 +148,7 @@ def sim800l_module():
     left = ["NET", "VCC", "RST", "RXD", "TXD", "GND"]          # pins 1..6
     right = ["RING", "DTR", "MIC+", "MIC-", "SPK+", "SPK-"]     # pins 12..7
     nets = {"VCC": "VBAT", "GND": "GND", "RXD": "SIM_RXD",
-            "TXD": "SIM_TXD", "RING": "RING"}
+            "TXD": "SIM_TXD", "RST": "SIM_RST"}
     pins = []
     for i, nm in enumerate(left):
         pins.append((str(i + 1), nm, X0, Y0 + i * PITCH))
@@ -192,7 +192,7 @@ def C(ref, val, x, y, a, b, rot=0, fp=C0402, lcsc=""):
 # 1 PB5/RESET  2 PB3  3 PB4  4 GND  5 PB0  6 PB1  7 PB2  8 VCC
 place("Package_SO", "SOIC-8_3.9x4.9mm_P1.27mm", "U1", "ATtiny85-20SU",
       113.2, 107.5, 0,
-      pads={"1": "RESET", "2": "RING", "3": "DRV", "4": "GND",
+      pads={"1": "RESET", "2": "RST_DRV", "3": "DRV", "4": "GND",
             "5": "MCU_RX", "6": "MCU_TX", "7": "BTN", "8": "VBAT"},
       lcsc="")
 C("C1", "100nF", 117.6, 109.0, "VBAT", "GND", rot=90)
@@ -207,6 +207,9 @@ C("C5", "10uF", 108.7, 106.3, "VBAT", "GND", rot=90, fp=C0603, lcsc="C19702")
 R("R1", "1k", 108.7, 109.2, "SIM_TXD", "MCU_RX", rot=90, lcsc="C11702")
 R("R2", "47k", 108.7, 111.2, "MCU_TX", "SIM_RXD", rot=90, lcsc="C25792")
 R("R3", "100k", 108.7, 113.2, "SIM_RXD", "GND", rot=90, lcsc="C25741")
+
+# --- PB3 -> 1k -> SIM800L RST (open-drain modem hard reset)
+R("R7", "1k", 105.0, 105.2, "RST_DRV", "SIM_RST", rot=0, lcsc="C11702")
 
 # --- reset pull-up (keeps PB5 as RESET for ISP)
 R("R6", "10k", 111.0, 103.9, "RESET", "VBAT", rot=0, lcsc="C25744")
@@ -226,16 +229,16 @@ place("Button_Switch_SMD", "SW_Push_1P1T-MP_NO_Horizontal_Alps_SKRTLAE010",
       "SW1", "Side tact", 116.6, BY + 1.8, 0,
       pads={"1": "BTN", "2": "GND"})   # MP = mechanical, no net
 
-# --- USB-C (power only) + MCP73831 charger
+# --- USB-C (power only) + TP4054 charger (MCP73831 pinout)
 place("Connector_USB", "USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal",
       "J1", "USB-C 6P", 112.6, BY + BH - 3.4, 180,
       pads={"A9": "VBUS", "B9": "VBUS", "A12": "GND", "B12": "GND",
             "A5": "CC1", "B5": "CC2", "SH": "GND"})
 R("R8", "5.1k", 111.0, 114.6, "CC1", "GND", rot=0, lcsc="C25905")
 R("R9", "5.1k", 114.2, 114.6, "CC2", "GND", rot=0, lcsc="C25905")
-place("Package_TO_SOT_SMD", "SOT-23-5", "U2", "MCP73831T-2ACI/OT",
+place("Package_TO_SOT_SMD", "SOT-23-5", "U2", "TP4054",
       120.3, 114.6, 90,
-      pads={"1": "STAT", "2": "GND", "3": "VBAT", "4": "VBUS", "5": "PROG"},
+      pads={"1": "CHRG", "2": "GND", "3": "VBAT", "4": "VBUS", "5": "PROG"},
       lcsc="")
 R("R10", "4.7k", 120.2, 118.4, "PROG", "GND", rot=90, lcsc="C25900")  # ~213 mA
 C("C3", "4.7uF", 118.6, 118.4, "VBUS", "GND", rot=90)
@@ -299,7 +302,7 @@ for i, nm in enumerate(["RING", "DTR", "MIC+", "MIC-", "SPK+", "SPK-"]):
 # netlist (cross-checked against this script), footprints link to symbols.
 net.items = NETS
 pcblib.sync_from_schematic(board, net, os.path.join(HW, "keychain-carrier.kicad_sch"),
-                           allow_dropped=("STAT",))
+                           allow_dropped=("CHRG",))
 pcblib.link_symbols(board, os.path.join(HW, "sch_uuids.json"), "keychain-carrier.kicad_sch")
 pcblib.save_custom_footprints(board, os.path.join(HW, "keychain.pretty"))
 board.BuildConnectivity()
