@@ -23,7 +23,7 @@ pcb_t = 0.8;
 bottom_parts_h = 3.2;  // tallest part under the carrier (USB-C receptacle)
 sim_gap = 1.5;         // SIM holder under the SIM800L
 module_h = 3.2;        // SIM800L PCB + shield
-bat_w = 25; bat_l = 20; bat_h = 5.0;   // 502025 LiPo (5 x 20 x 25 mm, ~250 mAh)
+bat_w = 25; bat_l = 20; bat_h = 5.0;   // 502025 LiPo (5 x 20 x 25 mm, 200-250 mAh)
 hb_t = 1.6;            // universal board thickness
 under_h = 1.3;         // solder joints + wires + insulating tape under the perfboard
 led_h = 5.3;           // 3 mm LED height above the board, flange to dome top (measure yours!)

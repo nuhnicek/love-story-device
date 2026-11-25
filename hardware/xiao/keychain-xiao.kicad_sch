@@ -3393,7 +3393,7 @@
 		)
 		(uuid "c4a951fb-954e-5241-91ee-0c22db45bd74")
 	)
-	(text "  (5 x 20 x 25 mm, ~250 mAh)"
+	(text "  (5 x 20 x 25 mm, 200-250 mAh)"
 		(exclude_from_sim no)
 		(at 20.32 81.28 0)
 		(effects
@@ -3402,7 +3402,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "23941e55-cf33-506b-810e-4e80770727be")
+		(uuid "4a87587e-96f2-5fa9-bddc-49d1ae6fd8d0")
 	)
 	(text "C1: right at the SIM800L VCC/GND pins;"
 		(exclude_from_sim no)

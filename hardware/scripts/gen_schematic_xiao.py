@@ -87,7 +87,7 @@ place("power:PWR_FLAG", "#FLG01", "PWR_FLAG", 86.36, 40.64, 180, "", {"1": "VBAT
 place("power:PWR_FLAG", "#FLG02", "PWR_FLAG", 86.36, 71.12, 0, "", {"1": "GND"})
 text("BT1: pouch cell WITH protection board (PCM);", 20.32, 76.2)
 text("  case is made for a 502025 cell", 20.32, 78.74)
-text("  (5 x 20 x 25 mm, ~250 mAh)", 20.32, 81.28)
+text("  (5 x 20 x 25 mm, 200-250 mAh)", 20.32, 81.28)
 text("C1: right at the SIM800L VCC/GND pins;", 20.32, 86.36)
 text("  takes the 2 A GSM bursts (else the modem resets)", 20.32, 88.9)
 text("Battery -> SIM800L: short, thick wires (26 AWG+)", 20.32, 93.98)
