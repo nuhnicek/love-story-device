@@ -11,8 +11,9 @@ Two boards per keychain:
    LEDs** in a heart outline. It sits behind a window in the enclosure and is wired to the
    carrier with 2 thin wires. See [Heart LED board](#heart-led-board).
 
-Cost: see [COST.md](COST.md) (≈ 2 100–3 800 Kč for the assembled pair incl. modules and
-batteries).
+Cost: see [COST.md](COST.md). Self-assembled pair ≈ 1 400–2 250 Kč of hardware plus SIMs
+(Czech prepaid, or an M2M data SIM such as 1NCE, ~€12 per SIM for 10 years, which needs
+MQTT firmware and a broker).
 
 ![bottom](fab/render-bottom.png)
 
