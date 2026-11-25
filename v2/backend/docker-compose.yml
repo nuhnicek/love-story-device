@@ -1,0 +1,9 @@
+services:
+  relay:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "7070:7070"              # keychains connect here (open it in the firewall)
+      - "127.0.0.1:8080:8080"    # status page: only from the server itself / an SSH tunnel
+    volumes:
+      - ./data:/data             # config.json (you create it), state.json, battery.csv

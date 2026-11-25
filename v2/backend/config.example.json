@@ -1,0 +1,23 @@
+{
+  "listen": "0.0.0.0",
+  "port": 7070,
+  "devices": {
+    "1": {
+      "name": "keychain A",
+      "token": "change-me-token-for-keychain-1",
+      "partner": "2"
+    },
+    "2": {
+      "name": "keychain B",
+      "token": "change-me-token-for-keychain-2",
+      "partner": "1"
+    }
+  },
+  "queue_ttl_s": 604800,
+  "resend_s": 60,
+  "idle_timeout_s": 1200,
+  "hello_timeout_s": 30,
+  "status_listen": "127.0.0.1",
+  "status_port": 8080,
+  "battery_log": "battery.csv"
+}
