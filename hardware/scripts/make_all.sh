@@ -1,5 +1,5 @@
 #!/bin/sh
-# Full pipeline for both boards: schematic -> PCB -> autoroute -> ERC/DRC/parity -> fab outputs.
+# Full pipeline for the carrier board: schematic -> PCB -> autoroute -> ERC/DRC/parity -> fab outputs.
 #   hardware/scripts/make_all.sh /path/to/freerouting-2.5.0.jar
 set -e
 cd "$(dirname "$0")/.."
@@ -44,13 +44,5 @@ $KPY scripts/autoroute.py "$JAR" keychain-carrier.kicad_pcb > /tmp/kc_route.log 
 grep -E "attempt" /tmp/kc_route.log
 fab_outputs "$HW" keychain-carrier back
 
-echo "== heart"
-python3 scripts/gen_heart.py
-$KPY scripts/build_heart.py
-$KPY scripts/autoroute.py "$JAR" heart/heart-led.kicad_pcb > /tmp/kc_route.log 2>&1 \
-  || { grep -E "attempt|failed" /tmp/kc_route.log; exit 1; }
-grep -E "attempt" /tmp/kc_route.log
-fab_outputs "$HW/heart" heart-led front
-
 $KPY scripts/bom.py
-echo "done -> hardware/fab/ and hardware/heart/fab/"
+echo "done -> hardware/fab/"

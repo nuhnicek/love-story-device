@@ -7,6 +7,9 @@ OPENSCAD=${OPENSCAD:-openscad}
 SLICER=${SLICER:-/Applications/PrusaSlicer.app/Contents/MacOS/PrusaSlicer}
 mkdir -p out
 
+# perfboard heart layout -> heart_layout.scad (lid holes/posts) + build drawing
+python3 heart_perfboard.py
+
 for p in tray lid plate; do
   $OPENSCAD -D "part=\"$p\"" -o out/case_$p.stl keychain_case.scad 2>&1 | grep -E "ECHO|WARNING|ERROR" || true
 done

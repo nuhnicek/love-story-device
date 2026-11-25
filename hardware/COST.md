@@ -1,7 +1,7 @@
 # Cost estimate — one pair, self-assembled, 1NCE data SIMs
 
 Estimate from 2026-11-25, assuming ~23 Kč/USD and ~25 Kč/EUR. Prices move, so get a live
-JLCPCB quote (upload the two gerber zips) and an LCSC cart from `BOM.md` before ordering.
+JLCPCB quote (upload `fab/keychain-carrier-gerbers.zip`) and an LCSC cart from `BOM.md` before ordering.
 
 ## Where the money goes, and what was cut
 
@@ -9,18 +9,19 @@ JLCPCB quote (upload the two gerber zips) and an LCSC cart from `BOM.md` before 
 |---|---|---|
 | Charger MCP73831 → **TP4054** (pin-compatible, same 213 mA) | ~$0.45 per board | none: standard standalone Li-ion charger with thermal regulation |
 | Q1 2N7002 → **AO3400A** | ~0 | better: no LED dimming |
-| No SMT assembly, no stencil (hand solder) | ~$40–60 | you need flux, a fine tip, and patience for the 0.5 mm arrays |
+| No SMT assembly, no stencil (hand solder) | ~$40–60 | you need flux and a fine tip for the 0402 parts on the carrier |
+| Heart on **perfboard with 3 mm LEDs** instead of a second PCB | ~$5–10 + one less shipping line | none; looks better, the LED domes stick out of the lid |
 | SIM800L, LiPo, motors from **AliExpress** instead of local shops | ~300–500 Kč | same Chinese modules; buy LiPos only with a built-in protection board |
 | **1NCE SIM**: €12 once for 10 years (500 MB + 250 SMS) | no monthly fees | needs your relay server (included in `/server`) |
 
 Kept on purpose: the **polymer** 470 µF tantalum (≈ $1–1.5), the SIM800L's 2 A burst buffer.
-The cheap MnO₂ type can fail short on a 4.2 V cell. Also kept: per-LED resistors on the heart.
+The cheap MnO₂ type can fail short on a 4.2 V cell. Also kept: one resistor per heart LED.
 
 ## One-time cost
 
 | Item | Approx. |
 |---|---|
-| Carrier PCB × 5 + heart PCB × 5 (JLCPCB, 2-layer, 0.8 mm) | ~$4–8 |
+| Carrier PCB × 5 (JLCPCB, 2-layer, 0.8 mm) | ~$2–4 |
 | PCB shipping to CZ (one combined order, VAT collected at checkout) | ~$8–15 |
 | Electronic parts from LCSC for **3 sets** (1 spare) | ~$12–20 |
 | LCSC shipping to CZ (or choose "ship with JLCPCB order" if offered at checkout) | ~$0–20 |
@@ -28,8 +29,9 @@ The cheap MnO₂ type can fail short on a 4.2 V cell. Also kept: per-LED resisto
 | SIM800L red mini × 2 (AliExpress ~$3–5 each; Hadex/GM ~150–250 Kč) | ~150–500 Kč |
 | LiPo 250–300 mAh with PCM × 2 (AliExpress ~$2–4) | ~100–300 Kč |
 | 0820 coin motors (AliExpress 5–10 pack) | ~30–60 Kč |
+| Heart: perfboard, 20 × 3 mm LEDs, 20 × 1/8 W resistors, thin wire | ~60–120 Kč |
 | 1NCE SIM × 2 (€12 each, 10 years; shipping not included) | ~600 Kč |
-| PLA for 2 cases (~6 g) | ~5 Kč |
+| PLA for 2 cases (~13 g) | ~10 Kč |
 | **Total for the pair** | **≈ 1 450–2 900 Kč**, the low end with AliExpress parts and combined shipping |
 
 The fixed costs (shipping, PCB minimum order, 1NCE) are most of the bill. The ATtiny85 is

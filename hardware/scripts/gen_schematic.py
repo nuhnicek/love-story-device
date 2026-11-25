@@ -206,13 +206,13 @@ place("Device:D", "D1", "1N4148WT", 218.44, 119.38, 0, "Diode_SMD:D_SOD-523",
       {"1": "VBAT", "2": "MOT_N"})
 tp("HT1", "HEART+", 223.52, 132.08, "VBAT", 1.0, rot=180)
 tp("HT2", "HEART-", 233.68, 142.24, "MOT_N", 1.0)
-text("HT1/HT2 -> heart LED board", 215.9, 149.86)
+text("HT1/HT2 -> heart perfboard (+ / -)", 215.9, 149.86)
 place("Motor:Motor_DC", "MOT1", "0820 motor", 254.0, 127.0, 0, "",
       {"1": "VBAT", "2": "MOT_N"}, on_board=False, in_bom=False)
 tp("MT1", "MOT+", 271.78, 119.38, "VBAT", 1.0, rot=180)
 tp("MT2", "MOT-", 281.94, 134.62, "MOT_N", 1.0)
 text("MOT1 is off-board, wired to pads MT1/MT2.  D1 = flyback.", 144.78, 151.13)
-text("Heart board (hardware/heart, 14 pink LEDs) sits in parallel with the motor.", 144.78, 153.67)
+text("Heart perfboard: 10 x 3 mm LEDs, one resistor each (enclosure/heart_perfboard.py), parallel to the motor.", 144.78, 153.67)
 
 # ------------------------------------------------------------ write
 S.write("GSM touch keychain - carrier board",

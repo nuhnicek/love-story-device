@@ -7,9 +7,10 @@ Two boards per keychain:
    straight through its own 12 holes. All electronics are on the **bottom** side, facing
    the LiPo cell. The separate TP4056 board is gone: USB-C and a TP4054 charger chip are
    on the carrier.
-2. **Heart LED board** (`heart/`): a **heart-shaped 16.4 × 15.2 mm** board with **14 pink
-   LEDs** in a heart outline. It sits behind a window in the enclosure and is wired to the
-   carrier with 2 thin wires. See [Heart LED board](#heart-led-board).
+2. **Heart LED board**: hand-built on a **universal board** (11 × 9 holes) with **10 × 3 mm
+   LEDs** in a heart, one resistor each, and the coin motor in the middle. The LED domes
+   stick out through holes in the case lid. Wired to the carrier's `HEART +/-` pads. See
+   [Heart LED board](#heart-led-board).
 
 Cost: see [COST.md](COST.md). ≈ 1 450–2 900 Kč for the self-assembled pair incl. 1NCE SIMs
 for 10 years. Firmware: [`../firmware`](../firmware). Relay server: [`../server`](../server).
@@ -22,9 +23,8 @@ for 10 years. Firmware: [`../firmware`](../firmware). Relay server: [`../server`
 | `keychain-carrier.kicad_pcb` / `.kicad_pro` / `.kicad_dru` | KiCad 10 board, project, custom DRC rule |
 | `keychain.kicad_sym`, `keychain.pretty/`, `sym-lib-table`, `fp-lib-table` | Project library: SIM800L symbol + footprint, VBAT power symbol, wire pads |
 | `netlist.txt` | Netlist extracted from the board copper |
-| `BOM.md` | Full parts list (carrier + heart + off-board) |
+| `BOM.md` | Full parts list (carrier + perfboard heart + off-board) |
 | `COST.md` | Manufacturing and running-cost estimate |
-| `heart/` | Heart LED board: own `.kicad_sch` / `.kicad_pcb`, `netlist.txt`, `fab/` (gerbers, top-side BOM/POS, renders, schematic PDF) |
 | `fab/keychain-carrier-gerbers.zip` | Gerbers + Excellon drill, ready to upload |
 | `fab/keychain-carrier-bom-jlcpcb.csv`, `fab/keychain-carrier-pos-bottom.csv` | JLCPCB assembly files (bottom side) |
 | `fab/assembly-bottom.pdf` | Assembly drawing with designators (bottom, mirrored) |
@@ -32,8 +32,8 @@ for 10 years. Firmware: [`../firmware`](../firmware). Relay server: [`../server`
 | `scripts/` | Generator: `make_all.sh <freerouting.jar>` rebuilds everything |
 
 Checks (all run by `make_all.sh`):
-- **ERC**: 0 violations (both boards)
-- **DRC**: 0 errors, 0 unconnected (both boards; only cosmetic silk notes remain)
+- **ERC**: 0 violations
+- **DRC**: 0 errors, 0 unconnected (one cosmetic silk note)
 - **Schematic ↔ PCB parity**: 0 issues. Every footprint is linked to its symbol, and the
   pad nets and fields come from the schematic netlist.
 
@@ -108,20 +108,26 @@ there's no room for them on the copper side.
 
 ## Heart LED board
 
-![heart](heart/fab/render-top.png)
+![heart perfboard](../enclosure/out/heart_perfboard.png)
 
-- **14 pink 0603 LEDs** spaced evenly around a heart, each pointing radially (that's what
-  fits the tight curves of the lobes).
-- **One 330 Ω per LED**, as four 4 × 0402 resistor arrays in the middle (2 spare). Pink LEDs
-  need ~2.9 V and vary a lot, so a shared resistor would make some much brighter. Current:
-  ~1.5 mA/LED at 3.4 V up to ~4 mA at 4.2 V (≤ 55 mA total). The heart dims noticeably as the
-  battery runs down, which doubles as a "charge me" hint.
-- **All parts are on the front**, so JLCPCB's cheap single-sided assembly works. The back
-  has only the two wire pads `+` (HP1 → carrier HT1) and `-` (HP2 → carrier HT2), and it is
-  flat for gluing.
-- Its own schematic `heart/heart-led.kicad_sch` and the same checks (ERC/DRC/parity = 0).
-- The outline is generated from the LED ring (`WIDTH` in `scripts/build_heart.py`), and the
-  resistor arrays are packed into the centre by a small search.
+- **Board:** a universal board (2.54 mm, single-sided pads) cut to **11 × 9 holes =
+  27.9 × 22.9 mm**.
+- **LEDs:** 10 × 3 mm LEDs stand in a heart, each with its two legs in vertically adjacent
+  holes.
+- **Resistors:** one 1/8 W resistor per LED, lying flat next to its LED: 470 Ω for
+  pink/white/blue LEDs (Vf ≈ 3 V), or 1 kΩ for red. That's ~1.5–3 mA per LED, ≤ 30 mA total.
+  Use LEDs from one bag so they match.
+- **Motor:** the 0820 coin motor sticks onto the free middle of the heart, on the component
+  side.
+- **Wiring** (underside, insulated thin wire): bridge each LED's anode to the resistor end
+  next to it. One wire joins all the far resistor ends (`+`, to the carrier's `HEART +` =
+  HT1). Another joins all the LED cathodes (`-`, to `HEART -` = HT2).
+- **Hole-by-hole list:** `enclosure/out/heart_perfboard.txt`. The layout comes from
+  `enclosure/heart_perfboard.py`, which also writes the LED and post positions the case lid
+  uses, so the lid holes always match the drawing.
+- **LED height:** the LEDs must sit **flat on the board** (flange down). The lid is
+  designed for LEDs 5.3 mm tall from flange to dome top. If yours differ, set `led_h` in
+  `enclosure/keychain_case.scad` and rebuild.
 
 ## Battery connection
 
@@ -148,9 +154,8 @@ socket (~2.9 mm tall) could replace the pads if you want a pluggable battery.
    flush on the bottom.
 4. Wire the battery to BT1/BT2 and the motor to MT1/MT2 (≈20 mm leads, the motor sticks
    to the enclosure wall).
-5. Wire the heart board: its `+` pad to carrier `HEART +` (HT1) and its `-` pad to
-   `HEART -` (HT2), with two thin wires (~20 mm). Glue the heart's flat back behind the
-   enclosure window, LEDs facing out.
+5. Wire the heart perfboard: its `+` wire to carrier `HEART +` (HT1) and its `-` wire to
+   `HEART -` (HT2), ~25 mm each. It sits on top of the SIM800L (tape in between), LEDs up.
 
 ## Things to check before ordering
 
@@ -175,8 +180,8 @@ socket (~2.9 mm tall) could replace the pads if you want a pluggable battery.
 | Carrier PCB | 0.8 |
 | Tallest bottom part (USB-C 3.2 / tantalum 3.1) | 3.2 |
 | LiPo | 4.0 |
-| Heart board (0.8 mm PCB + 0.6 mm LEDs) behind the window | ~1.5 |
-| **Total inside** | **~14** |
+| Heart perfboard: wiring underneath 1.3 + board 1.6 + space up to the lid 2.6 | ~5.5 |
+| **Total inside** | **~18.4** (case 20.8 mm + 1.5 mm LED domes) |
 
 The 11 mm target can't be reached with a Case-D tantalum, a top-mount USB-C and a 4 mm
 cell all stacked. To get close: use a 3 mm cell (e.g. 302025, ~150 mAh) and pocket the
@@ -184,9 +189,9 @@ battery around the USB-C/tantalum.
 
 ## Design flow / editing
 
-Per board: `gen_schematic.py` / `gen_heart.py` → `.kicad_sch` (source of truth)
-→ `build_pcb.py` / `build_heart.py` place footprints, then **import nets and fields from
-the schematic netlist** (and fail if they disagree with their own pin map)
+`gen_schematic.py` → `.kicad_sch` (source of truth)
+→ `build_pcb.py` places footprints, then **imports nets and fields from the schematic
+netlist** (and fails if they disagree with its own pin map)
 → `autoroute.py` (Freerouting, retried with varied pass budgets; fails if anything stays
 unrouted) → GND pours (carrier) → DRC + parity + ERC → fab outputs.
 Shared code: `schlib.py` (schematic writer), `pcblib.py` (pcbnew helpers), `sexpr.py`.

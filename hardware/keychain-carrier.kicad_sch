@@ -9897,7 +9897,7 @@
 			)
 		)
 	)
-	(text "HT1/HT2 -> heart LED board"
+	(text "HT1/HT2 -> heart perfboard (+ / -)"
 		(exclude_from_sim no)
 		(at 215.9 149.86 0)
 		(effects
@@ -9906,7 +9906,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3b577b9f-7f44-52b0-9562-e44b3fe39bce")
+		(uuid "28301b69-11b4-5cee-9736-907d09f65f64")
 	)
 	(wire
 		(pts
@@ -10310,7 +10310,7 @@
 		)
 		(uuid "819a179b-e0f2-5554-b232-6f3fb92c29ea")
 	)
-	(text "Heart board (hardware/heart, 14 pink LEDs) sits in parallel with the motor."
+	(text "Heart perfboard: 10 x 3 mm LEDs, one resistor each (enclosure/heart_perfboard.py), parallel to the motor."
 		(exclude_from_sim no)
 		(at 144.78 153.67 0)
 		(effects
@@ -10319,7 +10319,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "32fb49f4-3ddf-501d-857a-cf6635ac17ac")
+		(uuid "4ef07ccb-039b-5439-8de9-7ed2f3dd05f4")
 	)
 	(sheet_instances
 		(path "/"

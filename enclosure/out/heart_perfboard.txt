@@ -1,0 +1,19 @@
+Heart perfboard: cut a 11 x 9-hole piece (27.9 x 22.9 mm).
+Holes are (column, row): columns -5..5 left to right, rows -4..4 bottom to top,
+(0,0) = the hole under the motor centre. Component side up.
+
+D1  anode (long leg) (0, 3)   cathode (0, 2)   | R1  (-1, 4) - (1, 4) (body over (0, 4))
+D2  anode (long leg) (2, 3)   cathode (2, 4)   | R2  (1, 2) - (3, 2) (body over (2, 2))
+D3  anode (long leg) (4, 3)   cathode (4, 2)   | R3  (3, 4) - (5, 4) (body over (4, 4))
+D4  anode (long leg) (4, 0)   cathode (4, 1)   | R4  (5, -1) - (5, -3) (body over (5, -2))
+D5  anode (long leg) (2, -2)  cathode (2, -1)  | R5  (2, -3) - (4, -3) (body over (3, -3))
+D6  anode (long leg) (0, -3)  cathode (0, -2)  | R6  (-1, -4) - (-3, -4) (body over (-2, -4))
+D7  anode (long leg) (-2, -2) cathode (-2, -1) | R7  (-2, -3) - (-4, -3) (body over (-3, -3))
+D8  anode (long leg) (-4, 0)  cathode (-4, 1)  | R8  (-5, -1) - (-5, -3) (body over (-5, -2))
+D9  anode (long leg) (-4, 3)  cathode (-4, 2)  | R9  (-5, 4) - (-3, 4) (body over (-4, 4))
+D10 anode (long leg) (-2, 3)  cathode (-2, 4)  | R10 (-3, 2) - (-1, 2) (body over (-2, 2))
+
+Underside: bridge each LED anode to the resistor end next to it; join all far resistor ends with the + wire (to carrier HEART +), all cathodes with the - wire (to carrier HEART -).
+Lid hold-down posts press on the board at (mm from the motor-centre hole): (-12.5, 4.0), (12.5, 4.0), (-12.5, -10.0), (12.5, -10.0).
+Keep those spots (green circles in the drawing) free of wires and solder blobs.
+Use insulated wire (e.g. 0.1-0.2 mm enamelled or Kynar) for the + and - wires; crossings are fine.
