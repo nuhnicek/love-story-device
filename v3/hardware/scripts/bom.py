@@ -18,7 +18,7 @@ INFO = {
     "nRF9151-LACA": ("Nordic nRF9151 SiP: Cortex-M33 + LTE-M/NB-IoT modem + GNSS, LGA-80 12.1 x 11.1 mm",
                      "Nordic nRF9151-LACA (cut tape: nRF9151-LACA-R7)"),
     "TP4054": ("Li-ion/LiPo linear charger 4.2 V, SOT-23-5 (MCP73831 pinout), I = 1000 V / R3",
-               "TP4054 (Nanjing Top Power) or MCP73831T-2ACI/OT"),
+               "TP4054 (Nanjing Top Power) or MCP73832T-2ACI/OT (open-drain STAT; NOT the MCP73831, its STAT drives 5 V into the nRF9151)"),
     "XC6206P302MR": ("LDO 3.0 V 200 mA, Iq 1 uA, SOT-23 (VDD_GPIO)", "Torex XC6206P302MR"),
     "AO3400A": ("N-MOSFET 30 V 5.7 A, SOT-23 (motor + heart driver)", "AOS AO3400A"),
     "1N4148W": ("Switching diode, SOD-123 (motor flyback)", "Diodes 1N4148W-7-F"),

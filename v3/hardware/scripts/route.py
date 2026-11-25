@@ -124,9 +124,13 @@ for fp in board.GetFootprints():
         half = max(bb.GetWidth(), bb.GetHeight()) / 2
         fc = fp.GetPosition()
         base = math.atan2(pc.y - fc.y, pc.x - fc.x) if (pc.x, pc.y) != (fc.x, fc.y) else 0
+        if fp.GetReference() == "U1" and int(p.GetNumber()) < 105:
+            base += math.pi    # SiP edge GND pads: via inward (ground-only area), keep the escape channels free
         ok = False
         if fp.GetReference() == "U1" and int(p.GetNumber()) >= 105:
             dists = [half + mm(0.62)]          # into the gap between the centre pads
+        elif fp.GetReference() == "U1":
+            dists = [mm(0.55), mm(0.7), mm(0.9)]   # just inside the pad ring
         else:
             dists = [half + mm(0.5), half + mm(0.8), half + mm(1.2)]
         for d in dists:
@@ -167,6 +171,31 @@ print("GND fan-out vias:", len(placed), "pads without a via (left to the router)
 
 zone(board, pn.In1_Cu, "GND")
 pn.ZONE_FILLER(board).Fill(board.Zones())
+
+
+def rule_area(layers, x0, y0, x1, y1, vias, tracks):
+    z = pn.ZONE(board)
+    z.SetIsRuleArea(True)
+    ls = pn.LSET()
+    for l in layers:
+        ls.AddLayer(l)
+    z.SetLayerSet(ls)
+    z.SetDoNotAllowVias(vias); z.SetDoNotAllowTracks(tracks)
+    z.SetDoNotAllowZoneFills(False); z.SetDoNotAllowPads(False); z.SetDoNotAllowFootprints(False)
+    z.SetZoneName("routing-keepout")
+    ol = z.Outline(); ol.NewOutline()
+    for x, y in ((x0, y0), (x1, y0), (x1, y1), (x0, y1)):
+        ol.Append(mm(x), mm(y))
+    board.Add(z)
+
+
+# under the nRF9151, inside its pad ring: GND fan-out vias only (placed above),
+# no other vias on any layer and no top-layer tracks (Nordic: keep the area
+# under the SiP quiet and the L2 ground plane unbroken)
+uc = board.FindFootprintByReference("U1").GetPosition()
+ux, uy = pn.ToMM(uc.x), pn.ToMM(uc.y)
+rule_area((pn.F_Cu, pn.In1_Cu, pn.In2_Cu, pn.B_Cu), ux - 5.2, uy - 4.7, ux + 5.2, uy + 4.7, True, False)
+rule_area((pn.F_Cu,), ux - 5.2, uy - 4.7, ux + 5.2, uy + 4.7, False, True)
 pn.SaveBoard(PCB, board)
 
 tmp = tempfile.mkdtemp(prefix="v3_route_")
@@ -191,6 +220,9 @@ else:
     print("freerouting left %d connection(s); the GND pours close them, DRC checks" % unrouted)
 
 board = pn.LoadBoard(PCB)
+for z in list(board.Zones()):              # routing-only keepouts go away again
+    if z.GetIsRuleArea() and z.GetZoneName() == "routing-keepout":
+        board.Remove(z)
 if not pn.ImportSpecctraSES(board, ses):
     sys.exit("SES import failed")
 MIN_W = mm(0.09)
@@ -204,7 +236,7 @@ def via_layers(v):
     for t in board.GetTracks():
         if t.GetClass() == "PCB_VIA" or t.GetNetCode() != v.GetNetCode():
             continue
-        if v.GetPosition() in (t.GetStart(), t.GetEnd()):
+        if t.HitTest(v.GetPosition()):            # endpoint or T-junction on the track
             used.add(t.GetLayer())
     for fp in board.GetFootprints():
         for p in fp.Pads():

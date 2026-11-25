@@ -273,80 +273,99 @@
   "net_settings": {
     "classes": [
       {
-        "bus_width": 12,
-        "clearance": 0.13,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
         "name": "Default",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 2147483647,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.15,
-        "tuning_profile": "",
+        "clearance": 0.13,
         "via_diameter": 0.6,
         "via_drill": 0.3,
-        "wire_width": 6
-      },
-      {
+        "priority": 2147483647,
         "bus_width": 12,
-        "clearance": 0.15,
+        "wire_width": 6,
+        "line_style": 0,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
-        "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "Motor",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.3,
-        "tuning_profile": "",
-        "via_diameter": 0.6,
-        "via_drill": 0.3,
-        "wire_width": 6
+        "tuning_profile": ""
       },
       {
-        "bus_width": 12,
-        "clearance": 0.15,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
         "name": "Power",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.4,
-        "tuning_profile": "",
+        "clearance": 0.15,
         "via_diameter": 0.6,
         "via_drill": 0.3,
-        "wire_width": 6
-      },
-      {
+        "priority": 0,
         "bus_width": 12,
-        "clearance": 0.25,
+        "wire_width": 6,
+        "line_style": 0,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
-        "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "RF",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 2,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.35,
-        "tuning_profile": "",
+        "tuning_profile": ""
+      },
+      {
+        "name": "Motor",
+        "track_width": 0.3,
+        "clearance": 0.15,
         "via_diameter": 0.6,
         "via_drill": 0.3,
-        "wire_width": 6
+        "priority": 1,
+        "bus_width": 12,
+        "wire_width": 6,
+        "line_style": 0,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "tuning_profile": ""
+      },
+      {
+        "name": "NrfSupply",
+        "track_width": 0.3,
+        "clearance": 0.15,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "priority": 1,
+        "bus_width": 12,
+        "wire_width": 6,
+        "line_style": 0,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "tuning_profile": ""
+      },
+      {
+        "name": "RF",
+        "track_width": 0.35,
+        "clearance": 0.2,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "priority": 2,
+        "bus_width": 12,
+        "wire_width": 6,
+        "line_style": 0,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "tuning_profile": ""
       }
     ],
     "meta": {
@@ -368,16 +387,16 @@
         "pattern": "VBUS"
       },
       {
-        "netclass": "Power",
-        "pattern": "VDD_NRF"
+        "netclass": "NrfSupply",
+        "pattern": "*VDD_NRF"
       },
       {
         "netclass": "Motor",
-        "pattern": "MOT_N"
+        "pattern": "*MOT_N"
       },
       {
         "netclass": "RF",
-        "pattern": "LTE_ANT*"
+        "pattern": "*LTE_ANT*"
       }
     ]
   },

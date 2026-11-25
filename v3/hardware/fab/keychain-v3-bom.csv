@@ -2,8 +2,8 @@ Value,Designators,Qty/board,Footprint,Side,Fit,Description,Suggested MPN
 4.7uF,"C1, C2, C9, C11",4,C_0603_1608Metric,top,,MLCC 4.7 uF 10 V X5R 0603,Samsung CL10A475KP8NNNC
 10uF,"C3, C5",2,C_0603_1608Metric,top,,MLCC 10 uF 10 V X5R 0603,Samsung CL10A106KP8NNNC
 1uF,"C4, C6, C7, C8",4,C_0603_1608Metric,top,,MLCC 1 uF 16 V X5R 0603,Samsung CL10A105KO8NNNC
-100nF,"C10, C12, C13",3,C_0603_1608Metric,top,,MLCC 100 nF 16 V X7R 0603,Samsung CL10B104KO8NNNC
-DNP,"C14, C15",2,C_0402_1005Metric,top,DNP,"Antenna tuning pad, NOT fitted (0402)",-
+100nF,"C10, C12, C13",3,C_0603_1608Metric,bottom/top,,MLCC 100 nF 16 V X7R 0603,Samsung CL10B104KO8NNNC
+DNP,"C14, C15",2,C_0402_NoPaste,top,DNP,"Antenna tuning pad, NOT fitted (0402)",-
 1N4148W,D1,1,D_SOD-123,top,,"Switching diode, SOD-123 (motor flyback)",Diodes 1N4148W-7-F
 22R@100MHz 6A,FB1,1,L_0805_2012Metric,top,,"Ferrite bead 22 ohm @ 100 MHz, 6 A, 0805 (nRF9151 VDD)",Murata BLM21PG220SN1D
 USB-C 6P,J1,1,USB_C_Receptacle_GCT_USB4125-xx-x_6P_TopMnt_Horizontal,top,,"USB-C receptacle, power only, 6 pin, top mount",GCT USB4125-GF-A
@@ -19,6 +19,6 @@ AO3400A,Q1,1,SOT-23,top,,"N-MOSFET 30 V 5.7 A, SOT-23 (motor + heart driver)",AO
 100k,R8,1,R_0603_1608Metric,top,,Resistor 100 k 1% 0603 (gate pull-down),UNI-ROYAL 0603WAF1003T5E
 Side tact,SW1,1,SW_Push_1P1T-MP_NO_Horizontal_Alps_SKRTLAE010,top,,Side-push tactile switch 3.5 x 2.9 mm,Alps SKRTLAE010
 nRF9151-LACA,U1,1,Nordic_nRF9151-LAxx_LGA-80-33EP_12.1x11.1mm_P0.5mm,top,,"Nordic nRF9151 SiP: Cortex-M33 + LTE-M/NB-IoT modem + GNSS, LGA-80 12.1 x 11.1 mm",Nordic nRF9151-LACA (cut tape: nRF9151-LACA-R7)
-TP4054,U2,1,SOT-23-5,top,,"Li-ion/LiPo linear charger 4.2 V, SOT-23-5 (MCP73831 pinout), I = 1000 V / R3",TP4054 (Nanjing Top Power) or MCP73831T-2ACI/OT
+TP4054,U2,1,SOT-23-5,top,,"Li-ion/LiPo linear charger 4.2 V, SOT-23-5 (MCP73831 pinout), I = 1000 V / R3","TP4054 (Nanjing Top Power) or MCP73832T-2ACI/OT (open-drain STAT; NOT the MCP73831, its STAT drives 5 V into the nRF9151)"
 XC6206P302MR,U3,1,SOT-23-3,top,,"LDO 3.0 V 200 mA, Iq 1 uA, SOT-23 (VDD_GPIO)",Torex XC6206P302MR
 TPD4E05U06DQA,U4,1,USON-10_2.5x1.0mm_P0.5mm,top,,"4-channel ESD array for the SIM lines, USON-10 2.5 x 1 mm",TI TPD4E05U06DQAR

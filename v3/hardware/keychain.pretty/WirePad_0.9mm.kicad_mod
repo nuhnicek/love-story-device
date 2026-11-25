@@ -3,10 +3,10 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(property "Reference" "TP13"
+	(property "Reference" "TP11"
 		(at 0 0 0)
 		(layer "F.SilkS")
-		(uuid "12ac0a46-c220-4804-bab7-f01c63451a38")
+		(uuid "45565da3-b25d-43e8-893b-c59dcfa70760")
 		(effects
 			(font
 				(size 0.5 0.5)
@@ -14,11 +14,11 @@
 			)
 		)
 	)
-	(property "Value" "RX"
+	(property "Value" "GND"
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "ef911dae-1b27-4683-b68f-d882a2e730d7")
+		(uuid "e9b16ce2-9bdd-4501-84d6-a64b8cc09281")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29,7 +29,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "084139f3-2966-461e-8895-31cfe20fa25e")
+		(uuid "9acc2beb-8021-4d80-8aa3-1a8a528ee3e8")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -40,7 +40,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "ca99154d-14a4-4765-b55f-417af12fe57f")
+		(uuid "32b8743e-8d1f-46c6-896b-a98be812a168")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -60,7 +60,7 @@
 		)
 		(fill no)
 		(layer "F.CrtYd")
-		(uuid "9c6547ea-3ecb-40c7-a810-e70080f5e628")
+		(uuid "ed4a5762-a44d-4185-b408-0324b3027950")
 	)
 	(pad "1" smd roundrect
 		(at 0 0)
@@ -68,7 +68,7 @@
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.2)
 		(thermal_bridge_angle 45)
-		(uuid "25e45578-dd84-4b2f-9b44-72bd4dab78fa")
+		(uuid "08f86cd9-49d7-442c-a0e9-d738e64218d8")
 	)
 	(embedded_fonts no)
 )

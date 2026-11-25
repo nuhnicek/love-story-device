@@ -8062,7 +8062,7 @@
 		)
 		(uuid "dca7d893-05d2-5bd6-8d51-bb467d42d17c")
 	)
-	(text "CHRG (open drain, low while charging) -> P0.09, so the firmware can show charging"
+	(text "CHRG (open drain, low while charging) -> P0.26. Alternative part: MCP73832 (open drain), NOT MCP73831"
 		(exclude_from_sim no)
 		(at 20.32 91.44 0)
 		(effects
@@ -10625,13 +10625,47 @@
 		)
 		(uuid "4de8f91c-034e-58d1-8adb-1ccea7e92422")
 	)
-	(no_connect
-		(at 231.14 147.32)
-		(uuid "deec7e1a-1431-551b-8c7f-ee73f1ddad35")
+	(wire
+		(pts
+			(xy 231.14 147.32)
+			(xy 233.68 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdad9e3f-57ae-578d-a076-e91143708bb9")
 	)
-	(no_connect
-		(at 231.14 149.86)
-		(uuid "b88558f1-8cc0-5ca6-9631-8e1996affc4f")
+	(label "UART_TX"
+		(at 233.68 147.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9a621e7c-ae6f-5d30-abe6-35c41272f7f0")
+	)
+	(wire
+		(pts
+			(xy 231.14 149.86)
+			(xy 233.68 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cea95225-b8e1-58c3-8936-d757039a4a82")
+	)
+	(label "UART_RX"
+		(at 233.68 149.86 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cef183b3-d87e-5576-a95c-2a249491aa2c")
 	)
 	(wire
 		(pts
@@ -10816,13 +10850,47 @@
 		(at 180.34 142.24)
 		(uuid "5bc01755-722d-5d64-97e2-aa36d4055623")
 	)
-	(no_connect
-		(at 231.14 152.4)
-		(uuid "28257b85-8251-5562-9896-8b746eb861b6")
+	(wire
+		(pts
+			(xy 231.14 152.4)
+			(xy 233.68 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b8d670d-f990-544c-b9a9-207fec252942")
 	)
-	(no_connect
-		(at 231.14 154.94)
-		(uuid "9ff1b841-3e77-5de3-80e7-d2d4f7a6d335")
+	(label "CHRG"
+		(at 233.68 152.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "72ecbeca-18a1-51f4-b020-5d8514787804")
+	)
+	(wire
+		(pts
+			(xy 231.14 154.94)
+			(xy 233.68 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a379606-2811-58bf-adcf-654fb1c89298")
+	)
+	(label "BTN"
+		(at 233.68 154.94 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cb888a1e-6616-513c-8e04-34116b2b268e")
 	)
 	(no_connect
 		(at 231.14 157.48)
@@ -10977,93 +11045,25 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 231.14 106.68)
-			(xy 233.68 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "909a7267-7799-58f9-8326-96dac678a212")
+	(no_connect
+		(at 231.14 106.68)
+		(uuid "b602acbf-b424-57ec-811a-433224e59dfa")
 	)
-	(label "BTN"
-		(at 233.68 106.68 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ce3eda98-65e9-5cb1-94fc-5fa4ef0c44ab")
-	)
-	(wire
-		(pts
-			(xy 231.14 109.22)
-			(xy 233.68 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b6fe3bb7-225b-52b9-b9dc-e54e12b6e6c6")
-	)
-	(label "CHRG"
-		(at 233.68 109.22 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e3bef7cc-2122-5798-a8d3-4dd629f0de12")
+	(no_connect
+		(at 231.14 109.22)
+		(uuid "cf7063af-b103-5b6d-9ab2-14c70d0a171e")
 	)
 	(no_connect
 		(at 231.14 111.76)
 		(uuid "7c0f004c-5a66-5784-a9b5-f55fc9bbe4b4")
 	)
-	(wire
-		(pts
-			(xy 231.14 114.3)
-			(xy 233.68 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "232f1ddd-6d5e-58dd-ad4b-ae5343a510c3")
+	(no_connect
+		(at 231.14 114.3)
+		(uuid "cee034ab-fea0-5098-870f-0ea36f186d6b")
 	)
-	(label "UART_TX"
-		(at 233.68 114.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f5400a7b-d80e-5e35-831a-24b75ea19495")
-	)
-	(wire
-		(pts
-			(xy 231.14 116.84)
-			(xy 233.68 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff4acc5d-99c9-5dad-a41c-14a2aa892410")
-	)
-	(label "UART_RX"
-		(at 233.68 116.84 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5e88374d-047b-5ddf-a9c5-d036422f64f5")
+	(no_connect
+		(at 231.14 116.84)
+		(uuid "4c1c08f5-17f7-5920-b351-ed4ce722bb73")
 	)
 	(no_connect
 		(at 231.14 119.38)
@@ -12498,7 +12498,7 @@
 		)
 		(uuid "a30d8bc1-da1c-5fb9-8f27-5fa1382a1152")
 	)
-	(text "P0.05 DRV (PWM), P0.08 BTN, P0.09 CHRG, P0.11/P0.12 UART (Zephyr default)"
+	(text "P0.05 DRV (PWM), P0.27 BTN, P0.26 CHRG, P0.24 UART TX / P0.25 UART RX"
 		(exclude_from_sim no)
 		(at 149.86 248.92 0)
 		(effects
@@ -12507,7 +12507,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "94729d36-5758-5e13-8d2b-1053ed5c0002")
+		(uuid "97cc6062-4a98-5e9d-a293-873bd3e6606a")
 	)
 	(rectangle
 		(start 15.24 185.42)
@@ -12868,7 +12868,7 @@
 		)
 		(uuid "19e29f06-8d5a-52cc-87a7-8b969c0b9185")
 	)
-	(label "SIM_1V8"
+	(label "SIM_RST"
 		(at 38.1 215.9 180)
 		(effects
 			(font
@@ -12876,7 +12876,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "7b0cb987-0666-5949-97d2-2a3041679206")
+		(uuid "24c3d587-25a4-54e6-95ca-0234c17783b2")
 	)
 	(wire
 		(pts
@@ -13007,7 +13007,7 @@
 		)
 		(uuid "7134de15-c095-5d1d-a6cb-f20351005111")
 	)
-	(label "SIM_RST"
+	(label "SIM_1V8"
 		(at 68.58 220.98 0)
 		(effects
 			(font
@@ -13015,7 +13015,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6aead845-8f28-5a54-aec1-1047de1adb3f")
+		(uuid "9ee9d330-231c-5b6e-b975-6681b4b3ccb5")
 	)
 	(no_connect
 		(at 66.04 226.06)
@@ -13294,7 +13294,7 @@
 			)
 		)
 	)
-	(text "U4 + C13 right at the SIM holder. 1NCE SIMs: 1.8 V / 3 V multi-class"
+	(text "U4 + C13 right at the SIM holder contacts. 1NCE SIMs: 1.8 V / 3 V multi-class"
 		(exclude_from_sim no)
 		(at 20.32 243.84 0)
 		(effects
@@ -13303,9 +13303,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "7539a19e-fd43-57ec-8b6d-ff8081de8b77")
+		(uuid "5c6459ba-cb04-51db-9590-462b8d8b4ea5")
 	)
-	(text "J3 is on the BOTTOM side (hand-soldered after reflow)"
+	(text "J3 and C13 are on the BOTTOM side (hand-soldered after reflow)"
 		(exclude_from_sim no)
 		(at 20.32 246.38 0)
 		(effects
@@ -13314,7 +13314,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d558d56f-c805-5bbc-9593-05898ea98ede")
+		(uuid "0ae04550-a611-5fff-a652-51a59774587a")
 	)
 	(rectangle
 		(start 271.78 20.32)
@@ -13464,7 +13464,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "keychain:C_0402_NoPaste"
 			(at 300.6852 54.61 0)
 			(effects
 				(font
@@ -13739,7 +13739,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "keychain:C_0402_NoPaste"
 			(at 331.1652 54.61 0)
 			(effects
 				(font

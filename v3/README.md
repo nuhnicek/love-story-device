@@ -1,13 +1,13 @@
 # GSM touch keychain, v3: one custom board with the nRF9151 (LTE-M)
 
-v3 puts everything on **one 23 × 30 mm board** built around the **Nordic nRF9151**. That
+v3 puts everything on **one 25 × 30 mm board** built around the **Nordic nRF9151**. That
 single chip holds the processor and the LTE-M/NB-IoT modem. There's no XIAO and no SIM800L,
 and it's not affected by the 2G shutdown. You assemble it yourself.
 
 | | v2 (modules) | **v3 (this)** |
 |---|---|---|
 | Network | 2G (SIM800L), ends for 1NCE ~end of 2027 | **LTE-M / NB-IoT** (4G), no 2G shutdown problem |
-| Electronics | XIAO + SIM800L stacked, ~31 × 27 × 10 mm | **one 23 × 30 × ~4.5 mm board** (USB-C is the tallest part) |
+| Electronics | XIAO + SIM800L stacked, ~31 × 27 × 10 mm | **one 25 × 30 × ~4.5 mm board** (USB-C is the tallest part) |
 | Modem idle | ~1 mA (2G) | **µA level** with LTE-M power saving (PSM 2.7 µA, eDRX ~18 µA per Nordic) |
 | Assembly | wires + through-hole | SMD: solder paste + stencil + hot plate (details below) |
 
@@ -38,7 +38,9 @@ and it's not affected by the 2G shutdown. You assemble it yourself.
   - **213 mA** (R3 = 4.7 k), which suits a 200–500 mAh cell. Use 3.3 k for 300 mA if the cell is at least 300 mAh.
   - The charge-status pin goes to a GPIO, so the firmware can show "charging".
 - **Battery voltage** is measured by the modem itself (`AT%XVBAT`), so there are no divider resistors.
-- **Nano-SIM** (J3, hinged holder on the bottom), with the ESD protection the SIM interface requires (U4). The nRF9151 runs SIMs at 1.8 V; 1NCE SIMs support that.
+- **Nano-SIM** (J3, hinged holder on the bottom), with the ESD protection the SIM interface requires (U4).
+  - U4 sits directly above the SIM contacts, as ESD protection should; its 100 nF (C13) is on the bottom next to the holder.
+  - The nRF9151 runs SIMs at 1.8 V; 1NCE SIMs support that.
 - **Antenna:**
   - A 50 Ω trace runs straight from the antenna pin to a **U.FL** socket.
   - It goes through a 0 Ω resistor and two unfitted pads (C14/C15) for later tuning.
@@ -50,7 +52,8 @@ and it's not affected by the 2G shutdown. You assemble it yourself.
   - **SWD** (IO, CK, RST, VT, GND) for programming;
   - **TX/RX** for the log (3.0 V, 115200).
 
-Pins used: P0.05 motor/heart PWM, P0.08 button, P0.09 charge status, P0.11/P0.12 UART.
+Pins used: P0.05 motor/heart PWM, P0.27 button, P0.26 charge status, P0.24 UART TX, P0.25 UART RX
+(set these in the Zephyr devicetree; the nRF9151 can put the UART on any pin).
 
 ## Ordering
 
@@ -116,6 +119,31 @@ You need:
    - Check the chip responds, flash the nRF Connect SDK `at_client` sample, and send AT commands over TX/RX: `AT+CFUN=1`, then `AT+CEREG?`.
    - Registration status 1 or 5 means LTE-M works with the 1NCE SIM.
 
+## Design review (2026-11-25)
+
+DRC only proves the geometry is legal, so the board was also checked for design mistakes.
+Found and fixed:
+
+| Problem | Fix |
+|---|---|
+| Wide-track rules didn't apply to the nRF9151 supply and the motor line: the schematic names those nets `/VDD_NRF` and `/MOT_N`. VDD was routed 0.11 mm wide over 34 mm and 3 layers; the motor line went down to 0.09 mm | Rules match the real net names. VDD: 0.3 mm on the top layer only, fixed short track from pin 14 to C5/C6. Motor: 0.3 mm |
+| Side button rotated the wrong way: actuator into the board, pads at the edge | Rotated 180°; the actuator now sticks 0.24 mm out of the right edge |
+| Charger input and output caps (C1/C2) were 8.5 mm from the TP4054 | Charger block moved next to the battery pads; caps 2.7 and 4 mm from the pins |
+| Signal and power vias under the nRF9151 | Keep-out while routing: only ground vias under the SiP, and layer 2 is solid ground there |
+| SIM ESD (U4) and its 100 nF sat by the SiP, far from the SIM contacts | U4 moved directly above the contacts, with fixed short runs to each contact. The 100 nF is on the bottom next to the VCC contact |
+| Several caps had their signal pad on the far side (C5, C6, C9, C10, C12) | Rotated; DEC0 cap 1.6 mm and VDD_GPIO 100 nF 1.9 mm from their pins |
+| The two unfitted antenna pads would have got solder paste | Own footprint without stencil openings |
+| Alternative charger part: the MCP73831 drives its status pin to 5 V, which would damage the nRF9151's 3.0 V pin | BOM now names the MCP73832 (open-drain status) |
+| The left side of the SiP was too crowded to route cleanly | Board 2 mm wider (25 × 30 mm). UART moved to P0.24/P0.25 and the debug pads put in pin order |
+
+Checked and OK:
+- every part's pinout against its footprint;
+- the nRF9151 reference circuit;
+- the USB-C front at the board edge;
+- the RF path (no other copper near it, ground under and around it);
+- the SIM holder's keep-out areas;
+- 1.0 mm 4-layer stack-up, 0.3/0.6 mm vias, minimum track 0.11 mm (JLC 4-layer allows 0.09).
+
 ## Status and open points
 
 - **Firmware: not written yet.**
@@ -130,4 +158,4 @@ You need:
 - **First build:**
   - This is a new design and hasn't been made yet. Order the spare SiP.
   - Hand-soldering an LGA chip is the hardest step, so expect one board to need rework.
-- **Case:** not yet adapted to v3. Once you've picked the battery, the case can be redrawn around the 23 × 30 mm board. It will be thinner than v2.
+- **Case:** not yet adapted to v3. Once you've picked the battery, the case can be redrawn around the 25 × 30 mm board. It will be thinner than v2.

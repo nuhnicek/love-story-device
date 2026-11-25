@@ -71,7 +71,7 @@ res("R3", "4.7k", 93.98, 73.66, "PROG", "GND")
 cap("C2", "4.7uF", 134.62, 63.5, "VBAT", "GND")
 place("power:PWR_FLAG", "#FLG01", "PWR_FLAG", 127.0, 30.48, 180, "", {"1": "VBUS"})
 text("I_chg = 1000 V / R3: 4.7k = 213 mA (200-500 mAh cells), 3.3k = 300 mA (>= 300 mAh)", 20.32, 88.9)
-text("CHRG (open drain, low while charging) -> P0.09, so the firmware can show charging", 20.32, 91.44)
+text("CHRG (open drain, low while charging) -> P0.26. Alternative part: MCP73832 (open drain), NOT MCP73831", 20.32, 91.44)
 
 # ============================================================ B: battery, VDD, VDD_GPIO
 box(15.24, 101.6, 142.24, 180.34, "B. Battery, nRF9151 supply, 3.0 V GPIO rail")
@@ -101,7 +101,7 @@ U1_NETS = {"14": "VDD_NRF", "10": "ENABLE", "24": "DEC0", "65": "+3V0",
            "3": "SWDCLK", "4": "SWDIO", "9": "nRESET",
            "16": "SIM_RST", "17": "SIM_IO", "18": "SIM_CLK", "19": "SIM_1V8",
            "35": "LTE_ANT0",
-           "62": "DRV", "67": "BTN", "68": "CHRG", "70": "UART_TX", "72": "UART_RX"}
+           "62": "DRV", "45": "BTN", "44": "CHRG", "11": "UART_TX", "12": "UART_RX"}
 U1_GND = ["1", "7", "13", "15", "20", "25", "30", "34", "36", "38", "39", "40", "41", "43",
           "46", "51", "55", "60", "66", "71", "76"] + [str(n) for n in range(105, 114)]
 for g in U1_GND:
@@ -118,7 +118,7 @@ cap("C11", "4.7uF", 251.46, 50.8, "+3V0", "GND")
 res("R5", "1k", 162.56, 220.98, "nRESET_PAD", "nRESET")
 cap("C12", "100nF", 175.26, 220.98, "nRESET", "GND")
 text("ENABLE pulled up: always on. nRESET: no external pull-up (internal 13k)", 149.86, 246.38)
-text("P0.05 DRV (PWM), P0.08 BTN, P0.09 CHRG, P0.11/P0.12 UART (Zephyr default)", 149.86, 248.92)
+text("P0.05 DRV (PWM), P0.27 BTN, P0.26 CHRG, P0.24 UART TX / P0.25 UART RX", 149.86, 248.92)
 
 # ============================================================ D: SIM
 box(15.24, 185.42, 142.24, 251.46, "D. Nano-SIM (1.8 V class C) + UICC ESD")
@@ -128,17 +128,17 @@ place("Connector:SIM_Card_Shielded", "J3", "nano-SIM hinged", 109.22, 220.98, 0,
       field_at={"Reference": (-5.08, -12.7), "Value": (-5.08, 12.7)})
 place("Power_Protection:TPD4E05U06DQA", "U4", "TPD4E05U06DQA", 53.34, 218.44, 0,
       "Package_SON:USON-10_2.5x1.0mm_P0.5mm",
-      {"5": "SIM_RST", "4": "SIM_IO", "2": "SIM_CLK", "1": "SIM_1V8", "3": "GND", "8": "GND"},
+      {"1": "SIM_RST", "2": "SIM_CLK", "4": "SIM_IO", "5": "SIM_1V8", "3": "GND", "8": "GND"},
       nc=("6", "7", "9", "10"))
 cap("C13", "100nF", 81.28, 220.98, "SIM_1V8", "GND")
-text("U4 + C13 right at the SIM holder. 1NCE SIMs: 1.8 V / 3 V multi-class", 20.32, 243.84)
-text("J3 is on the BOTTOM side (hand-soldered after reflow)", 20.32, 246.38)
+text("U4 + C13 right at the SIM holder contacts. 1NCE SIMs: 1.8 V / 3 V multi-class", 20.32, 243.84)
+text("J3 and C13 are on the BOTTOM side (hand-soldered after reflow)", 20.32, 246.38)
 
 # ============================================================ E: antenna
 box(271.78, 20.32, 403.86, 76.2, "E. LTE antenna: 50 ohm, U.FL")
-place("Device:C", "C14", "DNP", 299.72, 50.8, 0, FP_C04, {"1": "LTE_ANT0", "2": "GND"}, dnp=True)
+place("Device:C", "C14", "DNP", 299.72, 50.8, 0, "keychain:C_0402_NoPaste", {"1": "LTE_ANT0", "2": "GND"}, dnp=True)
 res("R6", "0R", 314.96, 40.64, "LTE_ANT0", "LTE_ANT", fp=FP_R04, rot=90)
-place("Device:C", "C15", "DNP", 330.2, 50.8, 0, FP_C04, {"1": "LTE_ANT", "2": "GND"}, dnp=True)
+place("Device:C", "C15", "DNP", 330.2, 50.8, 0, "keychain:C_0402_NoPaste", {"1": "LTE_ANT", "2": "GND"}, dnp=True)
 place("Connector:Conn_Coaxial", "J2", "U.FL", 355.6, 40.64, 0,
       "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical", {"1": "LTE_ANT", "2": "GND"})
 text("Pi network for antenna tuning: R6 0R, C14/C15 not fitted", 274.32, 66.04)
