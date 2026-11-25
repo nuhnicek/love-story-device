@@ -2,7 +2,9 @@
 
 Press the button on one keychain and the other one vibrates and blinks, over 2G (SIM800L).
 
-**Current version: [`v2/`](v2/README.md)**, the module build: XIAO ESP32-C3 + SIM800L + 802530 LiPo, no custom PCB.
+**Newest design: [`v3/`](v3/README.md)**, one custom 23 × 30 mm board with the nRF9151 (LTE-M), hand assembled.
+
+**Module build: [`v2/`](v2/README.md)**, the module build: XIAO ESP32-C3 + SIM800L + 802530 LiPo, no custom PCB.
 It has the parts list, schematic, case STLs/G-code and the relay backend.
 
 v1 (custom PCB, ATtiny85):

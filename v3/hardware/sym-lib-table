@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "keychain")(type "KiCad")(uri "${KIPRJMOD}/keychain-v3.kicad_sym")(options "")(descr "Project parts"))
+)

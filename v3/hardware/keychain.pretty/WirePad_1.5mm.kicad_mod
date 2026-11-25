@@ -1,0 +1,74 @@
+(footprint "WirePad_1.5mm"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "TP2"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(uuid "7b8d5c36-cadd-4289-a541-79ecd08675c1")
+		(effects
+			(font
+				(size 0.5 0.5)
+				(thickness 0.08)
+			)
+		)
+	)
+	(property "Value" "BAT-"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "00dc8c6e-a622-4cc7-ad9a-1dcdef7392ef")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c960b36c-42f7-41e0-9f65-1f529259c095")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" "test point"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3f59739c-2b23-47fc-8760-73a2f75be30d")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(sheetname "/")
+	(sheetfile "keychain-v3.kicad_sch")
+	(attr smd exclude_from_pos_files exclude_from_bom)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -0.900001 -0.900001)
+		(end 0.9 0.9)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "00826097-4821-4147-b106-53b998326e6f")
+	)
+	(pad "1" smd roundrect
+		(at 0 0)
+		(size 1.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(thermal_bridge_angle 45)
+		(uuid "0db9bcdb-0b87-4dae-a19b-5363f85d8f4c")
+	)
+	(embedded_fonts no)
+)

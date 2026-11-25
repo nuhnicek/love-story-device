@@ -100,7 +100,7 @@ class Sheet:
 
     # -------------------------------------------------------- symbols
     def place(self, lib_id, ref, value, x, y, rot=0, footprint="", nets=None, nc=(),
-              on_board=True, in_bom=True, extra=None, field_at=None):
+              on_board=True, in_bom=True, extra=None, field_at=None, dnp=False):
         nets = nets or {}
         sym = self.libsym(lib_id)
         X, Y = snap(x), snap(y)
@@ -109,7 +109,7 @@ class Sheet:
             self.uuids[ref] = str(u)
         inst = ["symbol", ["lib_id", Q(lib_id)], ["at", X, Y, rot], ["unit", 1],
                 ["exclude_from_sim", "no"], ["in_bom", "yes" if in_bom else "no"],
-                ["on_board", "yes" if on_board else "no"], ["dnp", "no"], ["uuid", u]]
+                ["on_board", "yes" if on_board else "no"], ["dnp", "yes" if dnp else "no"], ["uuid", u]]
         values = {"Reference": ref, "Value": value, "Footprint": footprint}
         values.update(extra or {})
         for p in find(sym, "property"):
@@ -171,12 +171,12 @@ class Sheet:
         self.items.append(inst)
 
     # -------------------------------------------------------- output
-    def write(self, title, comments, uuids_path, date="2026-11-25", rev="1"):
+    def write(self, title, comments, uuids_path, date="2026-11-25", rev="1", paper="A4"):
         tb = ["title_block", ["title", Q(title)], ["date", Q(date)], ["rev", Q(rev)]]
         for i, c in enumerate(comments, 1):
             tb.append(["comment", i, Q(c)])
         sch = ["kicad_sch", ["version", 20250114], ["generator", Q("eeschema")],
-               ["generator_version", Q("10.0")], ["uuid", self.root], ["paper", Q("A4")], tb,
+               ["generator_version", Q("10.0")], ["uuid", self.root], ["paper", Q(paper)], tb,
                ["lib_symbols"] + list(self.lib_symbols.values())]
         sch += self.items
         sch.append(["sheet_instances", ["path", Q("/"), ["page", Q("1")]]])
