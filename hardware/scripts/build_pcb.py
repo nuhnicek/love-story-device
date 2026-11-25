@@ -306,6 +306,9 @@ def silk(text, x, y, size=0.8, layer=pn.B_SilkS):
     board.Add(t)
 
 silk("TOUCH-GSM v1", BX + BW / 2, BY + 11.0, 0.7, pn.F_SilkS)
+# battery polarity next to the solder pads (no reverse-polarity protection!)
+silk("+", 111.2, 113.65, 0.9)
+silk("-", 113.2, 113.65, 0.9)
 
 # ---------------------------------------------------------------- schematic sync
 # The schematic is the source of truth. Export its netlist, cross-check every
@@ -400,4 +403,30 @@ for fp in board.GetFootprints():
 
 board.BuildConnectivity()
 pn.SaveBoard(OUT, board)
+
+# ---------------------------------------------------------------- project file
+# pcbnew's SaveBoard() does not reliably rewrite an existing .kicad_pro, so the
+# net classes and minimum rules are written into the project JSON explicitly.
+PRO = OUT[:-len(".kicad_pcb")] + ".kicad_pro"
+pro = json.load(open(PRO)) if os.path.exists(PRO) else {"meta": {"filename": os.path.basename(PRO), "version": 3}}
+NETCLASSES = [  # name, track, clearance, via dia, via drill, priority
+    ("Default", 0.2, 0.15, 0.6, 0.3, 2147483647),
+    ("Power", 0.6, 0.2, 0.7, 0.35, 0),
+    ("Motor", 0.3, 0.15, 0.6, 0.3, 1),
+]
+PATTERNS = [("VBAT", "Power"), ("GND", "Power"), ("VBUS", "Power"), ("/MOT_N", "Motor")]
+nsj = pro.setdefault("net_settings", {"meta": {"version": 5}})
+nsj["classes"] = [{"name": n, "track_width": t, "clearance": c, "via_diameter": vd, "via_drill": vr,
+                   "priority": pr, "bus_width": 12, "wire_width": 6, "line_style": 0,
+                   "diff_pair_gap": 0.25, "diff_pair_via_gap": 0.25, "diff_pair_width": 0.2,
+                   "microvia_diameter": 0.3, "microvia_drill": 0.1,
+                   "pcb_color": "rgba(0, 0, 0, 0.000)", "schematic_color": "rgba(0, 0, 0, 0.000)",
+                   "tuning_profile": ""} for n, t, c, vd, vr, pr in NETCLASSES]
+nsj["netclass_patterns"] = [{"netclass": c, "pattern": p} for p, c in PATTERNS]
+nsj.setdefault("netclass_assignments", {})
+rules = pro.setdefault("board", {}).setdefault("design_settings", {}).setdefault("rules", {})
+rules.update({"min_clearance": 0.127, "min_track_width": 0.127, "min_hole_clearance": 0.05,
+              "min_through_hole_diameter": 0.3, "min_via_diameter": 0.5,
+              "min_copper_edge_clearance": 0.25, "min_hole_to_hole": 0.25})
+json.dump(pro, open(PRO, "w"), indent=2)
 print("saved", OUT, "footprints:", len(board.GetFootprints()))

@@ -6,7 +6,7 @@
 	(property "Reference" "M1"
 		(at 0 0 0)
 		(layer "F.SilkS")
-		(uuid "f5762fb8-3067-4155-ab3e-679c74b21eb4")
+		(uuid "20d635d2-59bc-4e9e-83d9-77a78d262927")
 		(effects
 			(font
 				(size 0.5 0.5)
@@ -18,7 +18,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "8a567f92-dbba-471f-b8fc-0c79bbd0cd66")
+		(uuid "df042634-c742-492b-92f0-a07a44213e26")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -29,7 +29,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "7b975fe3-b721-440e-80c5-85ff6607d64d")
+		(uuid "bade1680-5dab-4db6-a3c3-9fa182036522")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -40,7 +40,7 @@
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "e3206247-246f-43eb-bf13-6eaa2e97ac38")
+		(uuid "2b07dcd2-eaa3-41c5-ac82-f0c05791cc28")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -60,7 +60,7 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "dc5ba7e6-e372-47f0-ac10-0af4cf279781")
+		(uuid "370f3f54-349e-4d4e-a5b8-a67922dd7f33")
 	)
 	(fp_rect
 		(start 100.3 100.3)
@@ -71,7 +71,7 @@
 		)
 		(fill no)
 		(layer "F.Fab")
-		(uuid "fdf20da0-b0f6-4917-87b6-2a9d5f74b489")
+		(uuid "72c4de48-aeb6-403c-8611-252e5f9e153b")
 	)
 	(pad "1" thru_hole rect
 		(at 101.8 105)
@@ -80,7 +80,7 @@
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 		(thermal_bridge_angle 45)
-		(uuid "f7e6f765-2fb4-4e9d-8d12-ceb8e72f5c74")
+		(uuid "6b8138c4-7ad5-45dd-a280-f06ce750cc09")
 	)
 	(pad "2" thru_hole circle
 		(at 101.8 107.54)
@@ -88,7 +88,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "dfc4abbc-8546-4fb7-ac23-a5327dbd56fd")
+		(uuid "fe9eb7fc-3119-4ae1-bd59-904813a0ca91")
 	)
 	(pad "3" thru_hole circle
 		(at 101.8 110.08)
@@ -96,7 +96,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "76169b88-b856-4170-b68f-9320a9cb10bf")
+		(uuid "20b069a0-8192-4a12-855e-38b1c159cde3")
 	)
 	(pad "4" thru_hole circle
 		(at 101.8 112.62)
@@ -104,7 +104,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "618374af-bcd1-44cb-be2d-64e65f36e732")
+		(uuid "b6980221-5279-448b-ad92-c9246bccdbf5")
 	)
 	(pad "5" thru_hole circle
 		(at 101.8 115.16)
@@ -112,7 +112,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "7f8fb1c6-8c0a-4e8e-bd7e-0744f71fe555")
+		(uuid "984fe2e9-c6d9-4ea4-aee7-20bdf5b5a06a")
 	)
 	(pad "6" thru_hole circle
 		(at 101.8 117.7)
@@ -120,7 +120,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "38b75e9d-02e9-491a-b8a7-d8334929a46d")
+		(uuid "1a17e3a6-2ca5-4c30-b895-91598b0ffe03")
 	)
 	(pad "7" thru_hole circle
 		(at 123.67 120.24)
@@ -128,7 +128,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "562e7b95-f44d-4387-b44e-7697295fa86f")
+		(uuid "9861fa8f-f639-4592-9476-a0cd0e478f2c")
 	)
 	(pad "8" thru_hole circle
 		(at 123.67 117.7)
@@ -136,7 +136,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "cc78f818-5d4c-4198-abf7-30c57a0f37e5")
+		(uuid "9fc82019-3031-4909-9a45-fcd5496a73f2")
 	)
 	(pad "9" thru_hole circle
 		(at 123.67 115.16)
@@ -144,7 +144,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "3b331c70-06c0-4601-838c-9033aea5e335")
+		(uuid "8711eae8-c7c5-48f2-a355-dea8f9a05c46")
 	)
 	(pad "10" thru_hole circle
 		(at 123.67 112.62)
@@ -152,7 +152,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "796b8e70-b084-4e35-a154-3c22be645109")
+		(uuid "1bcb0207-b422-4acf-8de8-5c7765a3b6bb")
 	)
 	(pad "11" thru_hole circle
 		(at 123.67 110.08)
@@ -160,7 +160,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "47b6fbb8-ca54-4590-97a0-b2192f41861a")
+		(uuid "7edb9f0c-bae8-4e02-a571-0ebb8c66d7f7")
 	)
 	(pad "12" thru_hole circle
 		(at 123.67 107.54)
@@ -168,7 +168,7 @@
 		(drill 0.9)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "38f1ba77-d368-4366-ac4f-2ad4dc5dc794")
+		(uuid "170e3768-db00-45c2-ad38-5c9f9b0f0488")
 	)
 	(embedded_fonts no)
 )

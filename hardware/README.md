@@ -76,6 +76,15 @@ Five I/O pins can't cover TX, RX, RING, button, motor, LED and DTR separately. S
         D1 (K)─┘ MT2 (motor −) ──────────────────────┴──────────────────────── D   S ── GND
 ```
 
+## Battery connection
+
+There's no plug-in connector. The LiPo leads solder straight onto two 1.5 × 1.5 mm pads
+(2 mm apart) in the **middle of the bottom side**, just above the USB-C and below the
+ATtiny85. Looking at the bottom with the USB-C toward you, **BT1 "+" (red) is on the right
+and BT2 "−" (black) is on the left**. Both are marked on the silkscreen. There is **no
+reverse-polarity protection**, so check twice before soldering. A JST-SH 1.0 mm 2-pin
+socket (~2.9 mm tall) could replace the pads if you want a pluggable battery.
+
 ## Assembly order (important)
 
 1. **Flash the ATtiny85 before the SIM800L goes on.** The ISP pads (TP1–TP6, bottom-left)
