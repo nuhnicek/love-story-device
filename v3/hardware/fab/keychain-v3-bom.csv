@@ -4,8 +4,8 @@ Value,Designators,Qty/board,Footprint,Side,Fit,Description,Suggested MPN
 1uF,"C4, C6, C7, C8",4,C_0603_1608Metric,top,,MLCC 1 uF 16 V X5R 0603,Samsung CL10A105KO8NNNC
 100nF,"C10, C12, C13",3,C_0603_1608Metric,bottom/top,,MLCC 100 nF 16 V X7R 0603,Samsung CL10B104KO8NNNC
 DNP,"C14, C15",2,C_0402_NoPaste,top,DNP,"Antenna tuning pad, NOT fitted (0402)",-
-1uF,"C16, C17, C19",3,C_0402_1005Metric,top,,MLCC 1 uF 16 V X5R 0603,Samsung CL10A105KO8NNNC
-100nF,"C18, C21, C22, C23, C24, C25, C26, C27, C28, C29, C30, C31",12,C_0402_1005Metric,top,,MLCC 100 nF 16 V X7R 0603,Samsung CL10B104KO8NNNC
+1uF,"C16, C17, C19",3,C_0402_1005Metric,top,,MLCC 1 uF 25 V X5R 0402,Samsung CL05A105KA5NNNC
+100nF,"C18, C21, C22, C23, C24, C25, C26, C27, C28, C29, C30, C31",12,C_0402_1005Metric,top,,MLCC 100 nF 16 V X7R 0402,Samsung CL05B104KO5NNNC
 1N4148W,D1,1,D_SOD-123,top,,"Switching diode, SOD-123 (motor flyback)",Diodes 1N4148W-7-F
 WS2812B-2020,"D3, D4, D5, D6, D7, D8, D9, D10, D11, D12",10,LED_WS2812B-2020_PLCC4_2.0x2.0mm,top,,Addressable RGB LED 2.0 x 2.0 mm (heart),Worldsemi WS2812B-2020 or XL-2020RGBC-WS2812B
 22R@100MHz 6A,FB1,1,L_0805_2012Metric,top,,"Ferrite bead 22 ohm @ 100 MHz, 6 A, 0805 (nRF9151 VDD)",Murata BLM21PG220SN1D
@@ -14,18 +14,18 @@ U.FL,J2,1,U.FL_Hirose_U.FL-R-SMT-1_Vertical,top,,U.FL coaxial receptacle for the
 nano-SIM hinged,J3,1,nanoSIM_GCT_SIM8060-6-0-14-00,bottom,,"Nano-SIM holder, hinged, 6 contacts (bottom side)",GCT SIM8060-6-0-14-00
 AO3400A,Q1,1,SOT-23,top,,"N-MOSFET 30 V 5.7 A, SOT-23 (motor + heart driver)",AOS AO3400A
 DTC114E,Q2,1,SOT-23,top,,"Digital NPN 10k/10k, SOT-23 (USB auto-reset)",Rohm DTC114EKAT146 or Nexperia PDTC114ET
-5.1k,"R1, R2",2,R_0402_1005Metric,top,,Resistor 5.1 k 1% 0603 (USB-C CC),UNI-ROYAL 0603WAF5101T5E
-4.7k,"R3, R12, R13",3,R_0402_1005Metric,top,,Resistor 4.7 k 1% 0603 (charge current 213 mA; 3.3 k = 300 mA),UNI-ROYAL 0603WAF4701T5E
-10k,R4,1,R_0603_1608Metric,top,,Resistor 10 k 1% 0603 (ENABLE pull-up),UNI-ROYAL 0603WAF1002T5E
-1k,R5,1,R_0603_1608Metric,top,,Resistor 1 k 1% 0603 (reset series),UNI-ROYAL 0603WAF1001T5E
-0R,R6,1,R_0402_1005Metric,top,,Resistor 0 ohm 0402 (antenna series),UNI-ROYAL 0402WGF0000TCE
-100R,R7,1,R_0603_1608Metric,top,,Resistor 100 R 1% 0603 (gate),UNI-ROYAL 0603WAF1000T5E
-100k,R8,1,R_0603_1608Metric,top,,Resistor 100 k 1% 0603 (gate pull-down),UNI-ROYAL 0603WAF1003T5E
-22.1k,R9,1,R_0402_1005Metric,top,,Resistor 22.1 k 1% 0402 (VBUS sense divider),UNI-ROYAL 0402WGF2212TCE
-47.5k,R10,1,R_0402_1005Metric,top,,Resistor 47.5 k 1% 0402 (VBUS sense divider),UNI-ROYAL 0402WGF4752TCE
-10k,R11,1,R_0402_1005Metric,top,,Resistor 10 k 1% 0603 (ENABLE pull-up),UNI-ROYAL 0603WAF1002T5E
-100k,"R15, R16, R17",3,R_0402_1005Metric,top,,Resistor 100 k 1% 0603 (gate pull-down),UNI-ROYAL 0603WAF1003T5E
-330R,R18,1,R_0402_1005Metric,top,,Resistor 330 R 1% 0402 (LED data line),UNI-ROYAL 0402WGF3300TCE
+5.1k,"R1, R2",2,R_0402_1005Metric,top,,Resistor 5.1k 1% 0402 (USB-C CC),UNI-ROYAL 0402WGF5101TCE
+4.7k,"R3, R12, R13",3,R_0402_1005Metric,top,,"Resistor 4.7k 1% 0402 (UART series; charge current: 4.7 k = 213 mA, 3.3 k = 300 mA)",UNI-ROYAL 0402WGF4701TCE
+10k,R4,1,R_0603_1608Metric,top,,Resistor 10k 1% 0603 (ENABLE pull-up),UNI-ROYAL 0603WAF1002T5E
+1k,R5,1,R_0603_1608Metric,top,,Resistor 1k 1% 0603 (reset series),UNI-ROYAL 0603WAF1001T5E
+0R,R6,1,R_0402_1005Metric,top,,Resistor 0R 1% 0402 (antenna series),UNI-ROYAL 0402WGF0000TCE
+100R,R7,1,R_0603_1608Metric,top,,Resistor 100R 1% 0603 (motor gate),UNI-ROYAL 0603WAF1000T5E
+100k,R8,1,R_0603_1608Metric,top,,Resistor 100k 1% 0603 (gate pull-down),UNI-ROYAL 0603WAF1003T5E
+22.1k,R9,1,R_0402_1005Metric,top,,Resistor 22.1k 1% 0402 (VBUS sense divider),UNI-ROYAL 0402WGF2212TCE
+47.5k,R10,1,R_0402_1005Metric,top,,Resistor 47.5k 1% 0402 (VBUS sense divider),UNI-ROYAL 0402WGF4752TCE
+10k,R11,1,R_0402_1005Metric,top,,Resistor 10k 1% 0402 (CP2102N reset pull-up),UNI-ROYAL 0402WGF1002TCE
+100k,"R15, R16, R17",3,R_0402_1005Metric,top,,Resistor 100k 1% 0402 (LED_EN pull-down; USB_DET divider),UNI-ROYAL 0402WGF1003TCE
+330R,R18,1,R_0402_1005Metric,top,,Resistor 330R 1% 0402 (LED data line),UNI-ROYAL 0402WGF3300TCE
 Side tact,SW1,1,SW_Push_1P1T-MP_NO_Horizontal_Alps_SKRTLAE010,top,,Side-push tactile switch 3.5 x 2.9 mm,Alps SKRTLAE010
 nRF9151-LACA,U1,1,Nordic_nRF9151-LAxx_LGA-80-33EP_12.1x11.1mm_P0.5mm,top,,"Nordic nRF9151 SiP: Cortex-M33 + LTE-M/NB-IoT modem + GNSS, LGA-80 12.1 x 11.1 mm",Nordic nRF9151-LACA (cut tape: nRF9151-LACA-R7)
 TP4054,U2,1,SOT-23-5,top,,"Li-ion/LiPo linear charger 4.2 V, SOT-23-5 (MCP73831 pinout), I = 1000 V / R3","TP4054 (Nanjing Top Power) or MCP73832T-2ACI/OT (open-drain STAT; NOT the MCP73831, its STAT drives 5 V into the nRF9151)"
