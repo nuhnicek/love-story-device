@@ -17091,9 +17091,9 @@
 		(fill
 			(type none)
 		)
-		(uuid "15ced35f-a7cd-5cb7-863d-c93080b9c2a8")
+		(uuid "06730a5e-2c64-5944-ace9-4077960d3bca")
 	)
-	(text "G. SWD pads (bottom side): first bootloader flash only"
+	(text "G. SWD + test pads (bottom side)"
 		(exclude_from_sim no)
 		(at 273.05 166.37 0)
 		(effects
@@ -17103,7 +17103,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "27c7f669-6fec-55a4-abac-ca4682fa621b")
+		(uuid "f665dbc4-12ba-5ff2-baa1-abd2ca8750fe")
 	)
 	(wire
 		(pts
@@ -17640,6 +17640,1191 @@
 			)
 		)
 	)
+	(wire
+		(pts
+			(xy 284.48 172.72)
+			(xy 284.48 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87fc5987-e957-5d80-8fae-725ac0332abe")
+	)
+	(label "VLED"
+		(at 284.48 170.18 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "59f8d61a-193b-5243-a881-a87361799974")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 284.48 172.72 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "edbc1604-02b0-5b73-99dc-bd55e45ea853")
+		(property "Reference" "TP12"
+			(at 284.48 179.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VLED"
+			(at 284.48 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 279.4 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 279.4 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 284.48 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "87c7073e-d4f4-594c-93b9-1319d737a545")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 304.8 172.72)
+			(xy 304.8 175.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "017ed856-ea70-560b-bc64-1a2a4795cc5b")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 304.8 175.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5f530a37-62cd-5453-a5f6-309be5496595")
+		(property "Reference" "#PWR54"
+			(at 304.8 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 304.8 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 304.8 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 304.8 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 304.8 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4b91bb09-7251-5f48-b51c-e4177f462d1b")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 304.8 172.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "aff1181c-aa6f-5b33-b5ea-81b476c0d965")
+		(property "Reference" "TP13"
+			(at 304.8 165.862 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 304.8 167.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 309.88 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 309.88 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 304.8 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "20f2e65f-356a-5b76-b70d-c05e691e6adb")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 325.12 172.72)
+			(xy 325.12 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9466f0f8-de4f-5462-898c-a2d4b2eec9d2")
+	)
+	(label "GATE"
+		(at 325.12 170.18 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "552f8a6b-c07d-5c23-b973-b416b1be118e")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 325.12 172.72 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "53ea4dae-6144-54d1-8251-9527618f1a0c")
+		(property "Reference" "TP14"
+			(at 325.12 179.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GATE"
+			(at 325.12 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 320.04 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 320.04 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 325.12 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5bcb92ee-3d0e-51d9-a010-f619cac0c8cc")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 345.44 172.72)
+			(xy 345.44 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a273df7c-6943-5a15-9be0-bad1576fb260")
+	)
+	(label "LED_DIN"
+		(at 345.44 170.18 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "54372ef0-5d02-5276-945c-a17f3fe843c0")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 345.44 172.72 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "370e8443-842e-5304-8ad3-afeb6c61bf56")
+		(property "Reference" "TP15"
+			(at 345.44 179.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED"
+			(at 345.44 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 340.36 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 340.36 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 345.44 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "137476aa-e0bd-5318-8a97-30180ed029e7")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 365.76 172.72)
+			(xy 365.76 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0dd9111c-105e-5e6b-97dc-59d5b0c4003d")
+	)
+	(label "BTN"
+		(at 365.76 170.18 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "07bd6c12-7ded-5996-a2dc-4649068070ff")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 365.76 172.72 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "f4de7728-f5dd-552f-b8b5-1ece5aedcd2b")
+		(property "Reference" "TP16"
+			(at 365.76 179.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BTN"
+			(at 365.76 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 360.68 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 360.68 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 365.76 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cade09d2-d320-570a-828c-ff43a186021c")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 386.08 172.72)
+			(xy 386.08 170.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a70bc791-542e-5bf4-baf6-9782e2d4aa3a")
+	)
+	(label "VDD_NRF"
+		(at 386.08 170.18 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c80a4597-e736-519d-bcbb-88631c0f903b")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 386.08 172.72 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "7a8e4e39-97e0-5e68-a369-46c037556303")
+		(property "Reference" "TP17"
+			(at 386.08 179.578 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VDD"
+			(at 386.08 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 381 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 381 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 386.08 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d0ed4653-c225-5cd1-b18e-e342de496142")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 284.48 182.88)
+			(xy 284.48 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "545d7196-d799-5c05-a62d-118f30e8b041")
+	)
+	(label "SIM_1V8"
+		(at 284.48 180.34 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3e1b091b-8cc6-5d30-9187-26a8bda059c7")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 284.48 182.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "8a447f7b-4764-5830-8913-e466e55501c1")
+		(property "Reference" "TP18"
+			(at 284.48 189.738 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SIM"
+			(at 284.48 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 279.4 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 279.4 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 284.48 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dc365b4f-696d-51e8-912e-8eb6e63565ce")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 304.8 182.88)
+			(xy 304.8 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dfb42428-6396-5ec9-a421-f3f6d50dbb1c")
+	)
+	(label "PROG"
+		(at 304.8 180.34 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "26b1897a-4c12-5fd2-a718-a45507e2b9d3")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 304.8 182.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "71026295-3978-5f48-ac04-25f3e9777284")
+		(property "Reference" "TP19"
+			(at 304.8 189.738 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PRG"
+			(at 304.8 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 299.72 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 299.72 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 304.8 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "10dd4665-e51c-5874-90ea-c18071ecae33")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 325.12 182.88)
+			(xy 325.12 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "035d2607-1f33-5c5e-988d-18608b8d8bd2")
+	)
+	(symbol
+		(lib_id "power:VBUS")
+		(at 325.12 180.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "366ac8e9-6eb5-524a-8e1c-7304d54dcfb8")
+		(property "Reference" "#PWR55"
+			(at 325.12 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VBUS"
+			(at 325.12 176.784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 325.12 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 325.12 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VBUS\""
+			(at 325.12 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78de2acc-5083-5d5f-a69a-387d6880fe55")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 325.12 182.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "13ac2e55-8a9e-5193-9c30-e9fcda7774cb")
+		(property "Reference" "TP20"
+			(at 325.12 189.738 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5V"
+			(at 325.12 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 320.04 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 320.04 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 325.12 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "891435c2-f545-5f61-aaa5-0d23addf8370")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 345.44 182.88)
+			(xy 345.44 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c3f23d2-066d-53f3-8f21-42b38c1c1d19")
+	)
+	(label "V3U"
+		(at 345.44 180.34 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ce214d9a-8647-5b92-80f3-a83060fa16f7")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 345.44 182.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "3b2a8b28-141a-5f27-8bcd-7d1d52d74df7")
+		(property "Reference" "TP21"
+			(at 345.44 189.738 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "V3U"
+			(at 345.44 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 340.36 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 340.36 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 345.44 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "890bd82b-274c-5729-a2e5-9e290b269a91")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP21")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 365.76 182.88)
+			(xy 365.76 180.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2d21fabe-9748-5444-9558-cbb3b6fdca7b")
+	)
+	(label "USB_DET"
+		(at 365.76 180.34 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a2823249-2a9c-572f-b9ba-bc66449e25ab")
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 365.76 182.88 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "3c7bc3e8-5a9c-52a5-9c51-cee2a103b741")
+		(property "Reference" "TP22"
+			(at 365.76 189.738 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DET"
+			(at 365.76 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 360.68 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 360.68 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 365.76 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "35cb44ce-9192-5f6e-970b-4d395cb06e40")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 386.08 182.88)
+			(xy 386.08 185.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd9cf7ec-d427-5e0f-a823-68fbb7b5d79c")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 386.08 185.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7dddba97-1d96-5128-b2eb-e94c728c218d")
+		(property "Reference" "#PWR56"
+			(at 386.08 191.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 386.08 189.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 386.08 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 386.08 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 386.08 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ead35e17-f08c-5bb4-9ffa-7480fa732149")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR56")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 386.08 182.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "56c4f0f9-e446-5966-91e1-ef9520af3c24")
+		(property "Reference" "TP23"
+			(at 386.08 176.022 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 386.08 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "keychain:WirePad_0.9mm"
+			(at 391.16 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 391.16 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 386.08 182.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8a01fa44-103a-53cd-8e98-743485b625ac")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "TP23")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(text "Program with any SWD probe: J-Link, nRF91 DK, or a Pico debugprobe + pyOCD"
 		(exclude_from_sim no)
 		(at 274.32 220.98 0)
@@ -17720,8 +18905,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5f530a37-62cd-5453-a5f6-309be5496595")
-		(property "Reference" "#PWR54"
+		(uuid "77bd2db5-b501-52a3-8532-95a75ff0016d")
+		(property "Reference" "#PWR57"
 			(at 482.6 140.97 0)
 			(effects
 				(font
@@ -17766,12 +18951,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "4b91bb09-7251-5f48-b51c-e4177f462d1b")
+			(uuid "51101c60-6ea2-5cda-96f1-17f677807744")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR54")
+					(reference "#PWR57")
 					(unit 1)
 				)
 			)
@@ -17880,8 +19065,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "366ac8e9-6eb5-524a-8e1c-7304d54dcfb8")
-		(property "Reference" "#PWR55"
+		(uuid "a29f7e2e-b84e-5f42-8781-f56f0cbcc2db")
+		(property "Reference" "#PWR58"
 			(at 480.06 77.47 0)
 			(effects
 				(font
@@ -17926,12 +19111,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "78de2acc-5083-5d5f-a69a-387d6880fe55")
+			(uuid "f0e944da-7622-5c1f-890c-d17032e3c7fe")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR55")
+					(reference "#PWR58")
 					(unit 1)
 				)
 			)
@@ -18262,8 +19447,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7dddba97-1d96-5128-b2eb-e94c728c218d")
-		(property "Reference" "#PWR56"
+		(uuid "947c8681-7b90-529a-8157-97af47aaa32f")
+		(property "Reference" "#PWR59"
 			(at 424.18 43.18 0)
 			(effects
 				(font
@@ -18308,12 +19493,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "ead35e17-f08c-5bb4-9ffa-7480fa732149")
+			(uuid "10be23be-6b6d-5704-868f-a62e0abb8cb9")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR56")
+					(reference "#PWR59")
 					(unit 1)
 				)
 			)
@@ -18338,8 +19523,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "77bd2db5-b501-52a3-8532-95a75ff0016d")
-		(property "Reference" "#PWR57"
+		(uuid "aff741f4-1c69-5a1b-8781-4dd557ff0267")
+		(property "Reference" "#PWR60"
 			(at 424.18 58.42 0)
 			(effects
 				(font
@@ -18384,12 +19569,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "51101c60-6ea2-5cda-96f1-17f677807744")
+			(uuid "a26f23aa-9f0a-5e5c-9e92-44369b59be4f")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR57")
+					(reference "#PWR60")
 					(unit 1)
 				)
 			)
@@ -18504,8 +19689,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a29f7e2e-b84e-5f42-8781-f56f0cbcc2db")
-		(property "Reference" "#PWR58"
+		(uuid "b2c85ef6-055c-5506-be7b-9a6e6b4f1680")
+		(property "Reference" "#PWR61"
 			(at 436.88 58.42 0)
 			(effects
 				(font
@@ -18550,12 +19735,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "f0e944da-7622-5c1f-890c-d17032e3c7fe")
+			(uuid "b63fc0eb-8d73-51f9-bd11-77c8bc6840f4")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR58")
+					(reference "#PWR61")
 					(unit 1)
 				)
 			)
@@ -18670,8 +19855,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "947c8681-7b90-529a-8157-97af47aaa32f")
-		(property "Reference" "#PWR59"
+		(uuid "7d959fc8-383e-59e2-8f77-9142f9542c29")
+		(property "Reference" "#PWR62"
 			(at 449.58 58.42 0)
 			(effects
 				(font
@@ -18716,12 +19901,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "10be23be-6b6d-5704-868f-a62e0abb8cb9")
+			(uuid "ce0d9899-018b-5c31-9261-afd4bd4b1521")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR59")
+					(reference "#PWR62")
 					(unit 1)
 				)
 			)
@@ -18901,8 +20086,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "aff741f4-1c69-5a1b-8781-4dd557ff0267")
-		(property "Reference" "#PWR60"
+		(uuid "d2ac1465-26ab-562a-b26a-89fbe56fe6de")
+		(property "Reference" "#PWR63"
 			(at 424.18 78.74 0)
 			(effects
 				(font
@@ -18947,12 +20132,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "a26f23aa-9f0a-5e5c-9e92-44369b59be4f")
+			(uuid "3cdc2847-01d6-5abe-af99-776e80019a55")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR60")
+					(reference "#PWR63")
 					(unit 1)
 				)
 			)
@@ -19086,8 +20271,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b2c85ef6-055c-5506-be7b-9a6e6b4f1680")
-		(property "Reference" "#PWR61"
+		(uuid "655f8877-3b4e-5cbd-a545-71246f136fc2")
+		(property "Reference" "#PWR64"
 			(at 424.18 129.54 0)
 			(effects
 				(font
@@ -19132,12 +20317,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "b63fc0eb-8d73-51f9-bd11-77c8bc6840f4")
+			(uuid "f1dcbd17-4998-5737-9b0c-9e2bc913f45c")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR61")
+					(reference "#PWR64")
 					(unit 1)
 				)
 			)
@@ -19693,8 +20878,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7d959fc8-383e-59e2-8f77-9142f9542c29")
-		(property "Reference" "#PWR62"
+		(uuid "b5ac126e-ec03-5a61-8489-f63b1f5c7fdb")
+		(property "Reference" "#PWR65"
 			(at 449.58 152.4 0)
 			(effects
 				(font
@@ -19739,12 +20924,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "ce0d9899-018b-5c31-9261-afd4bd4b1521")
+			(uuid "7086e5b8-4f12-554f-b4b5-d61d46649a8c")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR62")
+					(reference "#PWR65")
 					(unit 1)
 				)
 			)
@@ -19878,8 +21063,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d2ac1465-26ab-562a-b26a-89fbe56fe6de")
-		(property "Reference" "#PWR63"
+		(uuid "556ddf86-826c-525f-9cb0-c0b89c2ce6de")
+		(property "Reference" "#PWR66"
 			(at 462.28 185.42 0)
 			(effects
 				(font
@@ -19924,12 +21109,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "3cdc2847-01d6-5abe-af99-776e80019a55")
+			(uuid "dfffeac4-31a3-5c88-b54c-e341b5671bc4")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR63")
+					(reference "#PWR66")
 					(unit 1)
 				)
 			)
@@ -20133,8 +21318,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "655f8877-3b4e-5cbd-a545-71246f136fc2")
-		(property "Reference" "#PWR64"
+		(uuid "efa4fbe0-2b2d-55cd-9382-8cbd0316b5a7")
+		(property "Reference" "#PWR67"
 			(at 30.48 290.83 0)
 			(effects
 				(font
@@ -20179,12 +21364,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "f1dcbd17-4998-5737-9b0c-9e2bc913f45c")
+			(uuid "48940089-8171-5f88-a615-44e4ca6dd0e9")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR64")
+					(reference "#PWR67")
 					(unit 1)
 				)
 			)
@@ -20209,8 +21394,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b5ac126e-ec03-5a61-8489-f63b1f5c7fdb")
-		(property "Reference" "#PWR65"
+		(uuid "e08c5355-c7f9-5777-9711-9ee4cc1f1a6f")
+		(property "Reference" "#PWR68"
 			(at 43.18 306.07 0)
 			(effects
 				(font
@@ -20255,12 +21440,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "7086e5b8-4f12-554f-b4b5-d61d46649a8c")
+			(uuid "cd025055-c2c6-546e-9a26-bfee35343017")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR65")
+					(reference "#PWR68")
 					(unit 1)
 				)
 			)
@@ -20414,8 +21599,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "556ddf86-826c-525f-9cb0-c0b89c2ce6de")
-		(property "Reference" "#PWR66"
+		(uuid "4ce41467-5c85-5aa2-95e6-427237fbbef1")
+		(property "Reference" "#PWR69"
 			(at 22.86 289.56 0)
 			(effects
 				(font
@@ -20460,12 +21645,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "dfffeac4-31a3-5c88-b54c-e341b5671bc4")
+			(uuid "b1c1954c-23a5-551d-a25a-b4d42e54f66f")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR66")
+					(reference "#PWR69")
 					(unit 1)
 				)
 			)
@@ -20490,8 +21675,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "efa4fbe0-2b2d-55cd-9382-8cbd0316b5a7")
-		(property "Reference" "#PWR67"
+		(uuid "d9abb8a5-c337-5c6d-b814-b8fccc268e94")
+		(property "Reference" "#PWR70"
 			(at 22.86 304.8 0)
 			(effects
 				(font
@@ -20536,12 +21721,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "48940089-8171-5f88-a615-44e4ca6dd0e9")
+			(uuid "4ec1a9f0-2c2e-5460-8385-d871a427ac80")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR67")
+					(reference "#PWR70")
 					(unit 1)
 				)
 			)
@@ -20656,8 +21841,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e08c5355-c7f9-5777-9711-9ee4cc1f1a6f")
-		(property "Reference" "#PWR68"
+		(uuid "d4d77147-c0c2-53b4-8e13-0879b206fd37")
+		(property "Reference" "#PWR71"
 			(at 25.4 325.12 0)
 			(effects
 				(font
@@ -20702,12 +21887,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "cd025055-c2c6-546e-9a26-bfee35343017")
+			(uuid "63f312a2-7d6b-51ba-a00e-b70c50708ed4")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR68")
+					(reference "#PWR71")
 					(unit 1)
 				)
 			)
@@ -20820,8 +22005,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4ce41467-5c85-5aa2-95e6-427237fbbef1")
-		(property "Reference" "#PWR69"
+		(uuid "c1d2853c-3616-513b-aaf2-4ede21bdb2b0")
+		(property "Reference" "#PWR72"
 			(at 68.58 304.8 0)
 			(effects
 				(font
@@ -20866,12 +22051,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "b1c1954c-23a5-551d-a25a-b4d42e54f66f")
+			(uuid "68128e9b-fdd3-5276-b8ea-5aac9f7cb4ee")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR69")
+					(reference "#PWR72")
 					(unit 1)
 				)
 			)
@@ -20990,8 +22175,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d9abb8a5-c337-5c6d-b814-b8fccc268e94")
-		(property "Reference" "#PWR70"
+		(uuid "125d832e-1310-50e2-9439-a80e0c55a754")
+		(property "Reference" "#PWR73"
 			(at 104.14 308.61 0)
 			(effects
 				(font
@@ -21036,12 +22221,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "4ec1a9f0-2c2e-5460-8385-d871a427ac80")
+			(uuid "1a3e7832-3f87-5d90-a0ee-7412c25b0be6")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR70")
+					(reference "#PWR73")
 					(unit 1)
 				)
 			)
@@ -21207,8 +22392,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d4d77147-c0c2-53b4-8e13-0879b206fd37")
-		(property "Reference" "#PWR71"
+		(uuid "ce33cdbe-4108-5f1d-8ad0-cdbae77ecced")
+		(property "Reference" "#PWR74"
 			(at 124.46 304.8 0)
 			(effects
 				(font
@@ -21253,12 +22438,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "63f312a2-7d6b-51ba-a00e-b70c50708ed4")
+			(uuid "17e0e04a-1f88-5872-8765-948f8871bd94")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR71")
+					(reference "#PWR74")
 					(unit 1)
 				)
 			)
@@ -21482,8 +22667,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c1d2853c-3616-513b-aaf2-4ede21bdb2b0")
-		(property "Reference" "#PWR72"
+		(uuid "4a428e99-7758-5ab4-8331-ac4a40078e34")
+		(property "Reference" "#PWR75"
 			(at 40.64 356.87 0)
 			(effects
 				(font
@@ -21528,12 +22713,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "68128e9b-fdd3-5276-b8ea-5aac9f7cb4ee")
+			(uuid "bee360f6-91e9-569c-b489-61cd2aee45ee")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR72")
+					(reference "#PWR75")
 					(unit 1)
 				)
 			)
@@ -21698,8 +22883,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "125d832e-1310-50e2-9439-a80e0c55a754")
-		(property "Reference" "#PWR73"
+		(uuid "6271513e-2035-57c6-9850-264bb7899d76")
+		(property "Reference" "#PWR76"
 			(at 55.88 353.06 0)
 			(effects
 				(font
@@ -21744,12 +22929,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1a3e7832-3f87-5d90-a0ee-7412c25b0be6")
+			(uuid "82c58e43-373b-5e43-9d2d-5a5ece0dfffd")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR73")
+					(reference "#PWR76")
 					(unit 1)
 				)
 			)
@@ -21864,8 +23049,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ce33cdbe-4108-5f1d-8ad0-cdbae77ecced")
-		(property "Reference" "#PWR74"
+		(uuid "48d2bc93-d6c3-5261-aa51-33bd25f4dc02")
+		(property "Reference" "#PWR77"
 			(at 74.93 356.87 0)
 			(effects
 				(font
@@ -21910,12 +23095,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "17e0e04a-1f88-5872-8765-948f8871bd94")
+			(uuid "6cc9ab85-fac1-52a8-957a-3d340b3684dc")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR74")
+					(reference "#PWR77")
 					(unit 1)
 				)
 			)
@@ -22080,8 +23265,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4a428e99-7758-5ab4-8331-ac4a40078e34")
-		(property "Reference" "#PWR75"
+		(uuid "9443b640-3529-5933-a5a6-a55d070518e3")
+		(property "Reference" "#PWR78"
 			(at 90.17 353.06 0)
 			(effects
 				(font
@@ -22126,12 +23311,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "bee360f6-91e9-569c-b489-61cd2aee45ee")
+			(uuid "012a6f19-90ef-55ba-81d3-a2648ba3a692")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR75")
+					(reference "#PWR78")
 					(unit 1)
 				)
 			)
@@ -22246,8 +23431,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "6271513e-2035-57c6-9850-264bb7899d76")
-		(property "Reference" "#PWR76"
+		(uuid "7d799f2a-d784-5ccb-853a-4d24c483729f")
+		(property "Reference" "#PWR79"
 			(at 109.22 356.87 0)
 			(effects
 				(font
@@ -22292,12 +23477,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "82c58e43-373b-5e43-9d2d-5a5ece0dfffd")
+			(uuid "8d99429d-5bf4-55fe-bc9d-421e15594107")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR76")
+					(reference "#PWR79")
 					(unit 1)
 				)
 			)
@@ -22462,8 +23647,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "48d2bc93-d6c3-5261-aa51-33bd25f4dc02")
-		(property "Reference" "#PWR77"
+		(uuid "3f369d71-70bb-5eb3-8eae-8413842e0028")
+		(property "Reference" "#PWR80"
 			(at 124.46 353.06 0)
 			(effects
 				(font
@@ -22508,12 +23693,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "6cc9ab85-fac1-52a8-957a-3d340b3684dc")
+			(uuid "fda1b93e-32e8-56a2-b3e0-c4fd39898636")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR77")
+					(reference "#PWR80")
 					(unit 1)
 				)
 			)
@@ -22628,8 +23813,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9443b640-3529-5933-a5a6-a55d070518e3")
-		(property "Reference" "#PWR78"
+		(uuid "c5858a84-3d94-5053-a4de-c1566c708264")
+		(property "Reference" "#PWR81"
 			(at 143.51 356.87 0)
 			(effects
 				(font
@@ -22674,12 +23859,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "012a6f19-90ef-55ba-81d3-a2648ba3a692")
+			(uuid "f85ab684-88b4-5235-916d-379ff379f2c9")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR78")
+					(reference "#PWR81")
 					(unit 1)
 				)
 			)
@@ -22844,8 +24029,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7d799f2a-d784-5ccb-853a-4d24c483729f")
-		(property "Reference" "#PWR79"
+		(uuid "077f22f8-daa7-5569-9271-6e7b36460136")
+		(property "Reference" "#PWR82"
 			(at 158.75 353.06 0)
 			(effects
 				(font
@@ -22890,12 +24075,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "8d99429d-5bf4-55fe-bc9d-421e15594107")
+			(uuid "1a667c7d-d693-523c-8f9e-b6839e7753eb")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR79")
+					(reference "#PWR82")
 					(unit 1)
 				)
 			)
@@ -23010,8 +24195,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3f369d71-70bb-5eb3-8eae-8413842e0028")
-		(property "Reference" "#PWR80"
+		(uuid "469a55df-48ae-5ac0-a8aa-1b107fa1e1e2")
+		(property "Reference" "#PWR83"
 			(at 177.8 356.87 0)
 			(effects
 				(font
@@ -23056,12 +24241,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "fda1b93e-32e8-56a2-b3e0-c4fd39898636")
+			(uuid "30de6a8e-8bee-55ee-85e5-be780ff6d19d")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR80")
+					(reference "#PWR83")
 					(unit 1)
 				)
 			)
@@ -23226,8 +24411,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c5858a84-3d94-5053-a4de-c1566c708264")
-		(property "Reference" "#PWR81"
+		(uuid "826fc195-8420-5d4b-865f-0ac70aba0acb")
+		(property "Reference" "#PWR84"
 			(at 193.04 353.06 0)
 			(effects
 				(font
@@ -23272,12 +24457,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "f85ab684-88b4-5235-916d-379ff379f2c9")
+			(uuid "0dcc78f8-59e6-53c9-bcf8-10fab55e509b")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR81")
+					(reference "#PWR84")
 					(unit 1)
 				)
 			)
@@ -23392,8 +24577,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "077f22f8-daa7-5569-9271-6e7b36460136")
-		(property "Reference" "#PWR82"
+		(uuid "0188c03a-db61-557b-bc1e-11ef96baaf38")
+		(property "Reference" "#PWR85"
 			(at 212.09 356.87 0)
 			(effects
 				(font
@@ -23438,12 +24623,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1a667c7d-d693-523c-8f9e-b6839e7753eb")
+			(uuid "94b1f6a3-2c7d-5e46-83fe-0c09cb828ef2")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR82")
+					(reference "#PWR85")
 					(unit 1)
 				)
 			)
@@ -23608,8 +24793,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "469a55df-48ae-5ac0-a8aa-1b107fa1e1e2")
-		(property "Reference" "#PWR83"
+		(uuid "c9bbd5c7-7513-5af7-9a74-1aa281bc4047")
+		(property "Reference" "#PWR86"
 			(at 227.33 353.06 0)
 			(effects
 				(font
@@ -23654,12 +24839,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "30de6a8e-8bee-55ee-85e5-be780ff6d19d")
+			(uuid "a70969a7-5562-5266-8093-b2daea188692")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR83")
+					(reference "#PWR86")
 					(unit 1)
 				)
 			)
@@ -23774,8 +24959,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "826fc195-8420-5d4b-865f-0ac70aba0acb")
-		(property "Reference" "#PWR84"
+		(uuid "7172350d-961a-5df7-b65a-7eb55e1d36ba")
+		(property "Reference" "#PWR87"
 			(at 246.38 356.87 0)
 			(effects
 				(font
@@ -23820,12 +25005,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "0dcc78f8-59e6-53c9-bcf8-10fab55e509b")
+			(uuid "f9db1d6e-510b-52cc-bdc8-685f2b601dee")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR84")
+					(reference "#PWR87")
 					(unit 1)
 				)
 			)
@@ -23990,8 +25175,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0188c03a-db61-557b-bc1e-11ef96baaf38")
-		(property "Reference" "#PWR85"
+		(uuid "0db624f8-6173-58cf-a49b-8da7f8afc90c")
+		(property "Reference" "#PWR88"
 			(at 261.62 353.06 0)
 			(effects
 				(font
@@ -24036,12 +25221,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "94b1f6a3-2c7d-5e46-83fe-0c09cb828ef2")
+			(uuid "ae688d2a-8a1a-57b8-ab27-5b4be85903f8")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR85")
+					(reference "#PWR88")
 					(unit 1)
 				)
 			)
@@ -24156,8 +25341,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c9bbd5c7-7513-5af7-9a74-1aa281bc4047")
-		(property "Reference" "#PWR86"
+		(uuid "a474cc9a-3a3c-5d08-bdce-2cdcf9615da7")
+		(property "Reference" "#PWR89"
 			(at 280.67 356.87 0)
 			(effects
 				(font
@@ -24202,12 +25387,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "a70969a7-5562-5266-8093-b2daea188692")
+			(uuid "92a9b79a-8227-597c-8146-f33b87325822")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR86")
+					(reference "#PWR89")
 					(unit 1)
 				)
 			)
@@ -24372,8 +25557,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7172350d-961a-5df7-b65a-7eb55e1d36ba")
-		(property "Reference" "#PWR87"
+		(uuid "0d05c34f-8764-5bdf-b4ab-720663776c72")
+		(property "Reference" "#PWR90"
 			(at 295.91 353.06 0)
 			(effects
 				(font
@@ -24418,12 +25603,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "f9db1d6e-510b-52cc-bdc8-685f2b601dee")
+			(uuid "386db618-503f-5bd5-ae3f-035a8e18537b")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR87")
+					(reference "#PWR90")
 					(unit 1)
 				)
 			)
@@ -24538,8 +25723,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0db624f8-6173-58cf-a49b-8da7f8afc90c")
-		(property "Reference" "#PWR88"
+		(uuid "9ca5579c-8caf-52b7-8a00-ffdf3f13f599")
+		(property "Reference" "#PWR91"
 			(at 314.96 356.87 0)
 			(effects
 				(font
@@ -24584,12 +25769,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "ae688d2a-8a1a-57b8-ab27-5b4be85903f8")
+			(uuid "bf2aa271-0f01-5bc6-857a-12d930f2901e")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR88")
+					(reference "#PWR91")
 					(unit 1)
 				)
 			)
@@ -24754,8 +25939,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a474cc9a-3a3c-5d08-bdce-2cdcf9615da7")
-		(property "Reference" "#PWR89"
+		(uuid "57642aff-a5bb-535f-8d6b-e0ea783d96be")
+		(property "Reference" "#PWR92"
 			(at 330.2 353.06 0)
 			(effects
 				(font
@@ -24800,12 +25985,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "92a9b79a-8227-597c-8146-f33b87325822")
+			(uuid "1d8c077c-dd3a-52d3-870f-56f051507b6d")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR89")
+					(reference "#PWR92")
 					(unit 1)
 				)
 			)
@@ -24903,8 +26088,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0d05c34f-8764-5bdf-b4ab-720663776c72")
-		(property "Reference" "#PWR90"
+		(uuid "97f5ce31-e13d-5429-ab0b-08b0ddb8bdd8")
+		(property "Reference" "#PWR93"
 			(at 349.25 356.87 0)
 			(effects
 				(font
@@ -24949,12 +26134,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "386db618-503f-5bd5-ae3f-035a8e18537b")
+			(uuid "282bca88-14e5-59e1-a1b5-52974a033ab3")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR90")
+					(reference "#PWR93")
 					(unit 1)
 				)
 			)
@@ -25119,8 +26304,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9ca5579c-8caf-52b7-8a00-ffdf3f13f599")
-		(property "Reference" "#PWR91"
+		(uuid "651eec60-b557-5c1d-9079-5701749cbd12")
+		(property "Reference" "#PWR94"
 			(at 364.49 353.06 0)
 			(effects
 				(font
@@ -25165,12 +26350,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "bf2aa271-0f01-5bc6-857a-12d930f2901e")
+			(uuid "69c9c8b5-27a6-54db-ae17-84366041bff4")
 		)
 		(instances
 			(project "keychain-v3"
 				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
-					(reference "#PWR91")
+					(reference "#PWR94")
 					(unit 1)
 				)
 			)

@@ -303,6 +303,18 @@ wirepad("TP2", "BAT-", 116.8, 128.6, 1.5, "GND")
 wirepad("TP3", "MOT+", 119.0, 117.4, 1.0, "VBAT")
 wirepad("TP4", "MOT-", 121.6, 117.4, 1.0, "MOT_N")
 
+# test pads (bottom, 0.9 mm) for checking a freshly soldered board: see v3/TESTING.md
+# (ref, label, net, x, y, label dx, label dy)
+TESTPADS = [("TP12", "VLED", "VLED", 100.2, 98.6, 0, 1.25), ("TP13", "GND", "GND", 103.2, 98.6, 0, 1.25),
+            ("TP14", "GATE", "GATE", 116.4, 98.8, 0, 1.25), ("TP15", "LED", "LED_DIN", 119.6, 98.8, 0, 1.25),
+            ("TP16", "BTN", "BTN", 121.7, 110.0, 0, 1.25),
+            ("TP17", "VDD", "VDD_NRF", 99.3, 112.8, 0.2, 1.2), ("TP18", "SIM", "SIM_1V8", 99.3, 115.4, 0.2, 1.2),
+            ("TP19", "PRG", "PROG", 99.4, 131.8, 0.2, -1.25),
+            ("TP20", "5V", "VBUS", 104.6, 132.7, 0, -1.25), ("TP21", "V3U", "V3U", 119.0, 132.5, 0, -1.25),
+            ("TP22", "DET", "USB_DET", 121.9, 124.9, -2.0, 0), ("TP23", "GND", "GND", 113.2, 132.9, 0, -1.25)]
+for ref, lab, n, x, y, dx, dy in TESTPADS:
+    wirepad(ref, lab, x, y, 0.9, n)
+
 if "--place-only" in sys.argv:
     pn.SaveBoard(OUT, board)
     sys.exit(0)
@@ -323,7 +335,9 @@ silk("-", 116.8, 127.1, 0.9)
 silk("MOT", 120.3, 116.1, 0.8)
 silk("+", 117.8, 117.4, 0.8)
 silk("SIM", UX, 117.0, 0.8)
-silk("TOUCH v3", 106.6, 133.0, 0.8)
+silk("TOUCH v3", 108.2, 98.9, 0.8)
+for ref, lab, n, x, y, dx, dy in TESTPADS:
+    silk(lab, x + dx, y + dy, 0.8)
 silk("ANT", ANT_X + 3.5, 119.6, 0.8, pn.F_SilkS)
 
 # ---------------------------------------------------------------- schematic sync + project
@@ -632,6 +646,121 @@ path([V(X(u5g), Y(u5g) - 0.85), u5g], net_of("U5", "2"), w=0.25)   # straight do
 
 d0, c9 = pad_pos("U1", "24"), pad_pos("C9", "1")
 path([d0, c9], net_of("U1", "24"), w=0.25)
+
+# test pads: each gets a fixed link = short top stub from a nearby pad of its net -> via
+# -> straight bottom track to the test pad, collision-checked against all copper, so the
+# autorouter never has to fit them in
+def seg_clear(a, b, layer, code, w=0.2, clr=0.2):
+    sh = pn.SHAPE_SEGMENT(a, b, mm(w))
+    for f_ in board.GetFootprints():
+        for q in f_.Pads():
+            if q.GetNetCode() == code and code:
+                continue
+            if q.IsOnLayer(layer) and q.GetEffectiveShape(layer).Collide(sh, mm(clr)):
+                return False
+            if q.GetDrillSize().x and q.GetEffectiveHoleShape().Collide(sh, mm(clr + 0.1)):
+                return False
+    for t_ in board.GetTracks():
+        if t_.GetNetCode() == code:
+            continue
+        if (t_.GetClass() == "PCB_VIA" or t_.GetLayer() == layer) and \
+                t_.GetEffectiveShape(layer if t_.GetClass() == "PCB_VIA" else t_.GetLayer()).Collide(sh, mm(clr)):
+            return False
+    return True
+
+
+def via_free(x_, y_, code):
+    c_ = pn.SHAPE_CIRCLE(pn.VECTOR2I(int(x_), int(y_)), mm(0.3))
+    e = board.GetBoardEdgesBoundingBox()
+    if not (e.GetLeft() + mm(0.6) < x_ < e.GetRight() - mm(0.6) and e.GetTop() + mm(0.6) < y_ < e.GetBottom() - mm(0.6)):
+        return False
+    for f_ in board.GetFootprints():
+        for q in f_.Pads():
+            if q.GetNetCode() == code and code:
+                continue
+            for L in (pn.F_Cu, pn.B_Cu):
+                if q.IsOnLayer(L) and q.GetEffectiveShape(L).Collide(c_, mm(0.2)):
+                    return False
+            if q.GetDrillSize().x and math.hypot(q.GetPosition().x - x_, q.GetPosition().y - y_) < q.GetDrillSize().x / 2 + mm(0.6):
+                return False
+    for t_ in board.GetTracks():
+        if t_.GetNetCode() == code:
+            continue
+        L = pn.F_Cu if t_.GetClass() == "PCB_VIA" else t_.GetLayer()
+        if t_.GetEffectiveShape(L).Collide(c_, mm(0.2)):
+            return False
+    return True
+
+
+def connect_testpad(tp):
+    tpad = board.FindFootprintByReference(tp).FindPadByNumber("1")
+    code, tpos = tpad.GetNetCode(), tpad.GetPosition()
+    srcs = [q for f_ in board.GetFootprints() if not f_.IsFlipped() for q in f_.Pads()
+            if q.GetNetCode() == code and q.IsOnLayer(pn.F_Cu)]
+    srcs.sort(key=lambda q: math.hypot(q.GetPosition().x - tpos.x, q.GetPosition().y - tpos.y))
+    # direct: a bottom track of the same net is already close by
+    for t_ in list(board.GetTracks()):
+        if t_.GetClass() == "PCB_VIA" or t_.GetLayer() != pn.B_Cu or t_.GetNetCode() != code:
+            continue
+        a_, b_ = t_.GetStart(), t_.GetEnd()
+        dx_, dy_ = b_.x - a_.x, b_.y - a_.y
+        L2 = dx_ * dx_ + dy_ * dy_ or 1
+        k_ = max(0.0, min(1.0, ((tpos.x - a_.x) * dx_ + (tpos.y - a_.y) * dy_) / L2))
+        pp = pn.VECTOR2I(int(a_.x + k_ * dx_), int(a_.y + k_ * dy_))
+        if math.hypot(pp.x - tpos.x, pp.y - tpos.y) < mm(4) and seg_clear(tpos, pp, pn.B_Cu, code):
+            track(tpos, pp, tpad.GetNet(), 0.2, layer=pn.B_Cu)
+            return True
+    for v_ in list(board.GetTracks()):            # ...or a via of the same net
+        if v_.GetClass() == "PCB_VIA" and v_.GetNetCode() == code:
+            vp_ = v_.GetPosition()
+            if math.hypot(vp_.x - tpos.x, vp_.y - tpos.y) < mm(6) and seg_clear(tpos, vp_, pn.B_Cu, code):
+                track(tpos, vp_, tpad.GetNet(), 0.2, layer=pn.B_Cu)
+                return True
+    for q in srcs[:8]:
+        pc = q.GetPosition()
+        pref = math.atan2(tpos.y - pc.y, tpos.x - pc.x)
+        angs = sorted((2 * math.pi * k / 24 for k in range(24)),
+                      key=lambda a: abs((a - pref + math.pi) % (2 * math.pi) - math.pi))
+        for r_ in (0.9, 1.1, 1.3, 1.6, 2.0):
+            for a_ in angs:
+                vx_, vy_ = pc.x + mm(r_) * math.cos(a_), pc.y + mm(r_) * math.sin(a_)
+                vp = pn.VECTOR2I(int(vx_), int(vy_))
+                if via_free(vx_, vy_, code) and seg_clear(pc, vp, pn.F_Cu, code) \
+                        and seg_clear(vp, tpos, pn.B_Cu, code):
+                    n_ = tpad.GetNet()
+                    track(pc, vp, n_, 0.2)
+                    via(pn.ToMM(vp.x), pn.ToMM(vp.y), n_)
+                    track(vp, tpos, n_, 0.2, layer=pn.B_Cu)
+                    return True
+    # second try: top stub -> via -> inner layer 3 -> via next to the test pad -> bottom stub
+    def spots(pc, toward, rs=(0.9, 1.1, 1.3, 1.6)):
+        pref = math.atan2(toward.y - pc.y, toward.x - pc.x)
+        angs = sorted((2 * math.pi * k / 24 for k in range(24)),
+                      key=lambda a: abs((a - pref + math.pi) % (2 * math.pi) - math.pi))
+        for r_ in rs:
+            for a_ in angs:
+                yield pn.VECTOR2I(int(pc.x + mm(r_) * math.cos(a_)), int(pc.y + mm(r_) * math.sin(a_)))
+    ends = [v2 for v2 in spots(tpos, tpos, (1.0, 1.3, 1.6, 2.0))
+            if v2.y > mm(100.3) and via_free(v2.x, v2.y, code) and seg_clear(v2, tpos, pn.B_Cu, code)]
+    for q in srcs[:8]:
+        pc = q.GetPosition()
+        for v1 in spots(pc, tpos):
+            if v1.y < mm(100.3) or not (via_free(v1.x, v1.y, code) and seg_clear(pc, v1, pn.F_Cu, code)):
+                continue
+            for v2 in ends:
+                if math.hypot(v1.x - v2.x, v1.y - v2.y) > mm(0.9) and seg_clear(v1, v2, pn.In2_Cu, code):
+                    n_ = tpad.GetNet()
+                    track(pc, v1, n_, 0.2)
+                    via(pn.ToMM(v1.x), pn.ToMM(v1.y), n_)
+                    track(v1, v2, n_, 0.2, layer=pn.In2_Cu)
+                    via(pn.ToMM(v2.x), pn.ToMM(v2.y), n_)
+                    track(v2, tpos, n_, 0.2, layer=pn.B_Cu)
+                    return True
+    return False
+
+
+failed = [tp[0] for tp in TESTPADS if tp[2] != "GND" and not connect_testpad(tp[0])]
+print("test pads without a fixed link (left to the router):", failed or "none")
 
 pcblib.link_symbols(board, os.path.join(HW, "sch_uuids.json"), NAME + ".kicad_sch")
 pcblib.save_custom_footprints(board, os.path.join(HW, "keychain.pretty"))

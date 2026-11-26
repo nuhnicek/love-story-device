@@ -14,6 +14,10 @@ and it's not affected by the 2G shutdown. You assemble it yourself.
 
 ![top](hardware/fab/render-top.png) ![bottom](hardware/fab/render-bottom.png)
 
+**Guides:**
+- [PROGRAMMING.md](PROGRAMMING.md): the first flash with a €5 Raspberry Pi Pico as the SWD probe (wiring + pyOCD), then updates over USB-C.
+- [TESTING.md](TESTING.md): step-by-step checks of a freshly soldered board on the labelled test pads (bottom side), with the expected value at every pad.
+
 ## Files (`hardware/`)
 
 | File | |
@@ -169,6 +173,10 @@ Checked and OK:
 - **Hand-routed nets:** the SIM lines, reset, enable, the battery feed to the regulator and the LED data were drawn as fixed tracks, so the result doesn't depend on autorouter luck.
 - **Charge status (CHRG):** dropped; the firmware uses *USB plugged in* plus the battery voltage instead.
 - **Result:** ERC, DRC and schematic↔PCB parity are clean. The board is 25 × 49 mm and has 73 parts.
+- **Test pads (added 2026-11-26):**
+  - 12 labelled 0.9 mm pads on the bottom: 5V, V3U, DET, PRG, VDD, SIM, VLED, GATE, LED, BTN and 2 × GND.
+  - Each one is wired with a fixed, collision-checked stub, so they don't depend on the autorouter.
+  - See [TESTING.md](TESTING.md).
 
 ## Status and open points
 
@@ -176,7 +184,7 @@ Checked and OK:
   - v3 needs a Zephyr / nRF Connect SDK version of the keychain firmware.
   - The protocol (`firmware/keychain/protocol.h`) and the relay server (`v2/backend`) stay the same.
   - LTE-M power saving (eDRX) decides how fast incoming taps arrive (a few seconds to ~20 s) and how long the battery lasts. That gets tuned on the real board.
-- **Modem firmware:** check the version with `AT%SHORTSWVER`. Updating it needs `nrfutil` and a J-Link-compatible probe.
+- **Modem firmware:** check the version with `AT%SHORTSWVER`. A brand-new chip already has modem firmware; later updates go through the app or `nrfutil` with a J-Link.
 - **Antenna:**
   - LTE-M uses 800/900 MHz in Czechia, and antennas for those bands want length. A small flexible antenna inside a keychain will work, with reduced range.
   - Use the biggest one that fits; tuning with C14/C15 needs a network analyser.

@@ -165,11 +165,19 @@ text("Q1 drives the 0820 coin motor (wired to MOT+/-); D1 = flyback", 274.32, 15
 text("BTN: internal pull-up, GPIO sense wakes the nRF9151", 274.32, 154.94)
 
 # ============================================================ G: debug pads
-box(271.78, 162.56, 403.86, 238.76, "G. SWD pads (bottom side): first bootloader flash only")
+box(271.78, 162.56, 403.86, 238.76, "G. SWD + test pads (bottom side)")
 for i, (ref, val, n) in enumerate([("TP7", "SWDIO", "SWDIO"), ("TP8", "SWDCLK", "SWDCLK"),
                                    ("TP9", "RST", "nRESET_PAD"), ("TP10", "VT", "+3V0"),
                                    ("TP11", "GND", "GND")]):
     pad(ref, val, 284.48 + i * 15.24, 195.58, n, 0.9, rot=180 if n != "GND" else 0)
+# test pads (0.9 mm, bottom side) for checking a freshly soldered board: see v3/TESTING.md
+TESTPADS = [("TP12", "VLED", "VLED"), ("TP13", "GND", "GND"), ("TP14", "GATE", "GATE"),
+            ("TP15", "LED", "LED_DIN"), ("TP16", "BTN", "BTN"), ("TP17", "VDD", "VDD_NRF"),
+            ("TP18", "SIM", "SIM_1V8"), ("TP19", "PRG", "PROG"), ("TP20", "5V", "VBUS"),
+            ("TP21", "V3U", "V3U"), ("TP22", "DET", "USB_DET"), ("TP23", "GND", "GND")]
+for i, (ref, val, n) in enumerate(TESTPADS):
+    pad(ref, val, 284.48 + (i % 6) * 20.32, 172.72 + (i // 6) * 10.16, n, 0.9,
+        rot=0 if n == "GND" else 180)
 text("Program with any SWD probe: J-Link, nRF91 DK, or a Pico debugprobe + pyOCD", 274.32, 220.98)
 text("VT = 3.0 V target reference (do NOT power the board from the probe)", 274.32, 223.52)
 text("After that: firmware + log over USB-C (block H)", 274.32, 226.06)
