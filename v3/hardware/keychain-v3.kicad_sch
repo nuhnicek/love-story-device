@@ -21285,9 +21285,9 @@
 		(fill
 			(type none)
 		)
-		(uuid "7309e304-7f54-5185-87e5-90d1a5e568db")
+		(uuid "7548da22-c640-551f-80bd-b8f862892828")
 	)
-	(text "I. Heart: 10 addressable RGB LEDs (WS2812B-2020), switched off when idle"
+	(text "I. Heart: 18 addressable RGB LEDs (Wurth WL-ICLED 2020), switched off when idle"
 		(exclude_from_sim no)
 		(at 16.51 262.89 0)
 		(effects
@@ -21297,7 +21297,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4881ac2f-b1f7-556a-91bf-b19e829daaaf")
+		(uuid "cb5a9ab3-0aa1-5178-9860-cffd9f4b2d13")
 	)
 	(wire
 		(pts
@@ -22629,39 +22629,39 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 340.36)
-			(xy 50.8 340.36)
+			(xy 48.26 325.12)
+			(xy 50.8 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b425ee8a-bfdb-5593-9a48-82e4d03a3ffd")
+		(uuid "7d95dc13-b29b-557c-ab1d-e15c256ee1d1")
 	)
 	(label "LED_D1"
-		(at 50.8 340.36 0)
+		(at 50.8 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "5a836afc-feb2-5471-bdb8-08a74ec9310f")
+		(uuid "b156aaff-9a69-5e7d-a42b-80997b004a91")
 	)
 	(wire
 		(pts
-			(xy 40.64 347.98)
-			(xy 40.64 350.52)
+			(xy 40.64 332.74)
+			(xy 40.64 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e6ea0e27-1705-5e8f-9bc2-b73e9a240d8a")
+		(uuid "f2806e70-a52f-5b88-8270-b1f48fe55a49")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 40.64 350.52 0)
+		(at 40.64 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22669,7 +22669,7 @@
 		(dnp no)
 		(uuid "4a428e99-7758-5ab4-8331-ac4a40078e34")
 		(property "Reference" "#PWR75"
-			(at 40.64 356.87 0)
+			(at 40.64 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22678,7 +22678,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 40.64 354.33 0)
+			(at 40.64 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22686,7 +22686,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 40.64 350.52 0)
+			(at 40.64 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22695,7 +22695,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 350.52 0)
+			(at 40.64 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22704,7 +22704,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 40.64 350.52 0)
+			(at 40.64 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22726,49 +22726,49 @@
 	)
 	(wire
 		(pts
-			(xy 33.02 340.36)
-			(xy 30.48 340.36)
+			(xy 33.02 325.12)
+			(xy 30.48 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "170be5eb-4b2d-5e4b-9eaf-c9653394e271")
+		(uuid "b2fe1891-fe8b-5f0a-8189-02a7481b3eb8")
 	)
 	(label "LED_D0"
-		(at 30.48 340.36 180)
+		(at 30.48 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "5f2bb5e8-ad43-5df1-8cdd-aae11bf8eeb1")
+		(uuid "302fe6f0-6a6a-5284-a6c0-d7ff4f9fd761")
 	)
 	(wire
 		(pts
-			(xy 40.64 332.74)
-			(xy 40.64 330.2)
+			(xy 40.64 317.5)
+			(xy 40.64 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "10996ea2-eab3-5ed8-80e7-9307c62779eb")
+		(uuid "38ccd370-c007-558f-a801-15cfa7ffefbb")
 	)
 	(label "VLED"
-		(at 40.64 330.2 90)
+		(at 40.64 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "612fafc9-34dd-5d36-bc24-8b75dc91320e")
+		(uuid "0b57ed88-1059-596f-981e-6694a350e063")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 40.64 340.36 0)
+		(at 40.64 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22776,7 +22776,7 @@
 		(dnp no)
 		(uuid "1f63449d-bc8e-53c6-9243-0be2a0b849de")
 		(property "Reference" "D3"
-			(at 35.56 330.2 0)
+			(at 35.56 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22784,8 +22784,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 40.64 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 40.64 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22793,8 +22793,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 41.91 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 41.91 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22804,7 +22804,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 43.18 349.885 0)
+			(at 43.18 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22814,7 +22814,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 40.64 340.36 0)
+			(at 40.64 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22845,39 +22845,39 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 336.55)
-			(xy 55.88 334.01)
+			(xy 55.88 321.31)
+			(xy 55.88 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "76d5b788-0dc1-5323-8b8c-fce10e8a547f")
+		(uuid "e08ebe13-1b92-5e93-9087-910e135f8903")
 	)
 	(label "VLED"
-		(at 55.88 334.01 90)
+		(at 55.88 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "b1921fcf-4d0b-5bb7-8dd5-0683be7f6046")
+		(uuid "4803f9e2-694b-53a8-bb88-887845639bcb")
 	)
 	(wire
 		(pts
-			(xy 55.88 344.17)
-			(xy 55.88 346.71)
+			(xy 55.88 328.93)
+			(xy 55.88 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a1b27f6e-e346-5f11-8067-1aeb1f49461f")
+		(uuid "d1e16f98-7770-54f2-8282-3c1334e7c9dc")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 55.88 346.71 0)
+		(at 55.88 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22885,7 +22885,7 @@
 		(dnp no)
 		(uuid "6271513e-2035-57c6-9850-264bb7899d76")
 		(property "Reference" "#PWR76"
-			(at 55.88 353.06 0)
+			(at 55.88 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22894,7 +22894,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 55.88 350.52 0)
+			(at 55.88 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22902,7 +22902,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 55.88 346.71 0)
+			(at 55.88 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22911,7 +22911,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 346.71 0)
+			(at 55.88 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22920,7 +22920,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 55.88 346.71 0)
+			(at 55.88 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22942,7 +22942,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 55.88 340.36 0)
+		(at 55.88 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22950,7 +22950,7 @@
 		(dnp no)
 		(uuid "5eb8ec1b-c513-5b15-b19d-19a4ca25dc44")
 		(property "Reference" "C22"
-			(at 56.515 337.82 0)
+			(at 56.515 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22959,7 +22959,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 56.515 342.9 0)
+			(at 56.515 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22968,7 +22968,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 56.8452 344.17 0)
+			(at 56.8452 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22977,7 +22977,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 55.88 340.36 0)
+			(at 55.88 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22986,7 +22986,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 55.88 340.36 0)
+			(at 55.88 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23011,39 +23011,39 @@
 	)
 	(wire
 		(pts
-			(xy 82.55 340.36)
-			(xy 85.09 340.36)
+			(xy 82.55 325.12)
+			(xy 85.09 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "45b2329e-b379-50e6-97b1-b9f998ef04aa")
+		(uuid "1afe4482-ba51-55df-bcb3-17a7f6ec11d5")
 	)
 	(label "LED_D2"
-		(at 85.09 340.36 0)
+		(at 85.09 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "d26c4805-d96c-5453-aa5a-a701662041cf")
+		(uuid "646b8a2f-7783-56c6-ae1d-d2cd31ae8854")
 	)
 	(wire
 		(pts
-			(xy 74.93 347.98)
-			(xy 74.93 350.52)
+			(xy 74.93 332.74)
+			(xy 74.93 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4f4f8faa-49fe-500f-9a78-6153e80c7aa7")
+		(uuid "84b9c8c4-a274-5574-9545-0275be86bd53")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 74.93 350.52 0)
+		(at 74.93 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23051,7 +23051,7 @@
 		(dnp no)
 		(uuid "48d2bc93-d6c3-5261-aa51-33bd25f4dc02")
 		(property "Reference" "#PWR77"
-			(at 74.93 356.87 0)
+			(at 74.93 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23060,7 +23060,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 74.93 354.33 0)
+			(at 74.93 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23068,7 +23068,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 74.93 350.52 0)
+			(at 74.93 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23077,7 +23077,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 74.93 350.52 0)
+			(at 74.93 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23086,7 +23086,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 74.93 350.52 0)
+			(at 74.93 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23108,49 +23108,49 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 340.36)
-			(xy 64.77 340.36)
+			(xy 67.31 325.12)
+			(xy 64.77 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4db15a5f-9580-503d-8fcf-0ee12a7d6bc4")
+		(uuid "7b059288-3a2d-5895-b7af-e0691b89cd3c")
 	)
 	(label "LED_D1"
-		(at 64.77 340.36 180)
+		(at 64.77 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "88906dab-b894-5060-87f6-2cba52424710")
+		(uuid "5f34b047-9c5c-57d5-a904-1df6ccf9b6e8")
 	)
 	(wire
 		(pts
-			(xy 74.93 332.74)
-			(xy 74.93 330.2)
+			(xy 74.93 317.5)
+			(xy 74.93 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d431db48-472e-5e29-9173-ca193abae861")
+		(uuid "5a493945-63a4-5c17-8630-c63360d1f8a7")
 	)
 	(label "VLED"
-		(at 74.93 330.2 90)
+		(at 74.93 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "d6d0f21e-7d8b-53d2-b5ad-1756ca8723ad")
+		(uuid "eb1d55cd-0775-5694-981d-63b90f7e3f47")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 74.93 340.36 0)
+		(at 74.93 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23158,7 +23158,7 @@
 		(dnp no)
 		(uuid "c53cca21-5fe5-5335-9a21-dd31cd3ae699")
 		(property "Reference" "D4"
-			(at 69.85 330.2 0)
+			(at 69.85 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23166,8 +23166,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 74.93 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 74.93 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23175,8 +23175,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 76.2 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 76.2 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23186,7 +23186,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 77.47 349.885 0)
+			(at 77.47 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23196,7 +23196,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 74.93 340.36 0)
+			(at 74.93 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23227,39 +23227,39 @@
 	)
 	(wire
 		(pts
-			(xy 90.17 336.55)
-			(xy 90.17 334.01)
+			(xy 90.17 321.31)
+			(xy 90.17 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "005d5c4c-b74d-51e3-aca3-dc02e85bb002")
+		(uuid "f1d1fbb4-2068-5ecb-ac35-a67765af03c1")
 	)
 	(label "VLED"
-		(at 90.17 334.01 90)
+		(at 90.17 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "c5766e71-2040-5bca-893b-80dac12c9bf5")
+		(uuid "6e086696-2d13-5d48-ae1c-e98cbf8def65")
 	)
 	(wire
 		(pts
-			(xy 90.17 344.17)
-			(xy 90.17 346.71)
+			(xy 90.17 328.93)
+			(xy 90.17 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c57adbb4-735f-5313-aed7-3f70fc55754c")
+		(uuid "58e04c77-bee5-5f6a-911e-b858e99c9dd7")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 90.17 346.71 0)
+		(at 90.17 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23267,7 +23267,7 @@
 		(dnp no)
 		(uuid "9443b640-3529-5933-a5a6-a55d070518e3")
 		(property "Reference" "#PWR78"
-			(at 90.17 353.06 0)
+			(at 90.17 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23276,7 +23276,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 90.17 350.52 0)
+			(at 90.17 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23284,7 +23284,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 90.17 346.71 0)
+			(at 90.17 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23293,7 +23293,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 90.17 346.71 0)
+			(at 90.17 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23302,7 +23302,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 90.17 346.71 0)
+			(at 90.17 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23324,7 +23324,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 90.17 340.36 0)
+		(at 90.17 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23332,7 +23332,7 @@
 		(dnp no)
 		(uuid "d14bed4c-53d9-5dce-8991-702db83e3a72")
 		(property "Reference" "C23"
-			(at 90.805 337.82 0)
+			(at 90.805 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23341,7 +23341,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 90.805 342.9 0)
+			(at 90.805 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23350,7 +23350,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 91.1352 344.17 0)
+			(at 91.1352 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23359,7 +23359,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 90.17 340.36 0)
+			(at 90.17 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23368,7 +23368,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 90.17 340.36 0)
+			(at 90.17 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23393,39 +23393,39 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 340.36)
-			(xy 119.38 340.36)
+			(xy 116.84 325.12)
+			(xy 119.38 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "411ff034-3263-54a9-b640-7b66cc99c05b")
+		(uuid "0dd48a79-9261-5d5c-972d-357b8a730dc9")
 	)
 	(label "LED_D3"
-		(at 119.38 340.36 0)
+		(at 119.38 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "1234a582-2feb-568f-acc0-cbb49478ca01")
+		(uuid "d560826e-32f4-57e6-b7a6-13086f86a3b2")
 	)
 	(wire
 		(pts
-			(xy 109.22 347.98)
-			(xy 109.22 350.52)
+			(xy 109.22 332.74)
+			(xy 109.22 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "60f27ff5-8cab-523e-b66f-95e7576f167e")
+		(uuid "578b84aa-7314-5399-ac73-14800a70a9e8")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 109.22 350.52 0)
+		(at 109.22 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23433,7 +23433,7 @@
 		(dnp no)
 		(uuid "7d799f2a-d784-5ccb-853a-4d24c483729f")
 		(property "Reference" "#PWR79"
-			(at 109.22 356.87 0)
+			(at 109.22 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23442,7 +23442,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 109.22 354.33 0)
+			(at 109.22 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23450,7 +23450,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 109.22 350.52 0)
+			(at 109.22 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23459,7 +23459,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 109.22 350.52 0)
+			(at 109.22 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23468,7 +23468,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 109.22 350.52 0)
+			(at 109.22 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23490,49 +23490,49 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 340.36)
-			(xy 99.06 340.36)
+			(xy 101.6 325.12)
+			(xy 99.06 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1d0cbe7c-467c-5109-9282-954511abd4d9")
+		(uuid "17debe44-f561-57ad-910f-1b8e9c443870")
 	)
 	(label "LED_D2"
-		(at 99.06 340.36 180)
+		(at 99.06 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "7c8799df-ed92-5aa5-b992-ca82cd697358")
+		(uuid "d95b760b-31af-536e-9526-3ecdcba0680c")
 	)
 	(wire
 		(pts
-			(xy 109.22 332.74)
-			(xy 109.22 330.2)
+			(xy 109.22 317.5)
+			(xy 109.22 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5a16bdbc-1281-5346-af2b-ae1c2589f084")
+		(uuid "3e778cdb-029f-5c12-afa3-457852b39bee")
 	)
 	(label "VLED"
-		(at 109.22 330.2 90)
+		(at 109.22 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "a266ac7b-df26-5f1f-853d-5329da165a7c")
+		(uuid "97ecd288-45fd-5386-848d-b72d0f0c03ce")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 109.22 340.36 0)
+		(at 109.22 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23540,7 +23540,7 @@
 		(dnp no)
 		(uuid "fe9de993-0d23-5cc7-a990-603e74cf0cb2")
 		(property "Reference" "D5"
-			(at 104.14 330.2 0)
+			(at 104.14 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23548,8 +23548,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 109.22 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 109.22 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23557,8 +23557,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 110.49 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 110.49 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23568,7 +23568,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 111.76 349.885 0)
+			(at 111.76 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23578,7 +23578,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 109.22 340.36 0)
+			(at 109.22 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23609,39 +23609,39 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 336.55)
-			(xy 124.46 334.01)
+			(xy 124.46 321.31)
+			(xy 124.46 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3619c37e-0032-5d3e-af88-96c1b39e5756")
+		(uuid "2fe376db-3687-59e1-a856-3cd927cf3391")
 	)
 	(label "VLED"
-		(at 124.46 334.01 90)
+		(at 124.46 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "927cc2dd-8e64-5b16-a9dd-b9475e49bbbd")
+		(uuid "ee517aa8-de9a-5cc2-9c1d-4f06f32deb4d")
 	)
 	(wire
 		(pts
-			(xy 124.46 344.17)
-			(xy 124.46 346.71)
+			(xy 124.46 328.93)
+			(xy 124.46 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "048c359b-fe41-5cb5-bf39-a55de06b6da0")
+		(uuid "59371958-0fc5-52ad-95be-09b6078906d6")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 124.46 346.71 0)
+		(at 124.46 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23649,7 +23649,7 @@
 		(dnp no)
 		(uuid "3f369d71-70bb-5eb3-8eae-8413842e0028")
 		(property "Reference" "#PWR80"
-			(at 124.46 353.06 0)
+			(at 124.46 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23658,7 +23658,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 124.46 350.52 0)
+			(at 124.46 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23666,7 +23666,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 124.46 346.71 0)
+			(at 124.46 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23675,7 +23675,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 346.71 0)
+			(at 124.46 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23684,7 +23684,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 124.46 346.71 0)
+			(at 124.46 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23706,7 +23706,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 124.46 340.36 0)
+		(at 124.46 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23714,7 +23714,7 @@
 		(dnp no)
 		(uuid "d76ffaf2-232e-504a-b367-0ba6391a5146")
 		(property "Reference" "C24"
-			(at 125.095 337.82 0)
+			(at 125.095 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23723,7 +23723,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 125.095 342.9 0)
+			(at 125.095 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23732,7 +23732,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 125.4252 344.17 0)
+			(at 125.4252 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23741,7 +23741,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 340.36 0)
+			(at 124.46 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23750,7 +23750,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 124.46 340.36 0)
+			(at 124.46 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23775,39 +23775,39 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 340.36)
-			(xy 153.67 340.36)
+			(xy 151.13 325.12)
+			(xy 153.67 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6792a69d-cb15-5010-8265-5b92d83f30b8")
+		(uuid "272b35db-6859-5c30-85ee-caad7a2a256d")
 	)
 	(label "LED_D4"
-		(at 153.67 340.36 0)
+		(at 153.67 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "93b37f11-88ab-594a-80a1-7179e9ea8fd8")
+		(uuid "af0ad796-f25a-5526-8d01-e55f3a026126")
 	)
 	(wire
 		(pts
-			(xy 143.51 347.98)
-			(xy 143.51 350.52)
+			(xy 143.51 332.74)
+			(xy 143.51 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "18f99519-4dc6-53a4-a438-e627b3d600e4")
+		(uuid "3453dccd-d7d2-551e-9831-b965c3b4df97")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 143.51 350.52 0)
+		(at 143.51 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23815,7 +23815,7 @@
 		(dnp no)
 		(uuid "c5858a84-3d94-5053-a4de-c1566c708264")
 		(property "Reference" "#PWR81"
-			(at 143.51 356.87 0)
+			(at 143.51 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23824,7 +23824,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 143.51 354.33 0)
+			(at 143.51 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23832,7 +23832,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 143.51 350.52 0)
+			(at 143.51 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23841,7 +23841,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 143.51 350.52 0)
+			(at 143.51 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23850,7 +23850,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 143.51 350.52 0)
+			(at 143.51 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23872,49 +23872,49 @@
 	)
 	(wire
 		(pts
-			(xy 135.89 340.36)
-			(xy 133.35 340.36)
+			(xy 135.89 325.12)
+			(xy 133.35 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f9eaee99-b5fa-5fc9-9cef-f88e3bcc58dc")
+		(uuid "413fa01d-cce1-5737-977a-78366782da3a")
 	)
 	(label "LED_D3"
-		(at 133.35 340.36 180)
+		(at 133.35 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "a988617d-ab5f-5aab-85bf-62ecd3096ca9")
+		(uuid "bb45c5a0-1a66-561e-9bee-350667e98969")
 	)
 	(wire
 		(pts
-			(xy 143.51 332.74)
-			(xy 143.51 330.2)
+			(xy 143.51 317.5)
+			(xy 143.51 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6e32279d-e793-533d-b260-c9cbf17939b5")
+		(uuid "922f9b6c-985d-5c6c-aad5-d4a656a18faa")
 	)
 	(label "VLED"
-		(at 143.51 330.2 90)
+		(at 143.51 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "92a71f1f-883f-51a3-b175-260aa5825366")
+		(uuid "f69617d3-15f0-503b-9ea8-3327d2308894")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 143.51 340.36 0)
+		(at 143.51 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -23922,7 +23922,7 @@
 		(dnp no)
 		(uuid "f67f06ee-817b-51d7-bc77-73a0db8859b3")
 		(property "Reference" "D6"
-			(at 138.43 330.2 0)
+			(at 138.43 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23930,8 +23930,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 143.51 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 143.51 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23939,8 +23939,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 144.78 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 144.78 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23950,7 +23950,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 146.05 349.885 0)
+			(at 146.05 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23960,7 +23960,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 143.51 340.36 0)
+			(at 143.51 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23991,39 +23991,39 @@
 	)
 	(wire
 		(pts
-			(xy 158.75 336.55)
-			(xy 158.75 334.01)
+			(xy 158.75 321.31)
+			(xy 158.75 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7cd5a8da-3897-5882-bdf9-bfef4015fa52")
+		(uuid "78610de2-38e5-5dcd-b260-90f19b3bb0fd")
 	)
 	(label "VLED"
-		(at 158.75 334.01 90)
+		(at 158.75 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "8faa9e89-da1f-5fa0-86ba-e0ada3a179a2")
+		(uuid "9cf4732a-4e05-5f92-96c1-869be8b9d009")
 	)
 	(wire
 		(pts
-			(xy 158.75 344.17)
-			(xy 158.75 346.71)
+			(xy 158.75 328.93)
+			(xy 158.75 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e5effe0f-95f1-5d1d-87a5-4fc48dd850d2")
+		(uuid "42da1a94-833e-56c0-9253-18da03846814")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 158.75 346.71 0)
+		(at 158.75 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24031,7 +24031,7 @@
 		(dnp no)
 		(uuid "077f22f8-daa7-5569-9271-6e7b36460136")
 		(property "Reference" "#PWR82"
-			(at 158.75 353.06 0)
+			(at 158.75 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24040,7 +24040,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 158.75 350.52 0)
+			(at 158.75 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24048,7 +24048,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 158.75 346.71 0)
+			(at 158.75 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24057,7 +24057,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 158.75 346.71 0)
+			(at 158.75 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24066,7 +24066,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 158.75 346.71 0)
+			(at 158.75 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24088,7 +24088,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 158.75 340.36 0)
+		(at 158.75 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24096,7 +24096,7 @@
 		(dnp no)
 		(uuid "f37d6b29-7ece-5dbe-bef4-d2009cb5b97d")
 		(property "Reference" "C25"
-			(at 159.385 337.82 0)
+			(at 159.385 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24105,7 +24105,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 159.385 342.9 0)
+			(at 159.385 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24114,7 +24114,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 159.7152 344.17 0)
+			(at 159.7152 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24123,7 +24123,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 158.75 340.36 0)
+			(at 158.75 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24132,7 +24132,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 158.75 340.36 0)
+			(at 158.75 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24157,39 +24157,39 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 340.36)
-			(xy 187.96 340.36)
+			(xy 185.42 325.12)
+			(xy 187.96 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3a7c761c-f713-538d-ae84-bb813785cbd9")
+		(uuid "d916e5d8-6288-5583-84a1-cd2eb8446f8d")
 	)
 	(label "LED_D5"
-		(at 187.96 340.36 0)
+		(at 187.96 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "65f14cdc-f01a-54e4-905e-d5b5dce3d9d0")
+		(uuid "b90b8e73-e476-5877-8444-b9410f002c03")
 	)
 	(wire
 		(pts
-			(xy 177.8 347.98)
-			(xy 177.8 350.52)
+			(xy 177.8 332.74)
+			(xy 177.8 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c26827cb-8711-54d0-97e1-9a62652fedfa")
+		(uuid "a4fc0998-c3d3-544a-8571-010a9b8d0040")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 177.8 350.52 0)
+		(at 177.8 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24197,7 +24197,7 @@
 		(dnp no)
 		(uuid "469a55df-48ae-5ac0-a8aa-1b107fa1e1e2")
 		(property "Reference" "#PWR83"
-			(at 177.8 356.87 0)
+			(at 177.8 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24206,7 +24206,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 177.8 354.33 0)
+			(at 177.8 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24214,7 +24214,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 177.8 350.52 0)
+			(at 177.8 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24223,7 +24223,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 177.8 350.52 0)
+			(at 177.8 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24232,7 +24232,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 177.8 350.52 0)
+			(at 177.8 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24254,49 +24254,49 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 340.36)
-			(xy 167.64 340.36)
+			(xy 170.18 325.12)
+			(xy 167.64 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2b597776-455f-5883-bf5b-ee5babb89d3b")
+		(uuid "50e22f76-0542-5de7-8f87-e7c4e2615952")
 	)
 	(label "LED_D4"
-		(at 167.64 340.36 180)
+		(at 167.64 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "43b6a9f0-6540-5fa7-85c7-2853e7b8998c")
+		(uuid "bf5eb07c-1282-5ed2-9805-1aaf719e6a7a")
 	)
 	(wire
 		(pts
-			(xy 177.8 332.74)
-			(xy 177.8 330.2)
+			(xy 177.8 317.5)
+			(xy 177.8 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7651b46d-85d4-50b7-a245-330a94593243")
+		(uuid "6ac6525c-97a5-5922-bb32-31a910f692b2")
 	)
 	(label "VLED"
-		(at 177.8 330.2 90)
+		(at 177.8 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "e55f075a-a82e-5f37-b871-bd2bf16e9a1e")
+		(uuid "6fb910d6-e414-5084-8b88-cbea396f8db3")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 177.8 340.36 0)
+		(at 177.8 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24304,7 +24304,7 @@
 		(dnp no)
 		(uuid "39b96977-6a16-5bd2-ab45-e2f4c5ca77ac")
 		(property "Reference" "D7"
-			(at 172.72 330.2 0)
+			(at 172.72 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24312,8 +24312,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 177.8 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 177.8 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24321,8 +24321,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 179.07 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 179.07 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24332,7 +24332,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 180.34 349.885 0)
+			(at 180.34 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24342,7 +24342,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 177.8 340.36 0)
+			(at 177.8 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24373,39 +24373,39 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 336.55)
-			(xy 193.04 334.01)
+			(xy 193.04 321.31)
+			(xy 193.04 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6b083547-3609-50e4-8c20-b9fc82297835")
+		(uuid "4ec2d517-901b-5000-a05f-9b075e7c7a3b")
 	)
 	(label "VLED"
-		(at 193.04 334.01 90)
+		(at 193.04 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "56738daa-8868-50e0-bca0-ac3170a2b2fa")
+		(uuid "e89cb9ef-17fe-5a29-bbda-cd41a1e1b823")
 	)
 	(wire
 		(pts
-			(xy 193.04 344.17)
-			(xy 193.04 346.71)
+			(xy 193.04 328.93)
+			(xy 193.04 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bfafd712-fb0c-589b-a60f-7eb3cd20b531")
+		(uuid "692abcc9-c62d-55f0-a596-581fc80d4f9f")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 193.04 346.71 0)
+		(at 193.04 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24413,7 +24413,7 @@
 		(dnp no)
 		(uuid "826fc195-8420-5d4b-865f-0ac70aba0acb")
 		(property "Reference" "#PWR84"
-			(at 193.04 353.06 0)
+			(at 193.04 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24422,7 +24422,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 193.04 350.52 0)
+			(at 193.04 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24430,7 +24430,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 193.04 346.71 0)
+			(at 193.04 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24439,7 +24439,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 193.04 346.71 0)
+			(at 193.04 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24448,7 +24448,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 193.04 346.71 0)
+			(at 193.04 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24470,7 +24470,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 193.04 340.36 0)
+		(at 193.04 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24478,7 +24478,7 @@
 		(dnp no)
 		(uuid "8982b141-76a9-5c9d-b4f1-f9cfa3ad8f7e")
 		(property "Reference" "C26"
-			(at 193.675 337.82 0)
+			(at 193.675 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24487,7 +24487,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 193.675 342.9 0)
+			(at 193.675 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24496,7 +24496,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 194.0052 344.17 0)
+			(at 194.0052 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24505,7 +24505,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 193.04 340.36 0)
+			(at 193.04 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24514,7 +24514,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 193.04 340.36 0)
+			(at 193.04 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24539,39 +24539,39 @@
 	)
 	(wire
 		(pts
-			(xy 219.71 340.36)
-			(xy 222.25 340.36)
+			(xy 219.71 325.12)
+			(xy 222.25 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9f261514-72f2-5beb-881b-dd16f92e85db")
+		(uuid "e10bee31-738d-572a-a20b-64d792ffd73b")
 	)
 	(label "LED_D6"
-		(at 222.25 340.36 0)
+		(at 222.25 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "2bc7e385-c571-55c1-9889-fbe1953c5d83")
+		(uuid "431ebf5f-80ca-5c8f-825c-170760f98d1e")
 	)
 	(wire
 		(pts
-			(xy 212.09 347.98)
-			(xy 212.09 350.52)
+			(xy 212.09 332.74)
+			(xy 212.09 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "69ff5371-e1af-557d-890b-1c466f857dc2")
+		(uuid "efc4fb21-0e9e-518b-8aff-9612570bd9a2")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 212.09 350.52 0)
+		(at 212.09 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24579,7 +24579,7 @@
 		(dnp no)
 		(uuid "0188c03a-db61-557b-bc1e-11ef96baaf38")
 		(property "Reference" "#PWR85"
-			(at 212.09 356.87 0)
+			(at 212.09 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24588,7 +24588,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 212.09 354.33 0)
+			(at 212.09 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24596,7 +24596,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 212.09 350.52 0)
+			(at 212.09 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24605,7 +24605,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 212.09 350.52 0)
+			(at 212.09 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24614,7 +24614,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 212.09 350.52 0)
+			(at 212.09 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24636,49 +24636,49 @@
 	)
 	(wire
 		(pts
-			(xy 204.47 340.36)
-			(xy 201.93 340.36)
+			(xy 204.47 325.12)
+			(xy 201.93 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "596f12e1-f0bd-58ea-8e59-0af54d3171fc")
+		(uuid "f22d0bee-02fe-5c2d-b28e-600e5c2c123a")
 	)
 	(label "LED_D5"
-		(at 201.93 340.36 180)
+		(at 201.93 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "3c99eadc-d9df-589e-86cc-7d98a44131f9")
+		(uuid "c6f27ddf-0cc0-50e5-986f-a5a04d9d7ce3")
 	)
 	(wire
 		(pts
-			(xy 212.09 332.74)
-			(xy 212.09 330.2)
+			(xy 212.09 317.5)
+			(xy 212.09 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "40c4eeff-b7bb-5295-a3cf-40e591abe972")
+		(uuid "1124c035-e87f-5408-ba55-1bd3e870d35d")
 	)
 	(label "VLED"
-		(at 212.09 330.2 90)
+		(at 212.09 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "61210276-277b-5d7f-a0df-c32b07d19506")
+		(uuid "5a77ecdf-62a6-5618-916d-cf01f959da55")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 212.09 340.36 0)
+		(at 212.09 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24686,7 +24686,7 @@
 		(dnp no)
 		(uuid "f6425d8c-517a-5592-845c-f134d9b15ae5")
 		(property "Reference" "D8"
-			(at 207.01 330.2 0)
+			(at 207.01 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24694,8 +24694,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 212.09 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 212.09 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24703,8 +24703,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 213.36 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 213.36 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24714,7 +24714,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 214.63 349.885 0)
+			(at 214.63 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24724,7 +24724,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 212.09 340.36 0)
+			(at 212.09 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24755,39 +24755,39 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 336.55)
-			(xy 227.33 334.01)
+			(xy 227.33 321.31)
+			(xy 227.33 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "189b7c33-a796-5954-a6c7-36277a21d1c0")
+		(uuid "50946a5d-62f5-5bde-bca4-aec6af06e1e0")
 	)
 	(label "VLED"
-		(at 227.33 334.01 90)
+		(at 227.33 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "ec7027e2-c815-510e-9475-c15affce7b6c")
+		(uuid "45b95ddc-6bd9-5acf-9bb2-f67ea145a6d4")
 	)
 	(wire
 		(pts
-			(xy 227.33 344.17)
-			(xy 227.33 346.71)
+			(xy 227.33 328.93)
+			(xy 227.33 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "35718f7c-5dcc-5dd3-90b9-a7dd42e3480a")
+		(uuid "0f0b2f04-4a21-545f-ac73-b2aca872ecb7")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 227.33 346.71 0)
+		(at 227.33 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24795,7 +24795,7 @@
 		(dnp no)
 		(uuid "c9bbd5c7-7513-5af7-9a74-1aa281bc4047")
 		(property "Reference" "#PWR86"
-			(at 227.33 353.06 0)
+			(at 227.33 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24804,7 +24804,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 227.33 350.52 0)
+			(at 227.33 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24812,7 +24812,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 227.33 346.71 0)
+			(at 227.33 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24821,7 +24821,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 227.33 346.71 0)
+			(at 227.33 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24830,7 +24830,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 227.33 346.71 0)
+			(at 227.33 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24852,7 +24852,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 227.33 340.36 0)
+		(at 227.33 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24860,7 +24860,7 @@
 		(dnp no)
 		(uuid "7294a34e-770f-5924-a6ef-0214f6c5362c")
 		(property "Reference" "C27"
-			(at 227.965 337.82 0)
+			(at 227.965 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24869,7 +24869,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 227.965 342.9 0)
+			(at 227.965 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24878,7 +24878,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 228.2952 344.17 0)
+			(at 228.2952 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24887,7 +24887,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 227.33 340.36 0)
+			(at 227.33 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24896,7 +24896,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 227.33 340.36 0)
+			(at 227.33 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24921,39 +24921,39 @@
 	)
 	(wire
 		(pts
-			(xy 254 340.36)
-			(xy 256.54 340.36)
+			(xy 254 325.12)
+			(xy 256.54 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "489135fb-dd38-5b11-80fa-513861f5e4cd")
+		(uuid "3a6cd5c4-9134-55b7-9fcd-c2731f2a3e42")
 	)
 	(label "LED_D7"
-		(at 256.54 340.36 0)
+		(at 256.54 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "bc1f73e9-f0c6-5ad8-a949-e568c73a7b2d")
+		(uuid "7a917d1c-b06a-505d-b1fc-2a5c6c257d4f")
 	)
 	(wire
 		(pts
-			(xy 246.38 347.98)
-			(xy 246.38 350.52)
+			(xy 246.38 332.74)
+			(xy 246.38 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "240cdb52-ac68-5b8d-8d4b-c958bb48e6da")
+		(uuid "b8e61888-5ed3-523b-92db-938bdd8a66e8")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 246.38 350.52 0)
+		(at 246.38 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -24961,7 +24961,7 @@
 		(dnp no)
 		(uuid "7172350d-961a-5df7-b65a-7eb55e1d36ba")
 		(property "Reference" "#PWR87"
-			(at 246.38 356.87 0)
+			(at 246.38 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24970,7 +24970,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 246.38 354.33 0)
+			(at 246.38 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24978,7 +24978,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 246.38 350.52 0)
+			(at 246.38 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24987,7 +24987,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 246.38 350.52 0)
+			(at 246.38 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -24996,7 +24996,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 246.38 350.52 0)
+			(at 246.38 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25018,49 +25018,49 @@
 	)
 	(wire
 		(pts
-			(xy 238.76 340.36)
-			(xy 236.22 340.36)
+			(xy 238.76 325.12)
+			(xy 236.22 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f9f97674-aa1a-5e65-bfe3-ae00e1905a1f")
+		(uuid "b5f4f4db-e400-5bcc-9a72-b0e24fb7bc7c")
 	)
 	(label "LED_D6"
-		(at 236.22 340.36 180)
+		(at 236.22 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "9ce9cd0b-f8fa-52e9-811c-18952f94f700")
+		(uuid "b0e8a78d-134d-5715-ae86-590cb10e8c82")
 	)
 	(wire
 		(pts
-			(xy 246.38 332.74)
-			(xy 246.38 330.2)
+			(xy 246.38 317.5)
+			(xy 246.38 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "caf2aea1-305a-597b-9b2f-6e1637d9253c")
+		(uuid "fca9b464-76bd-59f5-a942-531d3594e453")
 	)
 	(label "VLED"
-		(at 246.38 330.2 90)
+		(at 246.38 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "6ee3edb6-3585-575d-b376-b6cdf9d20c70")
+		(uuid "7b86cb34-306e-570d-8c95-92c4d9998d6a")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 246.38 340.36 0)
+		(at 246.38 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25068,7 +25068,7 @@
 		(dnp no)
 		(uuid "675e7351-e1cd-5d53-9f58-6ecb84e5ecd1")
 		(property "Reference" "D9"
-			(at 241.3 330.2 0)
+			(at 241.3 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25076,8 +25076,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 246.38 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 246.38 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25085,8 +25085,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 247.65 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 247.65 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25096,7 +25096,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 248.92 349.885 0)
+			(at 248.92 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25106,7 +25106,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 246.38 340.36 0)
+			(at 246.38 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25137,39 +25137,39 @@
 	)
 	(wire
 		(pts
-			(xy 261.62 336.55)
-			(xy 261.62 334.01)
+			(xy 261.62 321.31)
+			(xy 261.62 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5b367051-6f0a-547c-b7c9-7d2e8a971747")
+		(uuid "e65717f4-e1e9-5065-a90f-e8cdefe6dcd8")
 	)
 	(label "VLED"
-		(at 261.62 334.01 90)
+		(at 261.62 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "94eda80a-45a3-50d6-a9e4-d59ffdb482a8")
+		(uuid "4ad41144-b41a-5411-9929-f992530ffe3b")
 	)
 	(wire
 		(pts
-			(xy 261.62 344.17)
-			(xy 261.62 346.71)
+			(xy 261.62 328.93)
+			(xy 261.62 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ff089c43-3264-5a8f-8079-35f8b1442eed")
+		(uuid "c7086f05-4efa-58ee-9c95-c068aa65e9cf")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 261.62 346.71 0)
+		(at 261.62 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25177,7 +25177,7 @@
 		(dnp no)
 		(uuid "0db624f8-6173-58cf-a49b-8da7f8afc90c")
 		(property "Reference" "#PWR88"
-			(at 261.62 353.06 0)
+			(at 261.62 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25186,7 +25186,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 261.62 350.52 0)
+			(at 261.62 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25194,7 +25194,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 261.62 346.71 0)
+			(at 261.62 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25203,7 +25203,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 261.62 346.71 0)
+			(at 261.62 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25212,7 +25212,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 261.62 346.71 0)
+			(at 261.62 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25234,7 +25234,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 261.62 340.36 0)
+		(at 261.62 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25242,7 +25242,7 @@
 		(dnp no)
 		(uuid "7f17017f-79e2-5c8c-8ca8-89a8a4119044")
 		(property "Reference" "C28"
-			(at 262.255 337.82 0)
+			(at 262.255 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25251,7 +25251,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 262.255 342.9 0)
+			(at 262.255 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25260,7 +25260,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 262.5852 344.17 0)
+			(at 262.5852 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25269,7 +25269,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 261.62 340.36 0)
+			(at 261.62 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25278,7 +25278,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 261.62 340.36 0)
+			(at 261.62 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25303,39 +25303,39 @@
 	)
 	(wire
 		(pts
-			(xy 288.29 340.36)
-			(xy 290.83 340.36)
+			(xy 288.29 325.12)
+			(xy 290.83 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b20c5098-7810-5e3d-869f-54e797f0ee54")
+		(uuid "d28a73eb-1a74-543a-9bc6-29290c5dadcf")
 	)
 	(label "LED_D8"
-		(at 290.83 340.36 0)
+		(at 290.83 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "c913d6e1-a3bb-5f5b-9cb0-d697cfb2d7ab")
+		(uuid "a776daa4-351b-5abe-bfa2-b177a13cfde3")
 	)
 	(wire
 		(pts
-			(xy 280.67 347.98)
-			(xy 280.67 350.52)
+			(xy 280.67 332.74)
+			(xy 280.67 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3d2a471d-5c95-5120-80ee-27dc4225614b")
+		(uuid "b932caa0-23dc-585b-ac7e-5b554336eb49")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 280.67 350.52 0)
+		(at 280.67 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25343,7 +25343,7 @@
 		(dnp no)
 		(uuid "a474cc9a-3a3c-5d08-bdce-2cdcf9615da7")
 		(property "Reference" "#PWR89"
-			(at 280.67 356.87 0)
+			(at 280.67 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25352,7 +25352,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 280.67 354.33 0)
+			(at 280.67 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25360,7 +25360,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 280.67 350.52 0)
+			(at 280.67 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25369,7 +25369,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 280.67 350.52 0)
+			(at 280.67 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25378,7 +25378,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 280.67 350.52 0)
+			(at 280.67 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25400,49 +25400,49 @@
 	)
 	(wire
 		(pts
-			(xy 273.05 340.36)
-			(xy 270.51 340.36)
+			(xy 273.05 325.12)
+			(xy 270.51 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c60e881a-b4e7-510c-a367-e9a139310f40")
+		(uuid "b899aaf8-e95a-5e0b-9161-a54f80eb6218")
 	)
 	(label "LED_D7"
-		(at 270.51 340.36 180)
+		(at 270.51 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "0d81bd2a-68ac-5026-be1d-486f2b06fe82")
+		(uuid "27ec22b2-edfa-54c9-a589-432428e1d317")
 	)
 	(wire
 		(pts
-			(xy 280.67 332.74)
-			(xy 280.67 330.2)
+			(xy 280.67 317.5)
+			(xy 280.67 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f56cec43-072d-5400-96a6-42484ddd1799")
+		(uuid "4a7e2102-307a-59ab-9d1d-970404162627")
 	)
 	(label "VLED"
-		(at 280.67 330.2 90)
+		(at 280.67 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "d9e2bb2e-1ff8-589b-a8f5-c001bd3eac18")
+		(uuid "6f6f42e4-2b8d-53af-97b6-c73f1763c521")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 280.67 340.36 0)
+		(at 280.67 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25450,7 +25450,7 @@
 		(dnp no)
 		(uuid "0cbd8d88-f302-5ca0-be00-155d2578fef7")
 		(property "Reference" "D10"
-			(at 275.59 330.2 0)
+			(at 275.59 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25458,8 +25458,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 280.67 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 280.67 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25467,8 +25467,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 281.94 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 281.94 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25478,7 +25478,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 283.21 349.885 0)
+			(at 283.21 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25488,7 +25488,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 280.67 340.36 0)
+			(at 280.67 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25519,39 +25519,39 @@
 	)
 	(wire
 		(pts
-			(xy 295.91 336.55)
-			(xy 295.91 334.01)
+			(xy 295.91 321.31)
+			(xy 295.91 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9635db68-ee93-5bde-bec6-fff74f6b9f6f")
+		(uuid "384d3962-ffe2-5867-bcba-c187010daef6")
 	)
 	(label "VLED"
-		(at 295.91 334.01 90)
+		(at 295.91 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "7fc4ce8b-ecf1-5df1-a227-5fa1b7e70dbe")
+		(uuid "cf2a7c89-71a4-5130-a939-0ac8b306a1c8")
 	)
 	(wire
 		(pts
-			(xy 295.91 344.17)
-			(xy 295.91 346.71)
+			(xy 295.91 328.93)
+			(xy 295.91 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3a1494d2-53aa-5721-a043-a53a88e8a7fc")
+		(uuid "b6c65bbb-6c71-5067-a009-3bce95360baf")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 295.91 346.71 0)
+		(at 295.91 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25559,7 +25559,7 @@
 		(dnp no)
 		(uuid "0d05c34f-8764-5bdf-b4ab-720663776c72")
 		(property "Reference" "#PWR90"
-			(at 295.91 353.06 0)
+			(at 295.91 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25568,7 +25568,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 295.91 350.52 0)
+			(at 295.91 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25576,7 +25576,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 295.91 346.71 0)
+			(at 295.91 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25585,7 +25585,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 295.91 346.71 0)
+			(at 295.91 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25594,7 +25594,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 295.91 346.71 0)
+			(at 295.91 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25616,7 +25616,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 295.91 340.36 0)
+		(at 295.91 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25624,7 +25624,7 @@
 		(dnp no)
 		(uuid "a2f314e0-ab07-58c7-9c72-052cc45a380e")
 		(property "Reference" "C29"
-			(at 296.545 337.82 0)
+			(at 296.545 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25633,7 +25633,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 296.545 342.9 0)
+			(at 296.545 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25642,7 +25642,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 296.8752 344.17 0)
+			(at 296.8752 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25651,7 +25651,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 295.91 340.36 0)
+			(at 295.91 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25660,7 +25660,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 295.91 340.36 0)
+			(at 295.91 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25685,39 +25685,39 @@
 	)
 	(wire
 		(pts
-			(xy 322.58 340.36)
-			(xy 325.12 340.36)
+			(xy 322.58 325.12)
+			(xy 325.12 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f389ae70-9894-5dbd-b882-fecbfca6b796")
+		(uuid "fe674a24-fc29-5363-8b67-4dd5120a7ad2")
 	)
 	(label "LED_D9"
-		(at 325.12 340.36 0)
+		(at 325.12 325.12 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "3f3890de-b2b7-5c72-804b-aa9835abef4f")
+		(uuid "3e43ba77-b6a2-5d1f-8826-81f0ab37cda1")
 	)
 	(wire
 		(pts
-			(xy 314.96 347.98)
-			(xy 314.96 350.52)
+			(xy 314.96 332.74)
+			(xy 314.96 335.28)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ff1f18b4-7df2-5574-8f7a-966635314a23")
+		(uuid "53ba0dd8-067f-5799-aae8-0bdd82c57a4a")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 314.96 350.52 0)
+		(at 314.96 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25725,7 +25725,7 @@
 		(dnp no)
 		(uuid "9ca5579c-8caf-52b7-8a00-ffdf3f13f599")
 		(property "Reference" "#PWR91"
-			(at 314.96 356.87 0)
+			(at 314.96 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25734,7 +25734,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 314.96 354.33 0)
+			(at 314.96 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25742,7 +25742,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 314.96 350.52 0)
+			(at 314.96 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25751,7 +25751,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 314.96 350.52 0)
+			(at 314.96 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25760,7 +25760,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 314.96 350.52 0)
+			(at 314.96 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25782,49 +25782,49 @@
 	)
 	(wire
 		(pts
-			(xy 307.34 340.36)
-			(xy 304.8 340.36)
+			(xy 307.34 325.12)
+			(xy 304.8 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "292e479f-54c3-50b8-8304-38632b7eef7b")
+		(uuid "be5c23b2-afc2-5c7c-8ae1-c9076033db28")
 	)
 	(label "LED_D8"
-		(at 304.8 340.36 180)
+		(at 304.8 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "a42ae386-f531-5530-9375-36b6bf76f056")
+		(uuid "033f7976-8dbb-52ca-b594-bf5db010a478")
 	)
 	(wire
 		(pts
-			(xy 314.96 332.74)
-			(xy 314.96 330.2)
+			(xy 314.96 317.5)
+			(xy 314.96 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9513185b-5092-5442-9a54-b109ab481d56")
+		(uuid "89281d7d-91dd-5565-bf9c-483f23412a06")
 	)
 	(label "VLED"
-		(at 314.96 330.2 90)
+		(at 314.96 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "0f449408-cdcd-5177-beeb-e85ffbe66eb8")
+		(uuid "8f8b8132-f7b3-5cd4-8114-93265747c2c3")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 314.96 340.36 0)
+		(at 314.96 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25832,7 +25832,7 @@
 		(dnp no)
 		(uuid "e7230832-42c6-5d3c-b9d0-5545a8978f67")
 		(property "Reference" "D11"
-			(at 309.88 330.2 0)
+			(at 309.88 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25840,8 +25840,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 314.96 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 314.96 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25849,8 +25849,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 316.23 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 316.23 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25860,7 +25860,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 317.5 349.885 0)
+			(at 317.5 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25870,7 +25870,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 314.96 340.36 0)
+			(at 314.96 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25901,39 +25901,39 @@
 	)
 	(wire
 		(pts
-			(xy 330.2 336.55)
-			(xy 330.2 334.01)
+			(xy 330.2 321.31)
+			(xy 330.2 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "cccf370e-395d-5cf1-91ae-c7a505b7da60")
+		(uuid "f6e166bf-dbda-5a94-8e09-876db66b1bca")
 	)
 	(label "VLED"
-		(at 330.2 334.01 90)
+		(at 330.2 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "0fb6a1e5-4b7a-5384-9a8e-176c09b686d6")
+		(uuid "ec93969b-54a6-592b-a302-76fa9e3f3b79")
 	)
 	(wire
 		(pts
-			(xy 330.2 344.17)
-			(xy 330.2 346.71)
+			(xy 330.2 328.93)
+			(xy 330.2 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "eb0d61fd-472e-52ce-b84c-8cb92125784a")
+		(uuid "502e7aa7-a9a0-57e0-b362-a120aa399f8a")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 330.2 346.71 0)
+		(at 330.2 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25941,7 +25941,7 @@
 		(dnp no)
 		(uuid "57642aff-a5bb-535f-8d6b-e0ea783d96be")
 		(property "Reference" "#PWR92"
-			(at 330.2 353.06 0)
+			(at 330.2 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25950,7 +25950,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 330.2 350.52 0)
+			(at 330.2 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25958,7 +25958,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 330.2 346.71 0)
+			(at 330.2 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25967,7 +25967,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 330.2 346.71 0)
+			(at 330.2 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25976,7 +25976,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 330.2 346.71 0)
+			(at 330.2 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25998,7 +25998,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 330.2 340.36 0)
+		(at 330.2 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -26006,7 +26006,7 @@
 		(dnp no)
 		(uuid "447b9bfb-d971-5212-883d-fd7769c763cc")
 		(property "Reference" "C30"
-			(at 330.835 337.82 0)
+			(at 330.835 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26015,7 +26015,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 330.835 342.9 0)
+			(at 330.835 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26024,7 +26024,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 331.1652 344.17 0)
+			(at 331.1652 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26033,7 +26033,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 330.2 340.36 0)
+			(at 330.2 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26042,7 +26042,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 330.2 340.36 0)
+			(at 330.2 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26065,24 +26065,41 @@
 			)
 		)
 	)
-	(no_connect
-		(at 356.87 340.36)
-		(uuid "a9d90972-fabc-597a-97fe-08a5fd95be48")
-	)
 	(wire
 		(pts
-			(xy 349.25 347.98)
-			(xy 349.25 350.52)
+			(xy 356.87 325.12)
+			(xy 359.41 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7dce3ba6-c835-5c0c-a6a5-8eb0de7ef7e3")
+		(uuid "5dc9142a-d92b-5c34-8d8d-8071257e0a45")
+	)
+	(label "LED_D10"
+		(at 359.41 325.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "32962b41-13c3-54b4-813e-2e255ca1e94a")
+	)
+	(wire
+		(pts
+			(xy 349.25 332.74)
+			(xy 349.25 335.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3bcf886-4c46-5537-8784-b71b7e79d0ce")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 349.25 350.52 0)
+		(at 349.25 335.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -26090,7 +26107,7 @@
 		(dnp no)
 		(uuid "97f5ce31-e13d-5429-ab0b-08b0ddb8bdd8")
 		(property "Reference" "#PWR93"
-			(at 349.25 356.87 0)
+			(at 349.25 341.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26099,7 +26116,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 349.25 354.33 0)
+			(at 349.25 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26107,7 +26124,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 349.25 350.52 0)
+			(at 349.25 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26116,7 +26133,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 349.25 350.52 0)
+			(at 349.25 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26125,7 +26142,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 349.25 350.52 0)
+			(at 349.25 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26147,49 +26164,49 @@
 	)
 	(wire
 		(pts
-			(xy 341.63 340.36)
-			(xy 339.09 340.36)
+			(xy 341.63 325.12)
+			(xy 339.09 325.12)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5be5136b-ee5d-5475-8bef-504c586145c5")
+		(uuid "52cc94e4-d4c0-5714-8a6b-9cb0c9f32879")
 	)
 	(label "LED_D9"
-		(at 339.09 340.36 180)
+		(at 339.09 325.12 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right bottom)
 		)
-		(uuid "bc85c49f-54fb-548d-91a9-902494d54ec9")
+		(uuid "14278a7f-8bda-5186-89a7-9b24660ae1cd")
 	)
 	(wire
 		(pts
-			(xy 349.25 332.74)
-			(xy 349.25 330.2)
+			(xy 349.25 317.5)
+			(xy 349.25 314.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "fdceae09-16cb-572f-989f-f9135091c838")
+		(uuid "ed9f0c93-0d71-5102-9ffa-a5901fd2c043")
 	)
 	(label "VLED"
-		(at 349.25 330.2 90)
+		(at 349.25 314.96 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "959ebcbb-2e56-5e10-bc0a-c9bef2f226da")
+		(uuid "1952f59f-a7c9-5465-8168-153ccaba16c2")
 	)
 	(symbol
 		(lib_id "LED:WS2812B-2020")
-		(at 349.25 340.36 0)
+		(at 349.25 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -26197,7 +26214,7 @@
 		(dnp no)
 		(uuid "a5d5234c-9857-58da-857f-ae33ac0dec10")
 		(property "Reference" "D12"
-			(at 344.17 330.2 0)
+			(at 344.17 317.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26205,8 +26222,8 @@
 				(justify right bottom)
 			)
 		)
-		(property "Value" "WS2812B-2020"
-			(at 349.25 350.52 0)
+		(property "Value" "WL-ICLED 2020"
+			(at 349.25 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26214,8 +26231,8 @@
 				(justify left top)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm"
-			(at 350.52 347.98 0)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 350.52 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26225,7 +26242,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
-			(at 351.79 349.885 0)
+			(at 351.79 334.645 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26235,7 +26252,7 @@
 			)
 		)
 		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
-			(at 349.25 340.36 0)
+			(at 349.25 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26266,39 +26283,39 @@
 	)
 	(wire
 		(pts
-			(xy 364.49 336.55)
-			(xy 364.49 334.01)
+			(xy 364.49 321.31)
+			(xy 364.49 318.77)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d64f1e92-5381-5d37-a140-9daf8e623b15")
+		(uuid "2245e912-3c85-5bc7-b6c8-2b14579d306d")
 	)
 	(label "VLED"
-		(at 364.49 334.01 90)
+		(at 364.49 318.77 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "4c20de2c-dd38-5794-9300-51db6f0b8716")
+		(uuid "4050f946-fdd2-50f9-ab9a-56dafd98b2e1")
 	)
 	(wire
 		(pts
-			(xy 364.49 344.17)
-			(xy 364.49 346.71)
+			(xy 364.49 328.93)
+			(xy 364.49 331.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5bd22d42-6e06-5a1e-9708-6c885867f244")
+		(uuid "2ccb51a2-d54e-5d76-98d5-7f48b1ed57fc")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 364.49 346.71 0)
+		(at 364.49 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -26306,7 +26323,7 @@
 		(dnp no)
 		(uuid "651eec60-b557-5c1d-9079-5701749cbd12")
 		(property "Reference" "#PWR94"
-			(at 364.49 353.06 0)
+			(at 364.49 337.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26315,7 +26332,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 364.49 350.52 0)
+			(at 364.49 335.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26323,7 +26340,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 364.49 346.71 0)
+			(at 364.49 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26332,7 +26349,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 346.71 0)
+			(at 364.49 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26341,7 +26358,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 364.49 346.71 0)
+			(at 364.49 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26363,7 +26380,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 364.49 340.36 0)
+		(at 364.49 325.12 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -26371,7 +26388,7 @@
 		(dnp no)
 		(uuid "81ddbc04-1dba-54a5-983f-8d7da0db5641")
 		(property "Reference" "C31"
-			(at 365.125 337.82 0)
+			(at 365.125 322.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26380,7 +26397,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 365.125 342.9 0)
+			(at 365.125 327.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26389,7 +26406,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 365.4552 344.17 0)
+			(at 365.4552 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26398,7 +26415,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 364.49 340.36 0)
+			(at 364.49 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26407,7 +26424,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 364.49 340.36 0)
+			(at 364.49 325.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26430,29 +26447,3046 @@
 			)
 		)
 	)
-	(text "U6 (load switch) powers the LEDs only while they light: WS2812-type LEDs draw ~1 mA each even when dark."
-		(exclude_from_sim no)
-		(at 20.32 365.76 0)
+	(wire
+		(pts
+			(xy 48.26 347.98)
+			(xy 50.8 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "80d21b37-ccb5-55ce-af42-fa6bb8f9094b")
+	)
+	(label "LED_D11"
+		(at 50.8 347.98 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "accd589b-e32c-5af7-9b66-f53ea36e5b63")
+		(uuid "3676fadf-9241-5093-896e-6ca9301ed503")
 	)
-	(text "U7 lifts the 3.0 V data from P0.06 to the LED supply level (WS2812 needs 0.7 x VDD). R18 damps the line."
+	(wire
+		(pts
+			(xy 40.64 355.6)
+			(xy 40.64 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "510a5977-c20c-5048-9aa5-ed06832b0e73")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 40.64 358.14 0)
+		(unit 1)
 		(exclude_from_sim no)
-		(at 20.32 368.3 0)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e68e3c2b-fc6e-5187-83a0-95cda7a62f26")
+		(property "Reference" "#PWR95"
+			(at 40.64 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 40.64 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 40.64 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "85446c79-c645-502c-a8ef-0c109e3d4c67")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR95")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 33.02 347.98)
+			(xy 30.48 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47d5d8f5-c975-5c1c-a27c-fde5223dc1fa")
+	)
+	(label "LED_D10"
+		(at 30.48 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "76f1c235-6dc4-5a58-8cf5-add61083c630")
+	)
+	(wire
+		(pts
+			(xy 40.64 340.36)
+			(xy 40.64 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab47f126-0e6b-502c-aa6c-3980ff143256")
+	)
+	(label "VLED"
+		(at 40.64 337.82 90)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "15d9edd7-279a-5faf-a22e-e293c7e24183")
+		(uuid "7bba9928-4dbf-5e56-a53d-f13be9504f3e")
 	)
-	(text "LEDs run from the battery: full colour above ~3.6 V; the firmware dims / skips the heart below that."
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 40.64 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8dbea623-075b-5a19-9b18-b487b94aca21")
+		(property "Reference" "D13"
+			(at 35.56 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 40.64 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 41.91 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 43.18 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 40.64 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "49456309-3e22-5b88-b783-4e656e50a23c")
+		)
+		(pin "2"
+			(uuid "c217f43f-7a2d-5660-9e2f-ff657ab170ca")
+		)
+		(pin "3"
+			(uuid "b3ebad7d-f527-5c46-81a6-ad2ba9f8c1a8")
+		)
+		(pin "4"
+			(uuid "0a1b7bf4-1e63-57d2-b798-787f4a8ecc88")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 55.88 344.17)
+			(xy 55.88 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9642d402-1f8c-5b78-a199-5cc9a2a75196")
+	)
+	(label "VLED"
+		(at 55.88 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "58847297-214b-56cb-89c1-8915f30946cd")
+	)
+	(wire
+		(pts
+			(xy 55.88 351.79)
+			(xy 55.88 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "694c79d1-fa5f-5e80-a119-5c0afd863654")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 55.88 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ff080ab1-9880-5178-b0c8-ab5a18a71c5c")
+		(property "Reference" "#PWR96"
+			(at 55.88 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 55.88 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 55.88 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 55.88 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 55.88 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0933f182-2389-50bc-979f-42cef5a1c9df")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR96")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 55.88 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2b5702dd-5fbd-589e-8581-5b439cd600fe")
+		(property "Reference" "C32"
+			(at 56.515 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 56.515 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 56.8452 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 55.88 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 55.88 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "78ac6056-9b5a-51b9-b84e-d79b9f94f341")
+		)
+		(pin "2"
+			(uuid "117bc7bb-8e58-5678-83ca-7217c103d0fb")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 82.55 347.98)
+			(xy 85.09 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67597d2b-f498-58b3-bb76-d58d0848ead4")
+	)
+	(label "LED_D12"
+		(at 85.09 347.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "86d104b4-375a-591c-ba68-d8d6538f2e6f")
+	)
+	(wire
+		(pts
+			(xy 74.93 355.6)
+			(xy 74.93 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95f36b71-44a0-508d-86d1-afcc4a2014fc")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 74.93 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "deb48389-411b-524b-8ed1-797e0a6c1216")
+		(property "Reference" "#PWR97"
+			(at 74.93 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 74.93 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 74.93 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 74.93 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 74.93 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "40175d2f-da60-5300-a154-dba99b8b8c45")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR97")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 67.31 347.98)
+			(xy 64.77 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0aa5b9bd-501b-5905-aa4c-f370faf17641")
+	)
+	(label "LED_D11"
+		(at 64.77 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9aedf8e9-b065-56a7-9358-37fbd82aad7f")
+	)
+	(wire
+		(pts
+			(xy 74.93 340.36)
+			(xy 74.93 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a474a4a0-7d97-5a9a-b441-2344c59e1015")
+	)
+	(label "VLED"
+		(at 74.93 337.82 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9c2c0952-867d-59ce-861e-68e329720dda")
+	)
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 74.93 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7e8a9b90-2a72-5fa2-b83a-c3697baa18b9")
+		(property "Reference" "D14"
+			(at 69.85 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 74.93 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 76.2 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 77.47 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 74.93 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3239ff8c-a8df-5e6d-9599-81f57a8c9302")
+		)
+		(pin "2"
+			(uuid "5123e18f-0345-5b35-a527-991cf270ae1b")
+		)
+		(pin "3"
+			(uuid "564130f7-a47c-589e-967c-7a16686fecbf")
+		)
+		(pin "4"
+			(uuid "21c75aef-b5f5-5f27-9505-9839722d6ad7")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 90.17 344.17)
+			(xy 90.17 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a13b7e08-8ef3-50b4-9007-d05faef03b0a")
+	)
+	(label "VLED"
+		(at 90.17 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "71f339fc-a962-55ed-adeb-80d176d278bc")
+	)
+	(wire
+		(pts
+			(xy 90.17 351.79)
+			(xy 90.17 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc619e6e-1771-59df-887f-f8bcc1ea051b")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 90.17 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c6b7f64c-ed98-55a8-a8c2-3352a24e2ae5")
+		(property "Reference" "#PWR98"
+			(at 90.17 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 90.17 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.17 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 90.17 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a2e5094e-06a3-5d7b-a504-57cd4e1202d8")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR98")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 90.17 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "04b4c576-5383-5558-9493-a637068b3c0e")
+		(property "Reference" "C33"
+			(at 90.805 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 90.805 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 91.1352 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 90.17 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d8d41590-909d-5e90-956e-74dccddfd712")
+		)
+		(pin "2"
+			(uuid "f57c7c47-6dd5-5d6c-987b-2ea525507c14")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 116.84 347.98)
+			(xy 119.38 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "73f56b25-90a8-5ba0-bbd2-94c12c396ad3")
+	)
+	(label "LED_D13"
+		(at 119.38 347.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "43fa06e4-3c6b-533a-8b67-a37c26a73d0b")
+	)
+	(wire
+		(pts
+			(xy 109.22 355.6)
+			(xy 109.22 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa50faf3-c0fc-5292-b1d1-5447596d638d")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 109.22 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e9a58b69-8622-5dd6-a62b-ab93b23b40ef")
+		(property "Reference" "#PWR99"
+			(at 109.22 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 109.22 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 109.22 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 109.22 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 109.22 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a34ae0ae-1d12-532c-89b6-351a0f094bb9")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR99")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 101.6 347.98)
+			(xy 99.06 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "430ac22d-5fb7-54fe-acf0-16e2157ac535")
+	)
+	(label "LED_D12"
+		(at 99.06 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5377c493-bb95-5a34-a709-8a5c9ec80b33")
+	)
+	(wire
+		(pts
+			(xy 109.22 340.36)
+			(xy 109.22 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "221b53b0-e34b-58e1-bab5-2e7e7b8aef27")
+	)
+	(label "VLED"
+		(at 109.22 337.82 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2749e4c6-f9a6-51ee-8a69-fb0b6fb027b0")
+	)
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 109.22 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "92a5fe5e-2c41-507e-969a-e9086407bb85")
+		(property "Reference" "D15"
+			(at 104.14 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 109.22 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 110.49 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 111.76 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 109.22 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "65a35843-03e9-5fa1-a92a-3dc929f68ff3")
+		)
+		(pin "2"
+			(uuid "6cb47bfe-d671-563f-831d-519a3c435dff")
+		)
+		(pin "3"
+			(uuid "f86a605c-b116-59f9-a65f-ca37e17e266f")
+		)
+		(pin "4"
+			(uuid "00765b8e-d6a8-5ef3-8fe4-9519a2c77722")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 124.46 344.17)
+			(xy 124.46 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fbfeeec0-d830-510b-9ea6-fb17964fafd1")
+	)
+	(label "VLED"
+		(at 124.46 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8327664d-2db8-50a0-a393-c4460cef264b")
+	)
+	(wire
+		(pts
+			(xy 124.46 351.79)
+			(xy 124.46 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "620a4cc3-1efe-5b73-a6a6-5ec43780459e")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 124.46 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7066cc19-31ea-5472-8a48-2bc15259949f")
+		(property "Reference" "#PWR100"
+			(at 124.46 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 124.46 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 124.46 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "889d6e05-4d31-5366-9b77-bf4410b5514c")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR100")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 124.46 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a2ffbbbd-6ca9-5ba0-9c01-0b6ecc934a7e")
+		(property "Reference" "C34"
+			(at 125.095 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 125.095 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 125.4252 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 124.46 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4d67bfbf-b405-5817-afe1-9e4aa90fe5e2")
+		)
+		(pin "2"
+			(uuid "8427b921-c37f-5621-8c12-3b0c4aacdc4c")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 151.13 347.98)
+			(xy 153.67 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e756d89-5dce-5c8b-9e9d-6df43e6ec967")
+	)
+	(label "LED_D14"
+		(at 153.67 347.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b7f6559e-4052-58cb-8ef6-0895eb9f42ea")
+	)
+	(wire
+		(pts
+			(xy 143.51 355.6)
+			(xy 143.51 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "48de2879-282e-53b3-907c-8d161ce7e4e3")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 143.51 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b15d8b12-e8e4-572d-965d-525080627058")
+		(property "Reference" "#PWR101"
+			(at 143.51 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 143.51 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.51 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.51 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 143.51 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "94149098-efcb-5c63-90b2-de32f0401e14")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 135.89 347.98)
+			(xy 133.35 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9a428b6-ab43-5516-b29d-8844baccd82d")
+	)
+	(label "LED_D13"
+		(at 133.35 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "dcfc8e7a-e13d-5991-9f99-4c592bafdf4a")
+	)
+	(wire
+		(pts
+			(xy 143.51 340.36)
+			(xy 143.51 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b4ffd30-93d5-5cd0-ba68-d33db90ed4ad")
+	)
+	(label "VLED"
+		(at 143.51 337.82 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "31e6a456-68b6-53e1-8e5f-6a005b179f2e")
+	)
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 143.51 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9e71740c-d9dd-5bf3-b121-b97f7951b295")
+		(property "Reference" "D16"
+			(at 138.43 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 143.51 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 144.78 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 146.05 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 143.51 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5298b7ac-6454-53f5-bc1f-bbc5b384c05b")
+		)
+		(pin "2"
+			(uuid "3c6c9acc-b415-509e-8d0e-33d8cb5d718d")
+		)
+		(pin "3"
+			(uuid "edd406ed-4a16-5112-ace6-00a05bfca0c7")
+		)
+		(pin "4"
+			(uuid "7f072d04-4aa9-59a5-93a7-8f13ff3656d2")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 158.75 344.17)
+			(xy 158.75 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79845dfe-fc5d-55d7-ab3b-80fd64754393")
+	)
+	(label "VLED"
+		(at 158.75 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0a0b1e54-2c18-5ea6-92ee-ff9ef4f76b23")
+	)
+	(wire
+		(pts
+			(xy 158.75 351.79)
+			(xy 158.75 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17ea751d-65eb-5124-8f57-232afd58bdea")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 158.75 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "858fc609-7ab8-59c1-a3dc-5f67c951813c")
+		(property "Reference" "#PWR102"
+			(at 158.75 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 158.75 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 158.75 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 158.75 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 158.75 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0da853db-da0b-5610-bf63-0bb0b51d066f")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR102")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 158.75 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "07863ec8-c949-5307-a475-94ccbc0f14e8")
+		(property "Reference" "C35"
+			(at 159.385 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 159.385 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 159.7152 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 158.75 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 158.75 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8010cb14-02fb-546b-beea-f9fd33224b45")
+		)
+		(pin "2"
+			(uuid "a3f24ebb-cf3f-53e2-b766-07b1d6bcfe25")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C35")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 185.42 347.98)
+			(xy 187.96 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7a5b40f2-cd4a-5df1-bb6e-0abd8fe86984")
+	)
+	(label "LED_D15"
+		(at 187.96 347.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f9a0c8e7-79f4-55b0-a691-58012c38b8cf")
+	)
+	(wire
+		(pts
+			(xy 177.8 355.6)
+			(xy 177.8 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "19611cf8-1ffa-5b2a-89ba-b8815ac526db")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 177.8 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "666d4dfb-54ea-5e37-a2a0-f90928ad864c")
+		(property "Reference" "#PWR103"
+			(at 177.8 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 177.8 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 177.8 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 177.8 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 177.8 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1b964960-9047-58c0-9dc7-3ff7a11a835b")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR103")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 170.18 347.98)
+			(xy 167.64 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36e9f9ab-1a35-5e1f-b991-233698f0d373")
+	)
+	(label "LED_D14"
+		(at 167.64 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d3acdbc6-bd87-5a52-9f4a-698f44d77fdb")
+	)
+	(wire
+		(pts
+			(xy 177.8 340.36)
+			(xy 177.8 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69c49635-4d03-5927-b2bb-3e18670f6baa")
+	)
+	(label "VLED"
+		(at 177.8 337.82 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05ea8183-0956-590e-beb3-48437992927b")
+	)
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 177.8 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "04566ddc-b618-5cd0-943f-8f1623bdf874")
+		(property "Reference" "D17"
+			(at 172.72 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 177.8 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 179.07 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 180.34 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 177.8 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "95a428b9-aa79-5b6a-b8fd-a6bd2e6d59f6")
+		)
+		(pin "2"
+			(uuid "75254af7-185f-5b70-9853-fdda06c910be")
+		)
+		(pin "3"
+			(uuid "f986d295-4eab-518c-89b3-f6e4014e407d")
+		)
+		(pin "4"
+			(uuid "b38edfa2-b74f-5305-a500-0f067da0d8dc")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 193.04 344.17)
+			(xy 193.04 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9a731073-7084-511b-8c07-58bfeb22b5b8")
+	)
+	(label "VLED"
+		(at 193.04 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fb00a81d-73de-56bc-bace-e70f83c4e914")
+	)
+	(wire
+		(pts
+			(xy 193.04 351.79)
+			(xy 193.04 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2be72b20-aec9-5675-b0dc-415f23677055")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 193.04 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5a0da906-9c35-5965-9032-c891ac51d0b4")
+		(property "Reference" "#PWR104"
+			(at 193.04 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 193.04 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 193.04 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 193.04 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6a75d100-3833-51cc-865c-572b25eb644e")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR104")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 193.04 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "252fac1c-8820-5a68-9ed7-54f30ade5eb3")
+		(property "Reference" "C36"
+			(at 193.675 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 193.675 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 194.0052 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 193.04 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cad39135-23c2-5233-ac62-569c4558dfb8")
+		)
+		(pin "2"
+			(uuid "28853fd9-69f0-53ed-9827-fb2e9918db37")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C36")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 219.71 347.98)
+			(xy 222.25 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "027e1f21-b082-5329-b0aa-4125228f7f31")
+	)
+	(label "LED_D16"
+		(at 222.25 347.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2cd6cbf9-4442-596f-b78f-618989a80b40")
+	)
+	(wire
+		(pts
+			(xy 212.09 355.6)
+			(xy 212.09 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ba83047-21bf-5d1a-a633-2fae89a24087")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 212.09 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec7bc431-f87a-5129-99bd-1957e6f3e5b2")
+		(property "Reference" "#PWR105"
+			(at 212.09 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 212.09 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 212.09 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 212.09 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 212.09 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2d1f014a-1b7a-55b3-b6c7-a2cb035e166a")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR105")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 204.47 347.98)
+			(xy 201.93 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00b040f3-bd95-5f5a-ba94-64d886386832")
+	)
+	(label "LED_D15"
+		(at 201.93 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ddd3e78e-7355-51c8-8c7b-d5c3339b221b")
+	)
+	(wire
+		(pts
+			(xy 212.09 340.36)
+			(xy 212.09 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "857bdc69-fc9c-5d7d-9c3b-b4292d2de786")
+	)
+	(label "VLED"
+		(at 212.09 337.82 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8846628d-0cc9-5b06-848b-4135983ac8d9")
+	)
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 212.09 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "70b81b14-7111-5b58-b960-f2ffa1bb62cb")
+		(property "Reference" "D18"
+			(at 207.01 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 212.09 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 213.36 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 214.63 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 212.09 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4468e06a-5606-5a5c-9759-b59a05b2b52b")
+		)
+		(pin "2"
+			(uuid "65bc6241-721a-5f38-8162-13c5109c4eb3")
+		)
+		(pin "3"
+			(uuid "918d9eea-b0e1-5081-9047-e80f8ee043fa")
+		)
+		(pin "4"
+			(uuid "0120ef7b-2caa-5571-bf70-32f10b2c1f79")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 227.33 344.17)
+			(xy 227.33 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d36aeaa-554b-5b73-b312-324c0fde12f3")
+	)
+	(label "VLED"
+		(at 227.33 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c148ce7d-0afb-58fb-9b39-36753d4ace6b")
+	)
+	(wire
+		(pts
+			(xy 227.33 351.79)
+			(xy 227.33 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "680be981-6a2e-5968-b42d-70390489a826")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 227.33 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5021f31b-18ee-5986-a361-dc7c3bd16057")
+		(property "Reference" "#PWR106"
+			(at 227.33 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 227.33 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 227.33 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 227.33 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "89c6b1eb-0a45-5381-a3e9-d1bc375d12ca")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR106")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 227.33 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b67563df-4974-546e-b19d-dc06eb0f7ab8")
+		(property "Reference" "C37"
+			(at 227.965 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 227.965 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 228.2952 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 227.33 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 227.33 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bad3f548-9569-5747-a2a5-5723e54ce415")
+		)
+		(pin "2"
+			(uuid "70e16109-4160-52d1-823e-7d2fdd9ae33d")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C37")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 254 347.98)
+			(xy 256.54 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eb670b29-2b3d-5caa-9867-3b08992e05e2")
+	)
+	(label "LED_D17"
+		(at 256.54 347.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "05b81507-1562-5c14-9138-ee6a3473a502")
+	)
+	(wire
+		(pts
+			(xy 246.38 355.6)
+			(xy 246.38 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91a9a555-23c1-59d4-8742-9aeadfaa1592")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 246.38 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c6fce131-2004-589d-b606-f4c5fb543824")
+		(property "Reference" "#PWR107"
+			(at 246.38 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 246.38 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 246.38 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 246.38 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 246.38 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b90c8fcf-86a2-5138-aa4a-efa2bc39b065")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR107")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 238.76 347.98)
+			(xy 236.22 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a515af8-059d-579d-aa3f-a6652e42da5d")
+	)
+	(label "LED_D16"
+		(at 236.22 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "53938d9c-1251-5f0e-8e91-adfa44e88cc9")
+	)
+	(wire
+		(pts
+			(xy 246.38 340.36)
+			(xy 246.38 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0047db94-b082-5a42-a8ea-937299018cb0")
+	)
+	(label "VLED"
+		(at 246.38 337.82 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5007abd5-bea1-50c2-ab5d-dc192473804f")
+	)
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 246.38 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f66329c3-fce8-52e6-bcd8-bb4853f0f0c9")
+		(property "Reference" "D19"
+			(at 241.3 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 246.38 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 247.65 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 248.92 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 246.38 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b1424d99-2436-59c3-82ad-b580a8e8d589")
+		)
+		(pin "2"
+			(uuid "21ab70b2-c293-5baa-a253-194aaa069627")
+		)
+		(pin "3"
+			(uuid "6edb6ffa-08fe-564d-a012-466689d4ed5f")
+		)
+		(pin "4"
+			(uuid "6a47aafe-ef36-5277-9d91-7dfeecb69b51")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 261.62 344.17)
+			(xy 261.62 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67dfc092-ed40-5898-a9a0-56fbf3790b97")
+	)
+	(label "VLED"
+		(at 261.62 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "202525bf-bc10-5afd-ba63-4181f15f7cdf")
+	)
+	(wire
+		(pts
+			(xy 261.62 351.79)
+			(xy 261.62 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d9a97b2-e06e-501c-9dc2-9de563d582e4")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 261.62 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "770b8c0e-e921-517e-b0c2-2aeab1f4a4e8")
+		(property "Reference" "#PWR108"
+			(at 261.62 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 261.62 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 261.62 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 261.62 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "389bddf3-2ec3-5c80-b2fe-bcd6486f7727")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR108")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 261.62 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "550f4e90-af28-5cf3-b54d-4258de11ca1d")
+		(property "Reference" "C38"
+			(at 262.255 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 262.255 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 262.5852 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 261.62 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e5539e22-f44e-5d3d-9099-7c0f63d601a1")
+		)
+		(pin "2"
+			(uuid "f856e41f-4af3-5f0d-8acb-b9dd766095c0")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C38")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(no_connect
+		(at 288.29 347.98)
+		(uuid "ca1e75c6-68a3-5ba3-a5d2-d966bada3eef")
+	)
+	(wire
+		(pts
+			(xy 280.67 355.6)
+			(xy 280.67 358.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "820ebeaa-597a-5e58-9c57-fe9fd4ebfc23")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 280.67 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "99108cc2-dcab-550d-bdd7-301ad15ee80b")
+		(property "Reference" "#PWR109"
+			(at 280.67 364.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 280.67 361.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 280.67 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 280.67 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 280.67 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0a724ea7-7418-5fe2-b345-dc69ec758900")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR109")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 273.05 347.98)
+			(xy 270.51 347.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8bf665a-eddc-54c5-a456-88511bdbda8a")
+	)
+	(label "LED_D17"
+		(at 270.51 347.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "bc6a550f-0cc5-5c7c-ac3e-373d60274785")
+	)
+	(wire
+		(pts
+			(xy 280.67 340.36)
+			(xy 280.67 337.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "16cc1c47-438b-5be4-804c-a983d271ca53")
+	)
+	(label "VLED"
+		(at 280.67 337.82 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7cd48067-5e1f-5584-b978-e690296a5f30")
+	)
+	(symbol
+		(lib_id "LED:WS2812B-2020")
+		(at 280.67 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1a8e2b85-c2ce-53c9-9044-4bd55809ccea")
+		(property "Reference" "D20"
+			(at 275.59 340.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "WL-ICLED 2020"
+			(at 280.67 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(property "Footprint" "keychain:LED_WL-ICLED_2020"
+			(at 281.94 355.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf"
+			(at 283.21 357.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Description" "RGB LED with integrated controller, 2.0 x 2.0 mm, 12 mA"
+			(at 280.67 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cc0a5e54-afe3-5c2a-8a21-b017746fc47d")
+		)
+		(pin "2"
+			(uuid "7441034c-5c08-5ddf-a433-9b340ef53eaf")
+		)
+		(pin "3"
+			(uuid "a6dd485f-3aae-5d1f-87b0-3afebeb91f13")
+		)
+		(pin "4"
+			(uuid "742c91ef-44fa-54af-8535-59edc17ee8f1")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "D20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 295.91 344.17)
+			(xy 295.91 341.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "683148a3-e970-57e8-b388-d8fdec890a1f")
+	)
+	(label "VLED"
+		(at 295.91 341.63 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "49d04c37-db87-5948-9f01-ed0b5c0a1cf3")
+	)
+	(wire
+		(pts
+			(xy 295.91 351.79)
+			(xy 295.91 354.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0711b849-95e8-5699-a3ca-f89e874d07d7")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 295.91 354.33 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "60daed44-7bd7-51db-a816-ec801489fe18")
+		(property "Reference" "#PWR110"
+			(at 295.91 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 295.91 358.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 295.91 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 295.91 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 295.91 354.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "860d9bd1-b98b-5718-a680-2279ec37180b")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "#PWR110")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 295.91 347.98 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c37e01be-70f1-54e7-a37a-14da8f0bfd59")
+		(property "Reference" "C39"
+			(at 296.545 345.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 296.545 350.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 296.8752 351.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 295.91 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 295.91 347.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f73ac995-3f52-59e9-99c6-ddcbfdb398f6")
+		)
+		(pin "2"
+			(uuid "32059206-d161-595e-90b6-fcca67570768")
+		)
+		(instances
+			(project "keychain-v3"
+				(path "/e6ce5639-d844-5db1-a4fe-95cef9a98dcf"
+					(reference "C39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "U6 (load switch) powers the LEDs only while they light: these LEDs draw ~1 mA each even when dark."
 		(exclude_from_sim no)
 		(at 20.32 370.84 0)
 		(effects
@@ -26461,9 +29495,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "aa80febf-f183-5681-b510-256ef408f1e7")
+		(uuid "3003221e-afb8-55e9-8802-9d155e4ee16a")
 	)
-	(text "P0.19 = LED_EN (R17 keeps it off during reset), P0.06 = data. Zephyr: ws2812 driver over SPI or I2S."
+	(text "U7 lifts the 3.0 V data from P0.06 to the LED supply level (the LEDs need 0.7 x VDD). R18 damps the line."
 		(exclude_from_sim no)
 		(at 20.32 373.38 0)
 		(effects
@@ -26472,7 +29506,29 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8a2d519f-3f99-52ee-a4cf-9aa3f90cb0d7")
+		(uuid "2c8d21b8-256f-5847-99f1-6e8b94390722")
+	)
+	(text "Wurth 1312020030000 (WS2812 protocol, 3.3-5.5 V, 5.5 mA/colour): full colour down to ~3.3 V battery."
+		(exclude_from_sim no)
+		(at 20.32 375.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "784fda42-904e-54f4-936a-ce1ff87af1f1")
+	)
+	(text "P0.19 = LED_EN (R17 keeps it off during reset), P0.06 = data. Zephyr: ws2812 driver over SPI or I2S."
+		(exclude_from_sim no)
+		(at 20.32 378.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "02712343-c70b-5881-b12e-84d04019057c")
 	)
 	(sheet_instances
 		(path "/"

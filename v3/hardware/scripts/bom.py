@@ -39,6 +39,8 @@ INFO = {
     "Side tact": ("Side-push tactile switch 3.5 x 2.9 mm", "Alps SKRTLAE010"),
     "22R@100MHz 6A": ("Ferrite bead 22 ohm @ 100 MHz, 6 A, 0805 (nRF9151 VDD)", "Murata BLM21PG220SN1D"),
     "DNP": ("Antenna tuning pad, NOT fitted (0402)", "-"),
+    "WL-ICLED 2020": ("Addressable RGB LED 2.0 x 2.0 mm, WS2812 protocol, 3.3-5.5 V, 5.5 mA/colour (heart)",
+                      "Wurth 1312020030000 (DigiKey 732-1312020030000CT-ND); alt. Dialight 587-1024-147F"),
 }
 
 # passives: description + MPN from value AND package (an 0402 footprint needs an 0402 part)

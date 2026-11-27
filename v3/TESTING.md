@@ -20,15 +20,15 @@ All test pads are on the **bottom** side and labelled on the silkscreen. In the 
 | **5V** | VBUS | bottom edge, between the USB-C mounting legs | 5 V from USB |
 | **V3U** | V3U | bottom left corner | USB-serial chip's own 3.3 V |
 | **PRG** | PROG | bottom right corner, beside the USB-C | charging current |
-| **GND** | GND | below the BAT pads, at the heart end, and in the SWD column | black probe goes here |
+| **GND** | GND | below the BAT pads, at the right edge beside the SWD column, and in the SWD column | black probe goes here |
 | **CK IO RST VT GND** | SWD | right edge, column beside the SIM holder | programming; **VT** = the 3.0 V rail |
+| **VLED** | VLED | right edge, just above the SWD column | LED supply, switched |
 | **VDD** | VDD_NRF | right edge, below the SWD column | nRF9151 main supply (battery through the ferrite) |
 | **SIM** | SIM_1V8 | right edge, below VDD | SIM card supply from the modem |
-| **BTN** | BTN | left edge, beside the SIM holder | side button |
-| **DET** | USB_DET | left edge, above the side button | "USB plugged in" signal for the nRF |
-| **VLED** | VLED | heart end, right | LED supply, switched |
-| **GATE** | GATE | heart end, left | motor MOSFET gate |
-| **LED** | LED_DIN | heart end, left | data into the first LED (after the level shifter) |
+| **GATE** | GATE | left edge, top (level with the SIM holder's top) | motor MOSFET gate |
+| **LED** | LED_DIN | left edge, below GATE | data into the first LED (after the level shifter) |
+| **BTN** | BTN | left edge, below LED | side button |
+| **DET** | USB_DET | left edge, above the BAT pads | "USB plugged in" signal for the nRF |
 
 ## Step 1: Look (magnifier or phone camera)
 
@@ -36,7 +36,7 @@ All test pads are on the **bottom** side and labelled on the silkscreen. In the 
 |---|---|
 | nRF9151 (U1) sits flat and square, no solder balls along its edges | ☐ |
 | No bridges on the USB-C pins, the CP2102N (U5), the ESD chip (U4), or the SOT-23 parts | ☐ |
-| LEDs (D3–D12): the corner mark points the same way as on the assembly drawing | ☐ |
+| LEDs (D3–D20, Würth 1312020030000): the pin-1 corner of each LED matches the dot on the assembly drawing (`assembly-top.pdf`). The LEDs are turned 0/90/180/270° around the heart, so check each one | ☐ |
 | U.FL connector straight, centre pin not bridged to the shield | ☐ |
 | Charger U2, LDO U3, load switch U6 and level shifter U7 the right way round (pin-1 dot) | ☐ |
 | SIM holder: all 6 contacts and 4 shield tabs soldered | ☐ |
@@ -115,7 +115,7 @@ These need the test firmware (one command per function over the USB serial conso
 | Button | BTN | 3.0 V released, 0 V pressed | ☐ |
 | Motor | GATE | 3.0 V while the motor runs, 0 V otherwise; motor buzzes | ☐ |
 | LED power | VLED | ≈ battery voltage while the heart is on, 0 V when off | ☐ |
-| LED data | LED | a few hundred mV to ~1 V average while data is being sent (pulses), 0 V idle; all 10 LEDs show the test colours | ☐ |
+| LED data | LED | a few hundred mV to ~1 V average while data is being sent (pulses), 0 V idle; all 18 LEDs show the test colours | ☐ |
 | Serial | USB-C port | log text in a serial terminal (115200 baud) | ☐ |
 | Modem + SIM | SIM | 1.8 V (or 3.0 V, depending on the SIM) once the modem is switched on with a SIM inserted | ☐ |
 | Network | log | modem registers on LTE-M (`+CEREG: 1` or `5`) with the antenna connected | ☐ |

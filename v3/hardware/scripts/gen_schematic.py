@@ -215,7 +215,7 @@ for i, t in enumerate([
     text(t, 411.48, 185.42 + i * 2.54)
 
 # ============================================================ I: RGB heart
-box(15.24, 259.08, 403.86, 386.08, "I. Heart: 10 addressable RGB LEDs (WS2812B-2020), switched off when idle")
+box(15.24, 259.08, 403.86, 386.08, "I. Heart: 18 addressable RGB LEDs (Wurth WL-ICLED 2020), switched off when idle")
 place("Power_Management:TPS22917DBV", "U6", "TPS22917DBV", 43.18, 289.56, 0, "Package_TO_SOT_SMD:SOT-23-6",
       {"1": "VBAT", "2": "GND", "3": "LED_EN", "6": "VLED"}, nc=("4", "5"),
       field_at={"Reference": (0, -10.16), "Value": (0, 10.16)})
@@ -227,19 +227,20 @@ place("Logic_LevelTranslator:SN74LV1T34DBV", "U7", "SN74LV1T34DBV", 104.14, 292.
       field_at={"Reference": (0, -10.16), "Value": (0, 10.16)})
 cap("C21", "100nF", 124.46, 292.1, "VLED", "GND", fp=FP_C04)
 res("R18", "330R", 139.7, 287.02, "LED_DIN", "LED_D0", fp=FP_R04, rot=90)
-for i in range(10):
-    x = 40.64 + i * 34.29
-    place("LED:WS2812B-2020", "D%d" % (3 + i), "WS2812B-2020", x, 340.36, 0,
-          "LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm",
-          {"4": "VLED", "2": "GND", "3": "LED_D%d" % i, "1": ("LED_D%d" % (i + 1)) if i < 9 else None},
-          nc=() if i < 9 else ("1",), field_at={"Reference": (-5.08, -10.16), "Value": (0, 10.16)})
-    cap("C%d" % (22 + i), "100nF", x + 15.24, 340.36, "VLED", "GND", fp=FP_C04)
+for i in range(18):
+    x = 40.64 + (i % 10) * 34.29
+    y = 325.12 + (i // 10) * 22.86
+    place("LED:WS2812B-2020", "D%d" % (3 + i), "WL-ICLED 2020", x, y, 0,
+          "keychain:LED_WL-ICLED_2020",
+          {"4": "VLED", "2": "GND", "3": "LED_D%d" % i, "1": ("LED_D%d" % (i + 1)) if i < 17 else None},
+          nc=() if i < 17 else ("1",), field_at={"Reference": (-5.08, -7.62), "Value": (0, 7.62)})
+    cap("C%d" % (22 + i), "100nF", x + 15.24, y, "VLED", "GND", fp=FP_C04)
 for i, t in enumerate([
-        "U6 (load switch) powers the LEDs only while they light: WS2812-type LEDs draw ~1 mA each even when dark.",
-        "U7 lifts the 3.0 V data from P0.06 to the LED supply level (WS2812 needs 0.7 x VDD). R18 damps the line.",
-        "LEDs run from the battery: full colour above ~3.6 V; the firmware dims / skips the heart below that.",
+        "U6 (load switch) powers the LEDs only while they light: these LEDs draw ~1 mA each even when dark.",
+        "U7 lifts the 3.0 V data from P0.06 to the LED supply level (the LEDs need 0.7 x VDD). R18 damps the line.",
+        "Wurth 1312020030000 (WS2812 protocol, 3.3-5.5 V, 5.5 mA/colour): full colour down to ~3.3 V battery.",
         "P0.19 = LED_EN (R17 keeps it off during reset), P0.06 = data. Zephyr: ws2812 driver over SPI or I2S."]):
-    text(t, 20.32, 365.76 + i * 2.54)
+    text(t, 20.32, 370.84 + i * 2.54)
 
 S.write("GSM touch keychain v3 - nRF9151 LTE-M board",
         ["nRF9151 SiP + TP4054 charger + nano-SIM + U.FL, 4-layer 1.0 mm, hand assembly (stencil + hot plate)",

@@ -6,6 +6,7 @@ stitching around the U.FL, zone fill.
 
   $KPY v3/hardware/scripts/route.py /path/to/freerouting-2.5.0.jar
 """
+import json
 import math
 import os
 import re
@@ -54,6 +55,9 @@ for z in list(board.Zones()):
 # the pad and collision-checked against all other copper, holes and the edge.
 VIA_D, VIA_DRILL, CLR = 0.6, 0.3, 0.15
 GND = board.FindNet("GND")
+VLED = board.FindNet("/VLED")
+HEART = json.load(open(os.path.join(HW, "heart_outline.json")))["outline"]   # written by build_pcb.py
+HEART_C = (mm(sum(q[0] for q in HEART) / len(HEART)), mm(sum(q[1] for q in HEART) / len(HEART)))
 EDGE = board.GetBoardEdgesBoundingBox()
 placed = []            # (x, y) of vias we added
 
@@ -73,8 +77,27 @@ KEEPOUTS = [z for fp in board.GetFootprints() for z in fp.Zones() if z.GetIsRule
 KEEPOUTS += [z for z in board.Zones() if z.GetIsRuleArea() and z.GetDoNotAllowVias()]
 
 
+def in_heart(x, y, margin=0.5):
+    """Point (internal units) inside the VLED plane outline, at least margin mm from its edge."""
+    pts = [(mm(px), mm(py)) for px, py in HEART]
+    inside = False
+    for (x1, y1), (x2, y2) in zip(pts, pts[1:] + pts[:1]):
+        if (y1 > y) != (y2 > y) and x < x1 + (y - y1) * (x2 - x1) / (y2 - y1):
+            inside = not inside
+    if not inside:
+        return False
+    for (x1, y1), (x2, y2) in zip(pts, pts[1:] + pts[:1]):
+        dx, dy = x2 - x1, y2 - y1
+        t = max(0, min(1, ((x - x1) * dx + (y - y1) * dy) / float(dx * dx + dy * dy or 1)))
+        if math.hypot(x - (x1 + t * dx), y - (y1 + t * dy)) < mm(margin):
+            return False
+    return True
+
+
 def free(x, y, src_pad, seg_from):
     c = pn.SHAPE_CIRCLE(pn.VECTOR2I(int(x), int(y)), mm(VIA_D / 2))
+    if VLED is not None and src_pad.GetNetCode() == VLED.GetNetCode() and not in_heart(x, y):
+        return False
     seg = pn.SHAPE_SEGMENT(seg_from, pn.VECTOR2I(int(x), int(y)), mm(0.25))
     m = mm(0.6)
     if not (EDGE.GetLeft() + m < x < EDGE.GetRight() - m and EDGE.GetTop() + m < y < EDGE.GetBottom() - m):
@@ -103,6 +126,10 @@ def free(x, y, src_pad, seg_from):
                         and sh.Collide(seg, mm(CLR)):
                     return False
         else:
+            if o.GetClass() == "PCB_VIA":            # any via, same net too: keep hole-to-hole
+                op = o.GetPosition()
+                if math.hypot(op.x - x, op.y - y) < mm(VIA_D + 0.25):
+                    return False
             if same:
                 continue
             sh = o.GetEffectiveShape(o.GetLayer() if o.GetClass() != "PCB_VIA" else pn.F_Cu)
@@ -112,12 +139,11 @@ def free(x, y, src_pad, seg_from):
 
 
 
-VLED = board.FindNet("/VLED")
-HEART_Y = mm(99.9)                    # heart area: everything above this line
+
 missing = []
 for fp in board.GetFootprints():
     for p in fp.Pads():
-        is_vled = VLED is not None and p.GetNetCode() == VLED.GetNetCode() and p.GetPosition().y < HEART_Y
+        is_vled = VLED is not None and p.GetNetCode() == VLED.GetNetCode()      # all VLED pads sit in the heart
         if (p.GetNetCode() != GND.GetNetCode() and not is_vled) or p.GetDrillSize().x > 0:
             continue
         NET = VLED if is_vled else GND
@@ -128,6 +154,8 @@ for fp in board.GetFootprints():
         half = max(bb.GetWidth(), bb.GetHeight()) / 2
         fc = fp.GetPosition()
         base = math.atan2(pc.y - fc.y, pc.x - fc.x) if (pc.x, pc.y) != (fc.x, fc.y) else 0
+        if is_vled:                     # VLED vias towards the heart centre, i.e. into the plane
+            base = math.atan2(HEART_C[1] - pc.y, HEART_C[0] - pc.x)
         if fp.GetReference() == "U1" and int(p.GetNumber()) < 105:
             base += math.pi    # SiP edge GND pads: via inward (ground-only area), keep the escape channels free
         ok = False
@@ -177,7 +205,7 @@ zone(board, pn.In1_Cu, "GND")
 pn.ZONE_FILLER(board).Fill(board.Zones())
 
 
-def rule_area(layers, x0, y0, x1, y1, vias, tracks):
+def rule_area(layers, x0, y0, x1, y1, vias, tracks, poly=None):
     z = pn.ZONE(board)
     z.SetIsRuleArea(True)
     ls = pn.LSET()
@@ -188,7 +216,7 @@ def rule_area(layers, x0, y0, x1, y1, vias, tracks):
     z.SetDoNotAllowZoneFills(False); z.SetDoNotAllowPads(False); z.SetDoNotAllowFootprints(False)
     z.SetZoneName("routing-keepout")
     ol = z.Outline(); ol.NewOutline()
-    for x, y in ((x0, y0), (x1, y0), (x1, y1), (x0, y1)):
+    for x, y in (poly or ((x0, y0), (x1, y0), (x1, y1), (x0, y1))):
         ol.Append(mm(x), mm(y))
     board.Add(z)
 
@@ -200,9 +228,8 @@ uc = board.FindFootprintByReference("U1").GetPosition()
 ux, uy = pn.ToMM(uc.x), pn.ToMM(uc.y)
 rule_area((pn.F_Cu, pn.In1_Cu, pn.In2_Cu, pn.B_Cu), ux - 5.2, uy - 4.7, ux + 5.2, uy + 4.7, True, False)
 rule_area((pn.F_Cu,), ux - 5.2, uy - 4.7, ux + 5.2, uy + 4.7, False, True)
-# the heart area's inner layer 3 is reserved for the VLED plane
-e = board.GetBoardEdgesBoundingBox()
-rule_area((pn.In2_Cu,), pn.ToMM(e.GetLeft()), pn.ToMM(e.GetTop()), pn.ToMM(e.GetRight()), 99.9, False, True)
+# the heart's inner layer 3 is reserved for the VLED plane
+rule_area((pn.In2_Cu,), 0, 0, 0, 0, False, True, poly=HEART)
 pn.SaveBoard(PCB, board)
 
 tmp = tempfile.mkdtemp(prefix="v3_route_")
@@ -269,11 +296,9 @@ if board.FindNet("/VLED"):            # VLED plane on L3 under the heart, above 
     zv.SetLocalClearance(mm(0.2)); zv.SetMinThickness(mm(0.15))
     zv.SetPadConnection(pn.ZONE_CONNECTION_FULL); zv.SetAssignedPriority(1)
     zv.SetIslandRemovalMode(pn.ISLAND_REMOVAL_MODE_ALWAYS)
-    eb = board.GetBoardEdgesBoundingBox()
     ol = zv.Outline(); ol.NewOutline()
-    for x, y in ((eb.GetLeft(), eb.GetTop()), (eb.GetRight(), eb.GetTop()),
-                 (eb.GetRight(), mm(99.8)), (eb.GetLeft(), mm(99.8))):
-        ol.Append(x, y)
+    for x, y in HEART:                 # heart outline, 2.1 mm outside the LED centres
+        ol.Append(mm(x), mm(y))
     board.Add(zv)
 zone(board, pn.F_Cu, "GND", clearance=0.25)
 zone(board, pn.B_Cu, "GND", clearance=0.25)

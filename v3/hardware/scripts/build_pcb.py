@@ -26,7 +26,7 @@ NAME = "keychain-v3"
 OUT = os.path.join(HW, NAME + ".kicad_pcb")
 FPLIB = "/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints/"
 
-BX, BY, BW, BH, CORNER = 98.0, 85.0, 25.0, 49.0, 1.5   # heart area y 85-100   # 2 mm extra on the left = routing channel
+BX, BY, BW, BH, CORNER = 95.5, 84.0, 30.0, 50.0, 1.5   # 30 x 50 mm; heart area y 84-102, electronics below
 UX, UY = 112.0, 108.5          # nRF9151 centre
 
 board = pn.NewBoard(OUT)
@@ -79,7 +79,7 @@ for c, st in (((x2 - r, y1 + r), (x2 - r, y1)), ((x2 - r, y2 - r), (x2, y2 - r))
 # ---------------------------------------------------------------- parts
 def place(fpid, ref, val, x, y, rot=0, bottom=False, pads=None):
     lib, name = fpid.split(":")
-    fp = pn.FootprintLoad(FPLIB + lib + ".pretty", name)
+    fp = pn.FootprintLoad(os.path.join(HW, "keychain.pretty") if lib == "keychain" else FPLIB + lib + ".pretty", name)
     if fp is None:
         sys.exit("footprint not found: " + fpid)
     fp.SetFPID(pn.LIB_ID(lib, name))
@@ -131,7 +131,7 @@ place(C06, "C13", "100nF", 107.2, 117.4, 180, bottom=True, pads={"1": "SIM_1V8",
 
 # --- top band: VDD_GPIO decoupling, gate resistor
 C("C10", "100nF", 114.0, 101.5, "+3V0", "GND", rot=180)      # +3V0 pad right above pin 65
-C("C11", "4.7uF", 110.9, 101.5, "+3V0", "GND", rot=180)
+C("C11", "4.7uF", 124.1, 104.5, "+3V0", "GND", rot=90)     # beside the +3V0 lane (the heart tip sits above the SiP now)
 R("R7", "100R", 117.2, 101.5, "DRV", "GATE")
 
 # --- right column: motor driver, LDO, button
@@ -204,85 +204,166 @@ R("R13", "4.7k", 107.4, 121.0, "CP_TXD", "UART_RX", fp=R04)
 R("R1", "5.1k", 104.6, 125.55, "CC1", "GND", rot=180, fp=R04)
 R("R2", "5.1k", 107.7, 125.55, "CC2", "GND", rot=180, fp=R04)
 
-# --- RGB heart: 10 x WS2812B-2020 on a heart curve, 100 nF each towards the inside
+# --- RGB heart: 20 x Wurth WL-ICLED 2020 on a heart curve, each turned along the curve,
+# equal spacing (chord) so neighbours never get closer than ~3.3 mm; drivers sit inside
+import json  # noqa: E402
 import math  # noqa: E402
 
+HEART_N, HEART_CX, HEART_TOP, HEART_W, HEART_H = 18, 110.5, 86.0, 26.0, 14.0
+HEART_P, HEART_PHASE = 2.0, 0.5      # lobe shape exponent, where LED 1 sits (found by search:
+#                                       the arrangement with the most room between LEDs)
 
-def heart_points(n=10, cx=110.5, top=86.6, w=15.0, h=12.0):
-    """n points equally spaced (by arc length) on the classic heart curve, dip first."""
-    f = lambda t: (16 * math.sin(t) ** 3,
+
+def heart_curve(n=6000):
+    """Heart curve scaled into HEART_W x HEART_H (x = 16 sin^p t, classic y)."""
+    f = lambda t: (16 * abs(math.sin(t)) ** HEART_P * math.copysign(1, math.sin(t)),
                    -(13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)))
-    N = 20000
-    pts = [f(2 * math.pi * i / N) for i in range(N + 1)]
-    acc = [0.0]
-    for a, b in zip(pts, pts[1:]):
-        acc.append(acc[-1] + math.dist(a, b))
+    raw = [f(2 * math.pi * i / n) for i in range(n + 1)]
+    xs, ys = [q[0] for q in raw], [q[1] for q in raw]
+    xw, y0, y1 = max(xs) - min(xs), min(ys), max(ys)
+    return [(HEART_CX + x * HEART_W / xw, HEART_TOP + (y - y0) * HEART_H / (y1 - y0)) for x, y in raw]
+
+
+def heart_points(n=HEART_N):
+    """n points at equal arc length; LEDs stay upright (0/90 deg: neighbours never touch corners)."""
+    pts = heart_curve()
+    per = [0.0]
+    for a_, b_ in zip(pts, pts[1:]):
+        per.append(per[-1] + math.dist(a_, b_))
     out, k = [], 0
     for j in range(n):
-        while acc[k] < acc[-1] * j / n:
+        while per[k] < (j + HEART_PHASE) / n * per[-1]:
             k += 1
-        x, y = pts[k]
-        out.append((cx + x * w / 32, top + (y + 11.92) * h / 28.92))
-    return out
+        a_, b_ = pts[max(k - 15, 0)], pts[min(k + 15, len(pts) - 1)]
+        ang = math.degrees(math.atan2(b_[1] - a_[1], b_[0] - a_[0]))
+        # +180: the footprint's data runs DIN (pad 3) -> DOUT (pad 1) towards -x, so DOUT faces the next LED
+        out.append((pts[k][0], pts[k][1], (180 - round(ang / 90) * 90) % 360))   # KiCad angles turn the other way
+    return out, per[-1] / n
 
 
-HEART = heart_points()
-HC = (110.5, 92.6)                        # roughly the middle of the heart
-for i, (x, y) in enumerate(HEART):
-    nxt = "LED_D%d" % (i + 1) if i < 9 else None
+HEART, HEART_PITCH = heart_points()
+HC = (HEART_CX, HEART_TOP + 0.42 * HEART_H)          # roughly the middle of the heart
+for i, (x, y, ang) in enumerate(HEART):
+    nxt = "LED_D%d" % (i + 1) if i < HEART_N - 1 else None
     pads = {"4": "VLED", "2": "GND", "3": "LED_D%d" % i}
     if nxt:
         pads["1"] = nxt
-    place("LED_SMD:LED_WS2812B-2020_PLCC4_2.0x2.0mm", "D%d" % (3 + i), "WS2812B-2020", x, y, 0, pads=pads)
+    place("keychain:LED_WL-ICLED_2020", "D%d" % (3 + i), "WL-ICLED 2020", x, y, ang, pads=pads)
 
-# driver: load switch left of the heart, level shifter right of it
-place("Package_TO_SOT_SMD:SOT-23-6", "U6", "TPS22917DBV", 100.3, 92.8, 90,
+# heart outline for route.py: VLED plane on layer 3 + no autorouting on layer 3 inside it
+def _hull(P):
+    P = sorted(set(P))
+    def half(seq):
+        h = []
+        for q in seq:
+            while len(h) >= 2 and (h[-1][0] - h[-2][0]) * (q[1] - h[-2][1]) - (h[-1][1] - h[-2][1]) * (q[0] - h[-2][0]) <= 0:
+                h.pop()
+            h.append(q)
+        return h
+    lo, up = half(P), half(P[::-1])
+    return lo[:-1] + up[:-1]
+
+
+_e = (BX + 0.3, BY + 0.3, BX + BW - 0.3, BY + BH - 0.3)
+_outline = [(round(min(max(x_, _e[0]), _e[2]), 3), round(min(max(y_, _e[1]), _e[3]), 3)) for x_, y_ in
+            _hull([(x_ + 2.4 * math.cos(k * math.pi / 12), y_ + 2.4 * math.sin(k * math.pi / 12))
+                   for x_, y_, _ in HEART for k in range(24)])]
+json.dump({"outline": _outline}, open(os.path.join(HW, "heart_outline.json"), "w"))
+
+# drivers inside the heart: load switch (left), level shifter (right), next to their pins
+U6X, U6Y, U7X, U7Y = 105.0, 92.3, 116.0, 92.3
+place("Package_TO_SOT_SMD:SOT-23-6", "U6", "TPS22917DBV", U6X, U6Y, 0,
       pads={"1": "VBAT", "2": "GND", "3": "LED_EN", "6": "VLED"})
-C("C19", "1uF", 100.3, 95.9, "VBAT", "GND", fp=C04)
-R("R17", "100k", 100.3, 97.0, "LED_EN", "GND", fp=R04)
-C("C20", "10uF", 100.3, 89.6, "VLED", "GND")             # right at U6's output pin
-place("Package_TO_SOT_SMD:SOT-23-5", "U7", "SN74LV1T34DBV", 120.6, 92.8, 90,
+C("C19", "1uF", U6X - 3.1, U6Y - 0.95, "VBAT", "GND", fp=C04, rot=180)   # VBAT pad towards pin 1
+R("R17", "100k", U6X + 1.5, U6Y + 2.7, "LED_EN", "GND", fp=R04)
+C("C20", "10uF", U6X + 3.9, U6Y - 0.95, "VLED", "GND")                  # right at U6's output pin
+place("Package_TO_SOT_SMD:SOT-23-5", "U7", "SN74LV1T34DBV", U7X, U7Y, 0,
       pads={"2": "LED_DATA3V", "3": "GND", "4": "LED_DIN", "5": "VLED"})
-C("C21", "100nF", 120.6, 95.9, "VLED", "GND", fp=C04)
-R("R18", "330R", 120.6, 97.0, "LED_DIN", "LED_D0", rot=180, fp=R04)   # input pad on the edge side
+C("C21", "100nF", U7X + 3.3, U7Y - 0.95, "VLED", "GND", fp=C04)
+R("R18", "330R", U7X - 0.8, U7Y + 2.8, "LED_DIN", "LED_D0", fp=R04, rot=180)
 
 # each LED's 100 nF: first free spot (courtyard check) inside, beside, then outside the LED
 def crtyd(fp):
-    return fp.GetCourtyard(pn.B_CrtYd if fp.IsFlipped() else pn.F_CrtYd).BBox()
+    """Courtyard bounding box from the footprint's courtyard graphics (works for rotated parts)."""
+    L = pn.B_CrtYd if fp.IsFlipped() else pn.F_CrtYd
+    bb = None
+    for it in fp.GraphicalItems():
+        if it.GetLayer() == L:
+            b_ = it.GetBoundingBox()
+            if bb is None:
+                bb = b_
+            else:
+                bb.Merge(b_)
+    return bb if bb is not None else fp.GetBoundingBox(False)
+
+
+def crt_poly(fp):
+    L = pn.B_CrtYd if fp.IsFlipped() else pn.F_CrtYd
+    fp.BuildCourtyardCaches()
+    return fp.GetCourtyard(L)
+
+
+def in_outline(x_, y_, margin=1.3):
+    """(mm) inside the heart's VLED plane outline, margin mm away from its edge"""
+    ins = False
+    P = _outline
+    for (x1, y1), (x2, y2) in zip(P, P[1:] + P[:1]):
+        if (y1 > y_) != (y2 > y_) and x_ < x1 + (y_ - y1) * (x2 - x1) / (y2 - y1):
+            ins = not ins
+    if not ins:
+        return False
+    for (x1, y1), (x2, y2) in zip(P, P[1:] + P[:1]):
+        dx, dy = x2 - x1, y2 - y1
+        t = max(0, min(1, ((x_ - x1) * dx + (y_ - y1) * dy) / (dx * dx + dy * dy or 1)))
+        if math.dist((x_, y_), (x1 + t * dx, y1 + t * dy)) < margin:
+            return False
+    return True
 
 
 def collides(fp):
-    bb = crtyd(fp)
+    """True if fp's courtyard polygon touches another courtyard on its side, or is near the edge."""
+    if fp.GetReference() in LEDCAPS and not in_outline(pn.ToMM(fp.GetPosition().x), pn.ToMM(fp.GetPosition().y)):
+        return True
+    pa, bb = crt_poly(fp), crtyd(fp)
     for o in board.GetFootprints():
         if o.GetReference() == fp.GetReference() or o.IsFlipped() != fp.IsFlipped():
             continue
-        if bb.Intersects(crtyd(o)):
-            if "--debug-caps" in sys.argv:
-                print("  ", fp.GetReference(), "hits", o.GetReference())
+        if not bb.Intersects(crtyd(o)):
+            continue
+        pb = crt_poly(o)
+        if pa.Collide(pb.Outline(0)) if pb.OutlineCount() else True:
             return True
     e = board.GetBoardEdgesBoundingBox()
-    if "--debug-caps" in sys.argv:
-        print("  ", fp.GetReference(), "edge check", pn.ToMM(bb.GetLeft()), pn.ToMM(bb.GetTop()), pn.ToMM(e.GetLeft()), pn.ToMM(e.GetTop()))
     return not (bb.GetLeft() > e.GetLeft() + mm(0.3) and bb.GetRight() < e.GetRight() - mm(0.3)
                 and bb.GetTop() > e.GetTop() + mm(0.3) and bb.GetBottom() < e.GetBottom() - mm(0.3))
 
 
-for i, (x, y) in enumerate(HEART):
+NOCAP = []
+LEDCAPS = {"C%d" % (22 + i) for i in range(HEART_N)}
+for i, (x, y, _a) in enumerate(HEART):
     d = math.dist((x, y), HC)
     ux, uy = (HC[0] - x) / d, (HC[1] - y) / d          # towards the inside
     vx, vy = -uy, ux                                  # along the curve
     r2 = math.sqrt(0.5)
     dirs = [(ux, uy), ((ux + vx) * r2, (uy + vy) * r2), ((ux - vx) * r2, (uy - vy) * r2),
             (vx, vy), (-vx, -vy), (-ux, -uy)]
-    cands = [(dx, dy, k) for k in (1.9, 2.2, 2.5, 2.8, 3.1) for dx, dy in dirs]
-    for dx, dy, k in cands:
-        rot = 90 if abs(dx) > abs(dy) else 0
-        fp = C("C%d" % (22 + i), "100nF", x + dx * k, y + dy * k, "VLED", "GND", fp=C04, rot=rot)
+    cands = [(dx, dy, k) for k in (2.0, 2.3, 2.6, 2.9, 3.2, 3.5, 3.8, 4.2, 4.6, 5.0) for dx, dy in dirs]
+    fp = C("C%d" % (22 + i), "100nF", x, y, "VLED", "GND", fp=C04)
+    for dx, dy, k in cands:          # move one footprint around (removing + re-adding breaks SWIG)
+        fp.SetOrientationDegrees(90 if abs(dx) > abs(dy) else 0)
+        fp.SetPosition(V(x + dx * k, y + dy * k))
         if not collides(fp):
             break
-        board.Remove(fp)
-    else:
-        sys.exit("no room for the 100 nF next to D%d" % (3 + i))
+    else:                            # crowded spot: nearest free place inside the heart (VLED plane)
+        grid = [(HEART_CX + gx * 0.5, HEART_TOP + gy * 0.5) for gx in range(-24, 25) for gy in range(2, 26)]
+        grid.sort(key=lambda q: math.dist(q, (x, y)))
+        for gx, gy in grid:
+            fp.SetOrientationDegrees(0)
+            fp.SetPosition(V(gx, gy))
+            if not collides(fp):
+                break
+        else:
+            NOCAP.append("D%d" % (3 + i))
 # --- bottom: nano-SIM holder + wire pads
 place("Connector_Card:nanoSIM_GCT_SIM8060-6-0-14-00", "J3", "nano-SIM hinged", UX, 108.4, 0,
       bottom=True, pads={"1": "SIM_1V8", "2": "SIM_RST", "3": "SIM_CLK", "5": "GND",
@@ -305,8 +386,8 @@ wirepad("TP4", "MOT-", 121.6, 117.4, 1.0, "MOT_N")
 
 # test pads (bottom, 0.9 mm) for checking a freshly soldered board: see v3/TESTING.md
 # (ref, label, net, x, y, label dx, label dy)
-TESTPADS = [("TP12", "VLED", "VLED", 100.2, 98.6, 0, 1.25), ("TP13", "GND", "GND", 103.2, 98.6, 0, 1.25),
-            ("TP14", "GATE", "GATE", 116.4, 98.8, 0, 1.25), ("TP15", "LED", "LED_DIN", 119.6, 98.8, 0, 1.25),
+TESTPADS = [("TP12", "VLED", "VLED", 96.6, 101.0, 0.75, -1.2), ("TP13", "GND", "GND", 96.6, 104.3, 0.15, 1.2),
+            ("TP14", "GATE", "GATE", 124.4, 101.0, -0.75, 1.2), ("TP15", "LED", "LED_DIN", 124.4, 107.3, -0.15, 1.2),
             ("TP16", "BTN", "BTN", 121.7, 110.0, 0, 1.25),
             ("TP17", "VDD", "VDD_NRF", 99.3, 112.8, 0.2, 1.2), ("TP18", "SIM", "SIM_1V8", 99.3, 115.4, 0.2, 1.2),
             ("TP19", "PRG", "PROG", 99.4, 131.8, 0.2, -1.25),
@@ -315,6 +396,7 @@ TESTPADS = [("TP12", "VLED", "VLED", 100.2, 98.6, 0, 1.25), ("TP13", "GND", "GND
 for ref, lab, n, x, y, dx, dy in TESTPADS:
     wirepad(ref, lab, x, y, 0.9, n)
 
+print("LEDs without a cap spot:", NOCAP)
 if "--place-only" in sys.argv:
     pn.SaveBoard(OUT, board)
     sys.exit(0)
@@ -335,7 +417,7 @@ silk("-", 116.8, 127.1, 0.9)
 silk("MOT", 120.3, 116.1, 0.8)
 silk("+", 117.8, 117.4, 0.8)
 silk("SIM", UX, 117.0, 0.8)
-silk("TOUCH v3", 108.2, 98.9, 0.8)
+silk("TOUCH v3", HEART_CX, HC[1] + 1.0, 0.8)
 for ref, lab, n, x, y, dx, dy in TESTPADS:
     silk(lab, x + dx, y + dy, 0.8)
 silk("ANT", ANT_X + 3.5, 119.6, 0.8, pn.F_SilkS)
@@ -391,8 +473,8 @@ path([vdd, pn.VECTOR2I(c6.x, vdd.y)], net_of("U1", "14"), w=0.3)
 path([c5, c6], net_of("U1", "14"), w=0.3)
 g65, c10 = pad_pos("U1", "65"), pad_pos("C10", "1")
 path([g65, pn.VECTOR2I(g65.x, c10.y + mm(0.7)), pn.VECTOR2I(c10.x, c10.y + mm(0.3)), c10], net_of("U1", "65"), w=0.2)
-c11 = pad_pos("C11", "1")            # 4.7 uF joins the 100 nF over the top of both caps
-path([c11, pn.VECTOR2I(c11.x, mm(100.55)), pn.VECTOR2I(c10.x, mm(100.55)), c10], net_of("U1", "65"), w=0.2)
+c11 = pad_pos("C11", "1")            # 4.7 uF: short stub onto the +3V0 lane along the right side
+path([c11, pn.VECTOR2I(mm(122.45), c11.y)], net_of("U1", "65"), w=0.2)
 def via(x, y, n):
     v = pn.PCB_VIA(board)
     v.SetPosition(V(x, y)); v.SetWidth(mm(0.6)); v.SetDrill(mm(0.3)); v.SetNet(n); v.SetLocked(True)
@@ -439,7 +521,7 @@ bpath([(104.9, 113.35), (104.9, 116.2), (108.9, 116.2)], VCCN)
 # +3V0 from the LDO (right column) to the VDD_GPIO caps: along the right and top edge
 u3o = pad_pos("U3", "2")
 G = net_of("U1", "65")
-path([u3o, V(122.45, Y(u3o)), V(122.45, 101.6), V(121.6, 100.55), V(X(c10), 100.55)], G, w=0.2)  # cut the rounded corner
+path([u3o, V(122.45, Y(u3o)), V(122.45, 101.6), V(121.6, 100.55), V(X(c10), 100.55), c10], G, w=0.2)  # cut the rounded corner
 
 # ENABLE pull-up: R4's VDD pad (outer side) joins the C5/C6 VDD line through the gap
 # between the C5 and C6 ground pads
@@ -481,19 +563,10 @@ path([b6, V(107.6, 129.3)], DP, w=0.2)
 path([b7, V(X(b7), 128.4), V(105.3, 128.95), V(105.3, 130.0)], DM, w=0.2)
 path([a7, V(106.85, 130.0)], DM, w=0.2)
 
-# LED data: SiP pin 63 runs up between the fixed DRV (62) and VDD_GPIO (65) tracks,
-# drops to inner layer 3 and comes up next to U7's input
-p63, u7a = pad_pos("U1", "63"), pad_pos("U7", "2")
-LDN = net_of("U1", "63")
-path([p63, V(X(p63), 102.75), V(115.55, 102.3)], LDN, w=0.15)
-via(115.55, 102.3, LDN)
-ipath([(115.55, 102.3), (115.55, 99.6), (X(u7a), 96.9), (X(u7a), 95.0)], LDN, w=0.15)
-via(X(u7a), 95.0, LDN)                    # right below U7's input pin, clear of pins 1/3
-path([V(X(u7a), 95.0), u7a], LDN, w=0.15)
 
 # VLED: load switch output straight to its 10 uF
 u6o, c20 = pad_pos("U6", "6"), pad_pos("C20", "1")
-path([u6o, V(X(u6o), Y(c20) + 0.6), c20], net_of("U6", "6"), w=0.3)
+path([u6o, c20], net_of("U6", "6"), w=0.3)
 
 # SIM_CLK: SiP pin 18 -> via left of the SiP (above the SIM-VCC via) -> inner layer 3
 # -> the CLK via next to U4
@@ -531,12 +604,10 @@ path([V(104.6, 107.2), V(105.2, Y(p9)), p9], NRN, w=0.15)
 
 # VBAT to the LED load switch: down the free lane along the left board edge to FB1
 u6i, fb1 = pad_pos("U6", "1"), pad_pos("FB1", "1")
-path([u6i, V(98.75, Y(u6i) + 0.6), V(98.75, Y(fb1) - 0.6), fb1], net_of("U6", "1"), w=0.3)
-# LED data from the level shifter to R18, down the right board edge
-u7y, r18 = pad_pos("U7", "4"), pad_pos("R18", "1")
-path([u7y, V(122.3, Y(u7y) + 0.75), V(122.3, Y(r18) - 0.4), r18], net_of("U7", "4"), w=0.15)
-# LED chain link D10 -> D9 (short diagonal)
-path([pad_pos("D10", "3"), pad_pos("D9", "1")], net_of("D10", "3"), w=0.15)
+path([V(98.75, 100.4), V(98.75, Y(fb1) - 0.6), fb1], net_of("U6", "1"), w=0.3)
+# LED data from the level shifter output (pin 4) down to R18 below U7
+_u74, _r18 = pad_pos("U7", "4"), pad_pos("R18", "1")
+path([_u74, V(X(_u74) - 0.75, Y(_u74) + 1.05), _r18], net_of("U7", "4"), w=0.15)
 
 def via_spot(pad_ref, pad_num, toward=None, r_list=(0.9, 1.1, 1.3)):
     """First collision-free via position around a pad (all copper, holes, edge)."""
@@ -570,21 +641,16 @@ def via_spot(pad_ref, pad_num, toward=None, r_list=(0.9, 1.1, 1.3)):
     sys.exit("no via spot next to %s.%s" % (pad_ref, pad_num))
 
 
-# LED data chain: every DOUT -> next DIN through the empty bottom side under the heart
-# (D9 -> D10 is a short top-side diagonal, drawn above)
-for k in range(1, 10):
-    src, dst = "D%d" % (2 + k), "D%d" % (3 + k)
-    if (src, dst) == ("D9", "D10"):
-        continue
-    nk = net_of(src, "1")
-    ends = []
-    ps, pd = pad_pos(src, "1"), pad_pos(dst, "3")
-    for ref_, num_, tw in ((src, "1", (pd.x, pd.y)), (dst, "3", (ps.x, ps.y))):
-        vx_, vy_ = via_spot(ref_, num_, toward=tw)
-        via(pn.ToMM(int(vx_)), pn.ToMM(int(vy_)), nk)
-        track(pad_pos(ref_, num_), pn.VECTOR2I(int(vx_), int(vy_)), nk, 0.15)
-        ends.append((pn.ToMM(int(vx_)), pn.ToMM(int(vy_))))
-    bpath(ends, nk)
+# LED data: SiP pin 63 runs up between the fixed DRV (62) and VDD_GPIO (65) tracks,
+# drops to inner layer 3 and comes up next to U7's input
+p63, u7a = pad_pos("U1", "63"), pad_pos("U7", "2")
+LDN = net_of("U1", "63")
+path([p63, V(X(p63), 102.75), V(115.55, 102.3)], LDN, w=0.15)
+via(115.55, 102.3, LDN)
+_v = via_spot("U7", "2", toward=(mm(115.55), mm(102.3)))
+ipath([(115.55, 102.3), (pn.ToMM(int(_v[0])), pn.ToMM(int(_v[1])))], LDN, w=0.15)
+via(pn.ToMM(int(_v[0])), pn.ToMM(int(_v[1])), LDN)
+path([pn.VECTOR2I(int(_v[0]), int(_v[1])), u7a], LDN, w=0.15)
 
 # ENABLE: pin 10 straight left to R4's ENABLE pad (between the nRESET and VDD tracks)
 p10, r4e = pad_pos("U1", "10"), pad_pos("R4", "2")
@@ -612,20 +678,28 @@ via(112.0, 125.0, VB)                    # on the bottom battery run
 via(118.9, 119.9, VB)                    # next to C7 (LDO input)
 ipath([(112.0, 125.0), (118.9, 119.9)], VB, w=0.3)
 path([V(118.9, 119.9), pad_pos("C7", "1")], VB, w=0.3)
-# first LED's data (R18 -> D3) on inner layer 3, through the VLED plane
-r18o = pad_pos("R18", "2")
-d3i = pad_pos("D3", "3")
-LD0 = net_of("R18", "2")
-v1 = via_spot("R18", "2", toward=(d3i.x, d3i.y))
-v2 = via_spot("D3", "3", toward=(r18o.x, r18o.y))
-for vv, pp in ((v1, r18o), (v2, d3i)):
-    via(pn.ToMM(int(vv[0])), pn.ToMM(int(vv[1])), LD0)
-    track(pp, pn.VECTOR2I(int(vv[0]), int(vv[1])), LD0, 0.15)
-ipath([(pn.ToMM(int(v1[0])), pn.ToMM(int(v1[1]))), (pn.ToMM(int(v2[0])), pn.ToMM(int(v2[1])))], LD0, w=0.15)
 
 # auto-reset handshake: Q2 E/B straight across to U5 RTS/DTR
 path([pad_pos("Q2", "2"), pad_pos("U5", "19")], net_of("Q2", "2"), w=0.15)
 path([pad_pos("Q2", "1"), pad_pos("U5", "23")], net_of("Q2", "1"), w=0.15)
+# UART between the series resistors and the CP2102N, past Q2 on inner layer 3 (the autorouter
+# found this once and missed it later, so it is fixed now): RXD dives next to R12 and comes up
+# between Q2's pins, TXD dives next to R13 and comes up right at the CP2102N pin
+_RX, _TX = net_of("U5", "20"), net_of("U5", "21")
+path([V(105.91, 121.0), V(105.91, 122.19)], _RX, w=0.15)
+via(105.91, 122.19, _RX)
+ipath([(105.91, 122.19), (106.03, 122.32), (110.04, 122.32), (110.16, 122.2)], _RX, w=0.15)
+via(110.16, 122.2, _RX)
+path([V(110.16, 122.2), V(110.38, 122.42), V(110.38, 122.84)], _RX, w=0.15)
+path([V(110.38, 122.84), V(110.53, 122.99)], _RX, w=0.112)
+path([V(110.53, 122.99), V(113.21, 122.99), pad_pos("U5", "20")], _RX, w=0.15)
+path([pad_pos("R13", "1"), V(106.89, 121.42)], _TX, w=0.112)
+path([V(106.89, 121.42), V(106.53, 121.77)], _TX, w=0.112)
+via(106.53, 121.77, _TX)
+ipath([(106.53, 121.77), (106.44, 121.68), (105.65, 121.68), (105.35, 121.98), (105.35, 122.38),
+       (105.71, 122.74), (111.6, 122.74), (112.41, 123.55)], _TX, w=0.15)
+via(112.41, 123.55, _TX)
+path([V(112.41, 123.55), pad_pos("U5", "21")], _TX, w=0.15)
 # VBUS to the USB-detect divider: from C16 over the top of the resistor column
 # (keeps the pour between the columns open for the GND pads)
 c16v, r15v = pad_pos("C16", "1"), pad_pos("R15", "1")
@@ -652,6 +726,11 @@ path([d0, c9], net_of("U1", "24"), w=0.25)
 # autorouter never has to fit them in
 def seg_clear(a, b, layer, code, w=0.2, clr=0.2):
     sh = pn.SHAPE_SEGMENT(a, b, mm(w))
+    for f_ in board.GetFootprints():              # footprint keep-outs (no tracks on this layer)
+        for z in f_.Zones():
+            if z.GetIsRuleArea() and z.GetDoNotAllowTracks() and z.IsOnLayer(layer) \
+                    and z.Outline().Collide(sh, mm(0.1)):
+                return False
     for f_ in board.GetFootprints():
         for q in f_.Pads():
             if q.GetNetCode() == code and code:
@@ -669,8 +748,14 @@ def seg_clear(a, b, layer, code, w=0.2, clr=0.2):
     return True
 
 
+NOVIA = [z for f_ in board.GetFootprints() for z in f_.Zones() if z.GetIsRuleArea() and z.GetDoNotAllowVias()]
+
+
 def via_free(x_, y_, code):
     c_ = pn.SHAPE_CIRCLE(pn.VECTOR2I(int(x_), int(y_)), mm(0.3))
+    for z in NOVIA:
+        if z.Outline().Collide(pn.VECTOR2I(int(x_), int(y_)), mm(0.45)):
+            return False
     e = board.GetBoardEdgesBoundingBox()
     if not (e.GetLeft() + mm(0.6) < x_ < e.GetRight() - mm(0.6) and e.GetTop() + mm(0.6) < y_ < e.GetBottom() - mm(0.6)):
         return False
@@ -733,7 +818,7 @@ def connect_testpad(tp):
                     track(vp, tpos, n_, 0.2, layer=pn.B_Cu)
                     return True
     # second try: top stub -> via -> inner layer 3 -> via next to the test pad -> bottom stub
-    def spots(pc, toward, rs=(0.9, 1.1, 1.3, 1.6)):
+    def spots(pc, toward, rs=(0.9, 1.1, 1.3, 1.6, 2.0)):
         pref = math.atan2(toward.y - pc.y, toward.x - pc.x)
         angs = sorted((2 * math.pi * k / 24 for k in range(24)),
                       key=lambda a: abs((a - pref + math.pi) % (2 * math.pi) - math.pi))
@@ -741,11 +826,11 @@ def connect_testpad(tp):
             for a_ in angs:
                 yield pn.VECTOR2I(int(pc.x + mm(r_) * math.cos(a_)), int(pc.y + mm(r_) * math.sin(a_)))
     ends = [v2 for v2 in spots(tpos, tpos, (1.0, 1.3, 1.6, 2.0))
-            if v2.y > mm(100.3) and via_free(v2.x, v2.y, code) and seg_clear(v2, tpos, pn.B_Cu, code)]
+            if via_free(v2.x, v2.y, code) and seg_clear(v2, tpos, pn.B_Cu, code)]
     for q in srcs[:8]:
         pc = q.GetPosition()
         for v1 in spots(pc, tpos):
-            if v1.y < mm(100.3) or not (via_free(v1.x, v1.y, code) and seg_clear(pc, v1, pn.F_Cu, code)):
+            if not (via_free(v1.x, v1.y, code) and seg_clear(pc, v1, pn.F_Cu, code)):
                 continue
             for v2 in ends:
                 if math.hypot(v1.x - v2.x, v1.y - v2.y) > mm(0.9) and seg_clear(v1, v2, pn.In2_Cu, code):
@@ -759,7 +844,81 @@ def connect_testpad(tp):
     return False
 
 
+# into the heart on layer 3: VBAT from the left-edge lane to U6, LED_EN to U6 from a via
+# outside the heart that the autorouter connects to the SiP
+def hop(ref, num, outside, w=0.2, out_track_from=None):
+    pin = pad_pos(ref, num)
+    n_ = net_of(ref, num)
+    vi = via_spot(ref, num, toward=(mm(outside[0]), mm(outside[1])))
+    via(pn.ToMM(int(vi[0])), pn.ToMM(int(vi[1])), n_)
+    track(pin, pn.VECTOR2I(int(vi[0]), int(vi[1])), n_, w)
+    via(outside[0], outside[1], n_)
+    ipath([(pn.ToMM(int(vi[0])), pn.ToMM(int(vi[1]))), outside], n_, w=w)
+    if out_track_from:
+        path([V(*out_track_from), V(*outside)], n_, w=w)
+
+
+def spots(pc, toward, rs=(0.9, 1.1, 1.3, 1.6, 2.0)):
+    pref = math.atan2(toward.y - pc.y, toward.x - pc.x)
+    angs = sorted((2 * math.pi * k / 24 for k in range(24)),
+                  key=lambda a: abs((a - pref + math.pi) % (2 * math.pi) - math.pi))
+    for r_ in rs:
+        for a_ in angs:
+            yield pn.VECTOR2I(int(pc.x + mm(r_) * math.cos(a_)), int(pc.y + mm(r_) * math.sin(a_)))
+
+
+LINKFAIL = []
+
+
+def link(ref_a, num_a, ref_b, num_b, layers=(pn.B_Cu, pn.In2_Cu), w=0.15):
+    """pad -> via -> straight run on the first layer that is free -> via -> pad, all collision-checked."""
+    pa, pb = pad_pos(ref_a, num_a), pad_pos(ref_b, num_b)
+    code, n_ = net_of(ref_a, num_a).GetNetCode(), net_of(ref_a, num_a)
+    if seg_clear(pa, pb, pn.F_Cu, code, w=w):          # neighbours facing each other: straight on top
+        track(pa, pb, n_, w)
+        return True
+    for mid in (pn.VECTOR2I(pa.x, pb.y), pn.VECTOR2I(pb.x, pa.y)):     # or one bend on top
+        if seg_clear(pa, mid, pn.F_Cu, code, w=w) and seg_clear(mid, pb, pn.F_Cu, code, w=w):
+            track(pa, mid, n_, w); track(mid, pb, n_, w)
+            return True
+    va = [v for v in spots(pa, pb) if via_free(v.x, v.y, code) and seg_clear(pa, v, pn.F_Cu, code)]
+    vb = [v for v in spots(pb, pa) if via_free(v.x, v.y, code) and seg_clear(pb, v, pn.F_Cu, code)]
+    va, vb = va[:10], vb[:10]
+    for L in layers:
+        for v1 in va:
+            for v2 in vb:
+                if math.hypot(v1.x - v2.x, v1.y - v2.y) > mm(0.95) and seg_clear(v1, v2, L, code, w=w):
+                    track(pa, v1, n_, w); track(pb, v2, n_, w)
+                    via(pn.ToMM(v1.x), pn.ToMM(v1.y), n_); via(pn.ToMM(v2.x), pn.ToMM(v2.y), n_)
+                    track(v1, v2, n_, w, layer=L)
+                    return True
+    LINKFAIL.append("%s.%s->%s.%s (via spots %d/%d)" % (ref_a, num_a, ref_b, num_b, len(va), len(vb)))
+    return False
+
+
+hop("U6", "1", (98.75, 100.4), w=0.3)
+# LED_EN: U6 pin 3 -> layer 3 -> via just above SiP pin 80 (outside the no-via zone under the SiP)
+_p80 = pad_pos("U1", "80")
+_code = net_of("U1", "80").GetNetCode()
+for _v in spots(_p80, V(U6X, U6Y), rs=(1.0, 1.3, 1.6, 2.0)):
+    if pn.ToMM(_v.y) < 103.3 and via_free(_v.x, _v.y, _code) and seg_clear(_p80, _v, pn.F_Cu, _code):
+        hop("U6", "3", (pn.ToMM(_v.x), pn.ToMM(_v.y)))
+        track(_p80, _v, net_of("U1", "80"), 0.15)
+        break
+else:
+    sys.exit("no via spot for LED_EN at SiP pin 80")
+
+# first LED's data (R18 -> D3), inside the heart: bottom side if free, else layer 3
+link("R18", "2", "D3", "3")
+# LED data chain: every DOUT -> next DIN through the bottom side under the heart
+for k in range(1, HEART_N):
+    link("D%d" % (2 + k), "1", "D%d" % (3 + k), "3")
+
+
+print("links that found no free path:", LINKFAIL or "none")
 failed = [tp[0] for tp in TESTPADS if tp[2] != "GND" and not connect_testpad(tp[0])]
+if not connect_testpad("TP10"):
+    failed.append("TP10")
 print("test pads without a fixed link (left to the router):", failed or "none")
 
 pcblib.link_symbols(board, os.path.join(HW, "sch_uuids.json"), NAME + ".kicad_sch")

@@ -1,14 +1,14 @@
 # GSM touch keychain, v3: one custom board with the nRF9151 (LTE-M)
 
-v3 puts everything on **one 25 × 49 mm board** built around the **Nordic nRF9151**, including a
-**heart of 10 RGB LEDs** and **programming over USB-C**. That
+v3 puts everything on **one 30 × 50 mm board** built around the **Nordic nRF9151**, including a
+**heart of 18 RGB LEDs** and **programming over USB-C**. That
 single chip holds the processor and the LTE-M/NB-IoT modem. There's no XIAO and no SIM800L,
 and it's not affected by the 2G shutdown. You assemble it yourself.
 
 | | v2 (modules) | **v3 (this)** |
 |---|---|---|
 | Network | 2G (SIM800L), ends for 1NCE ~end of 2027 | **LTE-M / NB-IoT** (4G), no 2G shutdown problem |
-| Electronics | XIAO + SIM800L stacked, ~31 × 27 × 10 mm | **one 25 × 49 × ~4.5 mm board** with the RGB heart on it (USB-C is the tallest part) |
+| Electronics | XIAO + SIM800L stacked, ~31 × 27 × 10 mm | **one 30 × 50 × ~4.5 mm board** with the RGB heart on it (USB-C is the tallest part) |
 | Modem idle | ~1 mA (2G) | **µA level** with LTE-M power saving (PSM 2.7 µA, eDRX ~18 µA per Nordic) |
 | Assembly | wires + through-hole | SMD: solder paste + stencil + hot plate (details below) |
 
@@ -52,10 +52,19 @@ and it's not affected by the 2G shutdown. You assemble it yourself.
   - Ground stitching vias around the socket; the 2nd layer is solid ground.
 - **Motor:** AO3400A + flyback diode, the same as v1/v2, wired to the MOT+/− pads.
 - **RGB heart (on the board):**
-  - 10 × WS2812B-2020 addressable RGB LEDs on a heart curve at the end of the board, each with its own 100 nF.
-  - A load switch (U6, TPS22917) cuts their power when they're dark: these LEDs draw ~1 mA each even when off, which would cost more than the whole keychain in standby.
-  - A buffer (U7, SN74LV1T34) lifts the 3.0 V data to the LED supply. The LEDs are fed by a copper plane on layer 3 under the heart.
-  - Any colour per LED and fades; full colour above ~3.6 V battery.
+  - 18 × **Würth 1312020030000** (WL-ICLED, 2.0 × 2.0 mm, WS2812 protocol), each with its own 100 nF.
+    - They sit on a 26 × 14 mm heart curve at the top of the board.
+    - The parts are upright, evenly spaced and at least 0.3 mm apart. 18 is the most that fits on a 30 mm wide board; with 20, pads would touch on the curves.
+    - In stock at DigiKey. Alternative: Dialight 587-1024-147F.
+  - The load switch (U6, TPS22917) and the data buffer (U7, SN74LV1T34) sit inside the heart.
+    - U6 cuts the LED power when they're dark. These LEDs draw ~1 mA each even when off, which would cost more than the whole keychain in standby.
+    - U7 lifts the 3.0 V data to the LED supply.
+  - The LEDs are fed by a heart-shaped copper plane on layer 3.
+  - The data chain runs on the bottom layer, with a few links on top. Every link is collision-checked.
+  - Any colour per LED and fades.
+    - The LEDs are rated down to 3.3 V, so expect full colour down to ~3.3 V battery.
+    - They take 5.5 mA per colour, so the whole heart at full white is ≈ 300 mA. The small LiPo handles that in short flashes.
+  - Firmware: Zephyr `ws2812` driver with a reset time of ≥ 280 µs and a "1" pulse of ≈ 0.9 µs. The Würth datasheet allows 0.75–1.05 µs.
 - **USB-C with data (CP2102N, U5):**
   - Firmware updates and the log go over USB-C. The SWD pads are needed only once, to install the bootloader.
   - The PC can reset the board through DTR/RTS (Q2, as on ESP32 boards). Idle, an open port and an unplugged cable never reset it.
@@ -172,7 +181,7 @@ Checked and OK:
 - **Heart:** the LED chain runs on the bottom layer under the heart, and the LED supply is a plane on layer 3.
 - **Hand-routed nets:** the SIM lines, reset, enable, the battery feed to the regulator and the LED data were drawn as fixed tracks, so the result doesn't depend on autorouter luck.
 - **Charge status (CHRG):** dropped; the firmware uses *USB plugged in* plus the battery voltage instead.
-- **Result:** ERC, DRC and schematic↔PCB parity are clean. The board is 25 × 49 mm and has 73 parts.
+- **Result:** ERC, DRC and schematic↔PCB parity are clean. The board is 30 × 50 mm and has 89 parts.
 - **Test pads (added 2026-11-26):**
   - 12 labelled 0.9 mm pads on the bottom: 5V, V3U, DET, PRG, VDD, SIM, VLED, GATE, LED, BTN and 2 × GND.
   - Each one is wired with a fixed, collision-checked stub, so they don't depend on the autorouter.
@@ -192,4 +201,4 @@ Checked and OK:
 - **First build:**
   - This is a new design and hasn't been made yet. Order the spare SiP.
   - Hand-soldering an LGA chip is the hardest step, so expect one board to need rework.
-- **Case:** not yet adapted to v3. Once you've picked the battery, the case can be redrawn around the 25 × 49 mm board: thinner than v2, with the heart under a translucent lid or light holes.
+- **Case:** not yet adapted to v3. Once you've picked the battery, the case can be redrawn around the 30 × 50 mm board: thinner than v2, with the heart under a translucent lid or light holes.
